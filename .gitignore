@@ -30,3 +30,7 @@ package.json.[0-9]*
 .sync
 history/*.json
 .vite_cache
+/.skills
+/tasks
+.native-wind-cache
+.vite
