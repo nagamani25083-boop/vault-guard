@@ -1,0 +1,195 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Dopamine · high-saturation neon color clashes + rounded components + springy feedback
+   On Mini Program targets, fonts must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ global: true, family: 'YouSheBiaoTiHei',
+     source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf")' })
+   Taro.loadFontFace({ global: true, family: 'AlibabaPuHuiTi',
+     source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf")' })
+   ============================================================ */
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 320 100% 99%; /* Extremely pale pink-white, giving high-saturation blocks room to breathe */
+    --foreground: 240 28% 14%; /* Deep blue-ink, standing in for pure black */
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+    --primary: 334 100% 45%; /* Neon pink, lightness kept low enough to guarantee white text stays legible */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 265 83% 52%; /* Electric purple */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 320 40% 95%;
+    --muted-foreground: 240 12% 42%;
+    --accent: 265 83% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 320 45% 90%;
+    --input: 320 45% 90%;
+    --ring: 334 100% 50%;
+    --radius: 1rem;
+
+    /* Neon palette: yellow / blue / cyan / orange / pink / purple, all high saturation */
+    --fun-yellow: 44 98% 52%;
+    --fun-blue: 217 100% 61%;
+    --fun-cyan: 162 94% 43%;
+    --fun-orange: 20 97% 51%;
+    --fun-pink: 334 100% 50%;
+    --fun-purple: 265 83% 57%;
+
+    /* Gradient backdrops and colored glow */
+    --gradient-primary: linear-gradient(135deg, hsl(334 100% 50%), hsl(265 83% 57%));
+    --gradient-hero: linear-gradient(135deg, hsl(334 100% 55%) 0%, hsl(265 83% 57%) 50%, hsl(217 100% 61%) 100%);
+    --gradient-sky: linear-gradient(180deg, hsl(265 83% 62%) 0%, hsl(217 100% 66%) 100%);
+    --shadow-glow: 0 16rpx 60rpx hsl(334 100% 50% / 0.4);
+    --shadow-glow-purple: 0 16rpx 60rpx hsl(265 83% 57% / 0.4);
+
+    --chart-1: 334 100% 50%;
+    --chart-2: 265 83% 57%;
+    --chart-3: 217 100% 61%;
+    --chart-4: 162 94% 43%;
+    --chart-5: 44 98% 52%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 28% 14%;
+    --sidebar-primary: 334 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 320 40% 95%;
+    --sidebar-accent-foreground: 265 83% 45%;
+    --sidebar-border: 320 45% 90%;
+    --sidebar-ring: 334 100% 50%;
+  }
+
+  /* Dark inversion: surfaces switch to purple-black, hues stay pink-purple, neon brand colors read even brighter */
+  .dark {
+    --background: 258 45% 8%;
+    --foreground: 320 40% 97%;
+    --card: 258 40% 12%;
+    --card-foreground: 320 40% 97%;
+    --popover: 258 40% 12%;
+    --popover-foreground: 320 40% 97%;
+    --primary: 334 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 265 83% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 258 30% 18%;
+    --muted-foreground: 300 16% 72%;
+    --accent: 265 83% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 258 30% 24%;
+    --input: 258 30% 24%;
+    --ring: 334 100% 62%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: neon gradient backdrop, the energy source for the hero section and pill CTAs */
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+  .bg-gradient-sky {
+    background-image: var(--gradient-sky);
+  }
+
+  /* Colored glow shadow, replacing neutral gray drop shadows */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .shadow-glow-purple {
+    box-shadow: var(--shadow-glow-purple);
+  }
+
+  /* Extra-bold heading: both weight and letter-spacing need to "shout" */
+  .font-display {
+    font-family: 'YouSheBiaoTiHei', 'AlibabaPuHuiTi', -apple-system, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* Colored blob decoration: scattered large rounded color blocks, creating a joyful atmosphere */
+  .blob-spot {
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    opacity: 0.35;
+  }
+
+  /* Pill outline: switches to a neon-colored border in the focus state */
+  .pill-outline {
+    border-radius: 9999rpx;
+    border: 4rpx solid hsl(var(--primary));
+    box-shadow: 0 0 0 6rpx hsl(var(--primary) / 0.18);
+  }
+}
+
+/* Springy feedback: fast, direct, delightful, no gentle fade-ins */
+@keyframes dopa-pop {
+  0% {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dopa-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8rpx);
+  }
+}
+
+@layer utilities {
+  .animate-pop {
+    animation: dopa-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .animate-bounce-soft {
+    animation: dopa-bounce 1.2s ease-in-out infinite;
+  }
+  .pressable:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop,
+  .animate-bounce-soft {
+    animation: none;
+  }
+}

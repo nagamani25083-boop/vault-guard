@@ -1,0 +1,214 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Mystical — charcoal-black gloom / gilded gold / parchment yellow
+   High contrast, heavy shadows, hard sharp corners; materials evoke parchment, gold-leaf edging, weathered stone, and wax seals */
+
+@font-face {
+  font-family: 'JiangChengJianRenHei';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/JiangChengJianRenHei.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.125rem;
+
+    /* Charcoal-black base / parchment text */
+    --background: 0 0% 10%;
+    --foreground: 45 60% 88%;
+
+    --card: 0 0% 13%;
+    --card-foreground: 45 60% 88%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 45 60% 88%;
+
+    /* Primary: gilded gold */
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: deep purple */
+    --secondary: 275 100% 25%;
+    --secondary-foreground: 45 60% 90%;
+
+    --muted: 0 0% 17%;
+    --muted-foreground: 45 20% 68%;
+
+    /* Accent: emerald green highlight */
+    --accent: 174 76% 21%;
+    --accent-foreground: 45 60% 92%;
+
+    /* Blood-red warning */
+    --destructive: 0 94% 28%;
+    --destructive-foreground: 45 60% 92%;
+
+    --border: 46 40% 30%;
+    --input: 46 40% 30%;
+    --ring: 46 65% 52%;
+
+    --chart-1: 46 65% 52%;
+    --chart-2: 275 55% 42%;
+    --chart-3: 174 60% 30%;
+    --chart-4: 0 70% 35%;
+    --chart-5: 196 45% 80%;
+
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 45 60% 88%;
+    --sidebar-primary: 46 65% 52%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 46 65% 52%;
+    --sidebar-border: 46 40% 26%;
+    --sidebar-ring: 46 65% 52%;
+  }
+
+  /* Theme is inherently dark; .dark mirrors the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 45 60% 88%;
+    --card: 0 0% 13%;
+    --card-foreground: 45 60% 88%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 45 60% 88%;
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 275 100% 25%;
+    --secondary-foreground: 45 60% 90%;
+    --muted: 0 0% 17%;
+    --muted-foreground: 45 20% 68%;
+    --accent: 174 76% 21%;
+    --accent-foreground: 45 60% 92%;
+    --destructive: 0 94% 28%;
+    --destructive-foreground: 45 60% 92%;
+    --border: 46 40% 30%;
+    --input: 46 40% 30%;
+    --ring: 46 65% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JiangChengJianRenHei', 'PingFang SC', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  ::selection {
+    background: hsl(46 65% 52%);
+    color: hsl(0 0% 8%);
+  }
+}
+
+@layer components {
+  /* Core visual signature: gold-leaf edged antique tome frame — double hard border + inner gold thread */
+  .myst-gilt-frame {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow:
+      inset 0 0 0 1px hsl(0 0% 10%),
+      inset 0 0 0 2px hsl(46 65% 52% / 0.45),
+      0 18px 40px -12px hsl(0 0% 0% / 0.85);
+  }
+
+  /* Sacred geometry backdrop: star-map grid + faint runic ring afterimage */
+  .myst-sigil-bg {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(circle at 50% 40%, hsl(46 65% 52% / 0.06) 0 1px, transparent 1px),
+      repeating-linear-gradient(60deg, hsl(46 65% 52% / 0.04) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(-60deg, hsl(46 65% 52% / 0.04) 0 1px, transparent 1px 28px);
+    background-size: 22px 22px, auto, auto;
+  }
+
+  /* Parchment surface: grainy mottling and ink-stain bleed */
+  .myst-parchment {
+    background-color: hsl(45 55% 88%);
+    color: hsl(0 0% 12%);
+    background-image:
+      radial-gradient(circle at 18% 22%, hsl(35 45% 60% / 0.28) 0, transparent 42%),
+      radial-gradient(circle at 82% 78%, hsl(28 40% 45% / 0.22) 0, transparent 48%);
+    box-shadow: inset 0 0 36px hsl(30 40% 35% / 0.35);
+  }
+
+  /* Gilded divider: solid at the center, fading into darkness at both ends */
+  .myst-gold-line {
+    height: 1px;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      hsl(46 65% 52% / 0.9),
+      transparent
+    );
+  }
+
+  /* Wax seal emblem: thick circular stamp texture */
+  .myst-wax-seal {
+    border-radius: 9999px;
+    background: hsl(0 70% 26%);
+    color: hsl(45 60% 90%);
+    box-shadow:
+      inset 2px 2px 6px hsl(0 60% 45% / 0.6),
+      inset -3px -3px 8px hsl(0 80% 12% / 0.8),
+      0 6px 14px hsl(0 0% 0% / 0.7);
+  }
+
+  /* Rune illumination: spellcasting feedback on press and focus */
+  .myst-rune-glow {
+    transition: box-shadow 320ms ease-out, color 320ms ease-out;
+  }
+  .myst-rune-glow:hover,
+  .myst-rune-glow:focus-visible {
+    color: hsl(46 70% 62%);
+    box-shadow:
+      0 0 0 1px hsl(46 65% 52% / 0.7),
+      0 0 18px hsl(46 65% 52% / 0.45);
+  }
+  .myst-rune-glow:active {
+    box-shadow:
+      0 0 0 1px hsl(46 80% 66%),
+      0 0 34px hsl(46 80% 66% / 0.7);
+  }
+
+  /* Emerging from darkness: image develops out of shadow */
+  .myst-emerge {
+    filter: brightness(0.62) contrast(1.1);
+    transition: filter 500ms ease-out, transform 500ms ease-out;
+  }
+  .myst-emerge:hover {
+    filter: brightness(1) contrast(1);
+    transform: scale(1.02);
+  }
+
+  /* Background elements pulse slowly, as if alive */
+  .myst-pulse {
+    animation: myst-pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes myst-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.75; transform: scale(1.03); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .myst-pulse { animation: none; }
+    .myst-emerge { transition: none; }
+  }
+}

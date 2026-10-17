@@ -1,0 +1,166 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Neo-Brutalism — saturated candy-color blocks × thick black outlines × hard offset shadows
+   Hard-edged grid, solid color blocks, no blurred shadows; frosted glass and complex gradients are forbidden.
+   Fonts: @font-face only takes effect on H5; for the Mini Program target,
+   load the same-named font via Taro.loadFontFace in app.tsx before use.
+   ============================================================ */
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+}
+
+@layer base {
+  :root {
+    /* Warm white base / ink-black outlines and text, for a direct, strong contrast */
+    --background: 44 100% 97%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    /* Candy pink primary color, black text overlaid on the block (a signature brutalist pairing) */
+    --primary: 338 100% 71%;
+    --primary-foreground: 0 0% 10%;
+    /* Sky-blue secondary color block */
+    --secondary: 203 100% 71%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 30% 92%;
+    --muted-foreground: 0 0% 32%;
+    /* Bright yellow accent block */
+    --accent: 48 100% 62%;
+    --accent-foreground: 0 0% 10%;
+    /* Grass green: the fourth candy color */
+    --success: 126 46% 61%;
+    --success-foreground: 0 0% 10%;
+    --destructive: 0 84% 44%;
+    --destructive-foreground: 0 0% 100%;
+    /* Outline as structure: borders and inputs unified in ink black */
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
+    --ring: 338 100% 71%;
+    --radius: 0.5rem;
+    --chart-1: 338 100% 71%;
+    --chart-2: 48 100% 62%;
+    --chart-3: 203 100% 71%;
+    --chart-4: 126 46% 61%;
+    --chart-5: 0 0% 10%;
+    --sidebar-background: 48 100% 62%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 338 100% 71%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 203 100% 71%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 10%;
+    --sidebar-ring: 338 100% 71%;
+  }
+
+  /* Dark mode keeps the same candy-color blocks, only flipping the paper and outline: black base + bright white outline */
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 44 60% 96%;
+    --card: 0 0% 12%;
+    --card-foreground: 44 60% 96%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 44 60% 96%;
+    --primary: 338 100% 66%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 203 100% 66%;
+    --secondary-foreground: 0 0% 8%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 40 12% 70%;
+    --accent: 48 100% 62%;
+    --accent-foreground: 0 0% 8%;
+    --success: 126 46% 58%;
+    --success-foreground: 0 0% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 8%;
+    --border: 44 60% 96%;
+    --input: 44 60% 96%;
+    --ring: 338 100% 66%;
+    --chart-5: 0 0% 21%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: hard-edged building block — thick outline + unblurred solid offset shadow */
+  .nb-block {
+    border: 3px solid hsl(var(--border));
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+  .nb-border {
+    border: 3px solid hsl(var(--border));
+  }
+  .nb-border-thin {
+    border: 2px solid hsl(var(--border));
+  }
+  /* Three tiers of hard offset shadow, never blurred */
+  .nb-shadow-sm {
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+  .nb-shadow {
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+  .nb-shadow-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+  /* Dot texture: subtle noise in the background, enhancing a print-like feel */
+  .nb-dots {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.08) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+  /* Diagonal hard stripes: decorative base for color-block sections */
+  .nb-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--foreground) / 0.12) 0 6px,
+      transparent 6px 14px
+    );
+  }
+  /* Outlined text: poster-like title contour */
+  .nb-text-stroke {
+    -webkit-text-stroke: 1px hsl(var(--foreground));
+  }
+  .font-display {
+    font-family: 'YouSheBiaoTiHei', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  /* Touch feedback: lift with slight rotation on hover; sink with tightened shadow on press (160ms) */
+  .nb-press {
+    transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+  }
+  .nb-press:active {
+    transform: translate(2px, 3px) rotate(-1.5deg);
+    box-shadow: 1px 1px 0 0 hsl(var(--border));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nb-press {
+    transition: none;
+  }
+  .nb-press:active {
+    transform: none;
+  }
+}

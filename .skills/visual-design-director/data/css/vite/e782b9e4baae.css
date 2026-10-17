@@ -1,0 +1,169 @@
+/* stylelint-disable */
+@font-face {
+  font-family: 'OPPOSans';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/OPPOSans4.0.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system — Cyber Security Dark.
+All colors MUST be HSL. Default theme is dark.
+*/
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Ultra-deep ink navy-black background #04060B / card #0A0F1A */
+    --background: 222 55% 3%;
+    --foreground: 213 100% 95%;
+    --card: 220 40% 7%;
+    --card-foreground: 213 100% 95%;
+    --popover: 220 42% 6%;
+    --popover-foreground: 213 100% 95%;
+
+    /* Primary: security green #22F5B4 */
+    --primary: 161 91% 27%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: deep blue surface */
+    --secondary: 218 33% 14%;
+    --secondary-foreground: 213 60% 90%;
+
+    --muted: 219 30% 12%;
+    --muted-foreground: 216 22% 62%;
+
+    /* Accent: electric cyan-blue #3AC5FF */
+    --accent: 199 100% 35.5%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive: threat red #FF4D5E */
+    --destructive: 353 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 40% 18%;
+    --input: 214 40% 16%;
+    --ring: 161 91% 55%;
+
+    /* Status colors */
+    --success: 161 91% 55%;
+    --warning: 38 100% 56%;
+    --info: 199 100% 61%;
+
+    /* Charts: derived from the primary/accent colors */
+    --chart-1: 161 91% 55%;
+    --chart-2: 199 100% 61%;
+    --chart-3: 38 100% 56%;
+    --chart-4: 353 100% 65%;
+    --chart-5: 262 83% 68%;
+
+    --sidebar-background: 220 42% 5%;
+    --sidebar-foreground: 213 60% 88%;
+    --sidebar-primary: 161 91% 55%;
+    --sidebar-primary-foreground: 222 55% 4%;
+    --sidebar-accent: 218 33% 12%;
+    --sidebar-accent-foreground: 213 60% 90%;
+    --sidebar-border: 214 40% 16%;
+    --sidebar-ring: 161 91% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(161 91% 55%), hsl(199 100% 61%));
+    --gradient-card: linear-gradient(160deg, hsl(220 40% 9%), hsl(222 50% 5%));
+    --shadow-card: 0 8px 30px -12px hsl(222 60% 2% / 0.8);
+    --shadow-hover: 0 0 24px -4px hsl(161 91% 55% / 0.4);
+  }
+
+  .dark {
+    --radius: 1rem;
+    --background: 222 55% 3%;
+    --foreground: 213 100% 95%;
+    --card: 220 40% 7%;
+    --card-foreground: 213 100% 95%;
+    --popover: 220 42% 6%;
+    --popover-foreground: 213 100% 95%;
+    --primary: 161 91% 27%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 218 33% 14%;
+    --secondary-foreground: 213 60% 90%;
+    --muted: 219 30% 12%;
+    --muted-foreground: 216 22% 62%;
+    --accent: 199 100% 35.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 353 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 40% 18%;
+    --input: 214 40% 16%;
+    --ring: 161 91% 55%;
+    --success: 161 91% 55%;
+    --warning: 38 100% 56%;
+    --info: 199 100% 61%;
+    --chart-1: 161 91% 55%;
+    --chart-2: 199 100% 61%;
+    --chart-3: 38 100% 56%;
+    --chart-4: 353 100% 65%;
+    --chart-5: 262 83% 68%;
+    --sidebar-background: 220 42% 5%;
+    --sidebar-foreground: 213 60% 88%;
+    --sidebar-primary: 161 91% 55%;
+    --sidebar-primary-foreground: 222 55% 4%;
+    --sidebar-accent: 218 33% 12%;
+    --sidebar-accent-foreground: 213 60% 90%;
+    --sidebar-border: 214 40% 16%;
+    --sidebar-ring: 161 91% 55%;
+    --gradient-primary: linear-gradient(135deg, hsl(161 91% 55%), hsl(199 100% 61%));
+    --gradient-card: linear-gradient(160deg, hsl(220 40% 9%), hsl(222 50% 5%));
+    --shadow-card: 0 8px 30px -12px hsl(222 60% 2% / 0.8);
+    --shadow-hover: 0 0 24px -4px hsl(161 91% 55% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    font-family: 'OPPOSans', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px -2px hsl(var(--primary) / 0.55);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px -2px hsl(var(--accent) / 0.5);
+  }
+
+  .glow-danger {
+    box-shadow: 0 0 20px -2px hsl(var(--destructive) / 0.5);
+  }
+
+  .text-glow-primary {
+    text-shadow: 0 0 16px hsl(var(--primary) / 0.6);
+  }
+
+  .grid-noise {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}

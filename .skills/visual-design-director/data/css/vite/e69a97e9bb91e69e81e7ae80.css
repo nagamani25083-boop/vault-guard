@@ -1,0 +1,127 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@font-face {
+  font-family: 'Glow Sans SC';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.woff2') format('woff2');
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Dark minimalism: dark base + mystic purple signal color */
+    --background: 222 40% 7%;
+    --foreground: 220 13% 91%;
+    --card: 222 44% 11%;
+    --card-foreground: 220 13% 91%;
+    --popover: 222 46% 9%;
+    --popover-foreground: 220 13% 91%;
+    --primary: 258 72% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 220 13% 91%;
+    --muted: 217 33% 15%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 258 60% 24%;
+    --accent-foreground: 258 90% 90%;
+    --destructive: 0 72% 51%;
+    --border: 215 28% 18%;
+    --input: 215 28% 18%;
+    --ring: 258 72% 58%;
+    /* Functional colors (semantic states, not decorative fills) */
+    --fury: 0 84% 60%;
+    --fury-foreground: 0 0% 100%;
+    --calm: 199 89% 60%;
+    --calm-foreground: 210 40% 8%;
+    --shield: 45 96% 53%;
+    --shield-foreground: 45 90% 8%;
+    --true-dmg: 25 95% 53%;
+    --true-dmg-foreground: 0 0% 100%;
+    --heal: 152 60% 50%;
+    --heal-foreground: 152 60% 8%;
+    --chart-1: 258 72% 58%;
+    --chart-2: 199 89% 60%;
+    --chart-3: 0 84% 60%;
+    --chart-4: 45 96% 53%;
+    --chart-5: 152 60% 50%;
+    --sidebar-background: 222 46% 9%;
+    --sidebar-foreground: 220 13% 82%;
+    --sidebar-primary: 258 72% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 15%;
+    --sidebar-accent-foreground: 220 13% 91%;
+    --sidebar-border: 215 28% 18%;
+    --sidebar-ring: 258 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 222 40% 7%;
+    --foreground: 220 13% 91%;
+    --card: 222 44% 11%;
+    --card-foreground: 220 13% 91%;
+    --popover: 222 46% 9%;
+    --popover-foreground: 220 13% 91%;
+    --primary: 258 72% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 220 13% 91%;
+    --muted: 217 33% 15%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 258 60% 24%;
+    --accent-foreground: 258 90% 90%;
+    --destructive: 0 72% 51%;
+    --border: 215 28% 18%;
+    --input: 215 28% 18%;
+    --ring: 258 72% 58%;
+    --fury: 0 84% 60%;
+    --fury-foreground: 0 0% 100%;
+    --calm: 199 89% 60%;
+    --calm-foreground: 210 40% 8%;
+    --shield: 45 96% 53%;
+    --shield-foreground: 45 90% 8%;
+    --true-dmg: 25 95% 53%;
+    --true-dmg-foreground: 0 0% 100%;
+    --heal: 152 60% 50%;
+    --heal-foreground: 152 60% 8%;
+    --chart-1: 258 72% 58%;
+    --chart-2: 199 89% 60%;
+    --chart-3: 0 84% 60%;
+    --chart-4: 45 96% 53%;
+    --chart-5: 152 60% 50%;
+    --sidebar-background: 222 46% 9%;
+    --sidebar-foreground: 220 13% 82%;
+    --sidebar-primary: 258 72% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 15%;
+    --sidebar-accent-foreground: 220 13% 91%;
+    --sidebar-border: 215 28% 18%;
+    --sidebar-ring: 258 72% 58%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Glow Sans SC', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}

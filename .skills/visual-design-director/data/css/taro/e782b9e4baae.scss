@@ -1,0 +1,185 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Spotlight · Pure Black Base / Dramatic Spotlighting / Metallic Refraction
+   Near-black stage backdrop, a warm light-source hue as the main light, cool silver-chrome as accent highlights;
+   extreme light/dark contrast, light falling only on edges and subjects, everything else left as generous dark whitespace.
+   Mini-program fonts must be loaded in app.tsx via Taro.loadFontFace: OPPOSans4
+   ============================================================ */
+
+@font-face {
+  font-family: 'OPPOSans4';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/OPPOSans4.0.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Dark by default: deep theatrical base + warm gold main light + silver-chrome highlight */
+    --background: 30 27% 4%;
+    --foreground: 40 33% 92%;
+    --card: 33 31% 8%;
+    --card-foreground: 40 33% 92%;
+    --popover: 33 31% 8%;
+    --popover-foreground: 40 33% 92%;
+    --primary: 37 74% 65%; /* Main warm-gold light source, paired with near-black text at 9.9:1 */
+    --primary-foreground: 34 42% 7%;
+    --primary-glow: 40 82% 74%;
+    --secondary: 34 22% 14%;
+    --secondary-foreground: 40 33% 92%;
+    --muted: 33 20% 12%;
+    --muted-foreground: 38 18% 68%;
+    --accent: 33 60% 52%; /* Secondary light source, a shade darker warm copper glow; lighter base so paired with near-black text at 6.5:1 */
+    --accent-foreground: 34 42% 7%;
+    --destructive: 8 74% 44%;
+    --destructive-foreground: 40 33% 96%;
+    --chrome: 210 16% 78%; /* Silver-chrome accent: metallic refraction detail */
+    --border: 35 24% 22%;
+    --input: 35 24% 22%;
+    --ring: 37 74% 65%;
+    --radius: 1rem;
+    --chart-1: 37 74% 65%;
+    --chart-2: 40 82% 74%;
+    --chart-3: 33 60% 52%;
+    --chart-4: 210 16% 78%;
+    --chart-5: 38 18% 50%;
+    --gradient-primary: linear-gradient(135deg, hsl(37 74% 65%), hsl(40 82% 74%));
+    --gradient-subtle: linear-gradient(180deg, hsl(33 31% 10%), hsl(30 27% 5%));
+    --gradient-chrome: linear-gradient(135deg, hsl(210 16% 88%), hsl(210 10% 58%), hsl(210 16% 82%));
+    --shadow-glow: 0 12px 36px -14px hsl(37 74% 65% / 0.45);
+    --sidebar-background: 32 28% 6%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 37 74% 65%;
+    --sidebar-primary-foreground: 34 42% 7%;
+    --sidebar-accent: 34 22% 14%;
+    --sidebar-accent-foreground: 40 30% 90%;
+    --sidebar-border: 35 24% 20%;
+    --sidebar-ring: 37 74% 65%;
+  }
+
+  /* The theme itself is already dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 30 27% 4%;
+    --foreground: 40 33% 92%;
+    --card: 33 31% 8%;
+    --card-foreground: 40 33% 92%;
+    --popover: 33 31% 8%;
+    --popover-foreground: 40 33% 92%;
+    --primary: 37 74% 65%;
+    --primary-foreground: 34 42% 7%;
+    --secondary: 34 22% 14%;
+    --secondary-foreground: 40 33% 92%;
+    --muted: 33 20% 12%;
+    --muted-foreground: 38 18% 68%;
+    --accent: 33 60% 52%;
+    --accent-foreground: 34 42% 7%;
+    --destructive: 8 74% 44%;
+    --destructive-foreground: 40 33% 96%;
+    --border: 35 24% 22%;
+    --input: 35 24% 22%;
+    --ring: 37 74% 65%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'OPPOSans4', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: spotlight pool — a bright center with a small soft halo, like a searchlight falling on the dark */
+  .spotlight {
+    background-image: radial-gradient(
+      circle at 50% 22%,
+      hsl(var(--primary-glow) / 0.32) 0%,
+      hsl(var(--primary) / 0.14) 26%,
+      transparent 62%
+    );
+  }
+
+  /* Lit surface: warm light poured from the top edge, silhouetting the card's form */
+  .lit-surface {
+    background-color: hsl(var(--card));
+    background-image: radial-gradient(130% 92% at 50% 0%, hsl(var(--primary) / 0.14), transparent 62%);
+  }
+
+  /* Constant-glow outline: an ultra-thin highlight edge that traces contours even in the dark */
+  .glow-edge {
+    border: 1px solid hsl(var(--primary) / 0.24);
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.08), 0 8px 26px -16px hsl(var(--primary) / 0.4);
+  }
+
+  /* Metallic refraction hairline: a silver-chrome highlight bar, used for dividers and badges */
+  .chrome-line {
+    height: 1px;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--chrome) / 0.75) 50%,
+      transparent
+    );
+  }
+
+  /* Glossy outline on large headings: a warm-light rim around the letterforms, interacting with light and shadow */
+  .text-lit {
+    color: hsl(var(--foreground));
+    text-shadow: 0 0 18px hsl(var(--primary) / 0.4), 0 1px 0 hsl(var(--chrome) / 0.28);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .bg-gradient-chrome {
+    background-image: var(--gradient-chrome);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Slow fade-in after being lit, mimicking the eye adjusting to darkness */
+  .fade-in-lit {
+    animation: fade-in-lit 0.72s ease-out both;
+  }
+
+  /* Light-source breathing: very slow brightness oscillation, keeping the scene feeling alive */
+  .breathe-glow {
+    animation: breathe-glow 5s ease-in-out infinite;
+  }
+}
+
+@keyframes fade-in-lit {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes breathe-glow {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-lit,
+  .breathe-glow {
+    animation: none;
+    opacity: 1;
+  }
+}

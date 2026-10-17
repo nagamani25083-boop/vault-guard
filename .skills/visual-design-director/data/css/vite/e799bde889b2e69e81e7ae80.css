@@ -1,0 +1,389 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@font-face {
+  font-family: 'Glow Sans SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.woff2') format('woff2');
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+    --background: 220 33% 98.5%;
+    --foreground: 221 39% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 221 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+    --primary: 221 73% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 22% 95%;
+    --secondary-foreground: 221 39% 20%;
+    --muted: 220 22% 95%;
+    --muted-foreground: 220 9% 44%;
+    --accent: 221 62% 95%;
+    --accent-foreground: 221 73% 42%;
+    --destructive: 358 70% 53%;
+    --border: 220 20% 90%;
+    --input: 220 20% 88%;
+    --ring: 221 73% 55%;
+    --chart-1: 221 73% 55%;
+    --chart-2: 199 72% 55%;
+    --chart-3: 258 60% 62%;
+    --chart-4: 173 55% 45%;
+    --chart-5: 36 79% 57%;
+    /* Importance level signal colors */
+    --level-high: 358 72% 58%;
+    --level-mid: 36 79% 52%;
+    --level-low: 142 45% 44%;
+    /* Glass/acrylic material */
+    --glass-bg: 0 0% 100%;
+    --glass-border: 0 0% 100%;
+    --glass-highlight: 0 0% 100%;
+    --glass-shadow: 0 10px 40px -12px hsl(221 45% 30% / 0.16);
+    --gradient-primary: linear-gradient(135deg, hsl(221 80% 60%), hsl(199 84% 62%) 55%, hsl(258 72% 68%));
+    --gradient-card: linear-gradient(150deg, hsl(0 0% 100% / 0.9), hsl(220 45% 99% / 0.62) 60%, hsl(221 60% 97% / 0.5));
+    --gradient-background: radial-gradient(1200px 620px at 10% -10%, hsl(221 85% 90% / 0.85), transparent 60%), radial-gradient(1000px 560px at 98% 4%, hsl(196 82% 88% / 0.75), transparent 56%), radial-gradient(760px 760px at 58% 112%, hsl(258 72% 92% / 0.68), transparent 60%), radial-gradient(600px 500px at 82% 68%, hsl(174 60% 90% / 0.5), transparent 62%);
+    --shadow-card: 0 12px 44px -14px hsl(221 45% 30% / 0.16), 0 2px 8px -4px hsl(221 45% 30% / 0.08);
+    --shadow-hover: 0 20px 56px -14px hsl(221 55% 35% / 0.26), 0 4px 14px -6px hsl(221 55% 35% / 0.12);
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 221 20% 32%;
+    --sidebar-primary: 221 73% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 221 62% 95%;
+    --sidebar-accent-foreground: 221 73% 42%;
+    --sidebar-border: 220 20% 90%;
+    --sidebar-ring: 221 73% 55%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 221 40% 8%;
+    --foreground: 220 30% 96%;
+    --card: 221 38% 12%;
+    --card-foreground: 220 30% 96%;
+    --popover: 221 38% 12%;
+    --popover-foreground: 220 30% 96%;
+    --primary: 221 78% 55.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 221 30% 18%;
+    --secondary-foreground: 220 30% 96%;
+    --muted: 221 30% 18%;
+    --muted-foreground: 220 12% 65%;
+    --accent: 221 40% 22%;
+    --accent-foreground: 220 40% 92%;
+    --destructive: 358 62% 52%;
+    --border: 221 26% 24%;
+    --input: 221 26% 24%;
+    --ring: 221 78% 66%;
+    --chart-1: 221 78% 66%;
+    --chart-2: 199 72% 60%;
+    --chart-3: 258 62% 68%;
+    --chart-4: 173 55% 52%;
+    --chart-5: 36 79% 62%;
+    --level-high: 358 68% 62%;
+    --level-mid: 36 75% 58%;
+    --level-low: 142 42% 52%;
+    --glass-bg: 221 38% 18%;
+    --glass-border: 217 34% 66%;
+    --glass-highlight: 217 45% 82%;
+    --glass-shadow: 0 10px 40px -12px hsl(221 60% 3% / 0.6);
+    --gradient-primary: linear-gradient(135deg, hsl(221 74% 56%), hsl(199 76% 54%) 55%, hsl(258 62% 62%));
+    --gradient-card: linear-gradient(150deg, hsl(221 38% 19% / 0.88), hsl(221 40% 13% / 0.62) 60%, hsl(224 42% 16% / 0.5));
+    --gradient-background: radial-gradient(1200px 620px at 10% -10%, hsl(221 62% 24% / 0.7), transparent 60%), radial-gradient(1000px 560px at 98% 4%, hsl(196 58% 20% / 0.6), transparent 56%), radial-gradient(760px 760px at 58% 112%, hsl(258 52% 26% / 0.55), transparent 60%);
+    --shadow-card: 0 12px 44px -14px hsl(221 60% 3% / 0.6), 0 2px 8px -4px hsl(221 60% 3% / 0.4);
+    --shadow-hover: 0 20px 56px -14px hsl(221 60% 3% / 0.75), 0 4px 14px -6px hsl(221 60% 3% / 0.5);
+    --sidebar-background: 221 38% 11%;
+    --sidebar-foreground: 220 20% 80%;
+    --sidebar-primary: 221 78% 66%;
+    --sidebar-primary-foreground: 221 40% 10%;
+    --sidebar-accent: 221 40% 22%;
+    --sidebar-accent-foreground: 220 40% 92%;
+    --sidebar-border: 221 26% 24%;
+    --sidebar-ring: 221 78% 66%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Glow Sans SC', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  /* Gradient glass / acrylic translucent panel — unified global material for enhanced multi-layer translucency */
+  .glass-panel {
+    position: relative;
+    background-color: hsl(var(--glass-bg) / 0.6);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border) / 0.55);
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.55);
+  }
+  .glass-card {
+    position: relative;
+    background-image: var(--gradient-card);
+    backdrop-filter: blur(22px) saturate(165%);
+    -webkit-backdrop-filter: blur(22px) saturate(165%);
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.6);
+  }
+  /* A translucent highlight along the card top, enhancing the acrylic sense of volume */
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(150deg, hsl(var(--glass-highlight) / 0.7), transparent 45%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .glass-soft {
+    background-color: hsl(var(--glass-bg) / 0.42);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid hsl(var(--glass-border) / 0.42);
+  }
+  /* Interaction hover: slight lift + enhanced shadow */
+  .glass-hover {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover), inset 0 1px 0 0 hsl(var(--glass-highlight) / 0.7);
+    border-color: hsl(var(--primary) / 0.35);
+  }
+  /* Decorative gradient light blobs, used for background layering */
+  .glow-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+    animation: blobDrift 24s ease-in-out infinite;
+  }
+  .glow-blob.blob-drift-slow {
+    animation: blobDrift 34s ease-in-out infinite;
+    animation-delay: -9s;
+  }
+  .glow-blob.blob-drift-rev {
+    animation: blobDriftRev 28s ease-in-out infinite;
+    animation-delay: -5s;
+  }
+  @keyframes blobDrift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(46px, 34px) scale(1.12);
+    }
+  }
+  @keyframes blobDriftRev {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-42px, -26px) scale(0.9);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow-blob {
+      animation: none;
+    }
+  }
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Rich text rendering styles — unified body typography and image presentation */
+  .rich-content {
+    color: hsl(var(--foreground));
+    line-height: 1.75;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .rich-content:focus {
+    outline: none;
+  }
+  .rich-content p {
+    margin: 0 0 0.85em;
+  }
+  .rich-content h1 { font-size: 1.6em; font-weight: 600; margin: 0.6em 0 0.4em; }
+  .rich-content h2 { font-size: 1.35em; font-weight: 600; margin: 0.6em 0 0.4em; }
+  .rich-content h3 { font-size: 1.15em; font-weight: 600; margin: 0.6em 0 0.4em; }
+  .rich-content ul { list-style: disc; padding-left: 1.5em; margin: 0 0 0.85em; }
+  .rich-content ol { list-style: decimal; padding-left: 1.5em; margin: 0 0 0.85em; }
+  .rich-content li { margin: 0.2em 0; }
+  .rich-content a { color: hsl(var(--primary)); text-decoration: underline; }
+  .rich-content blockquote {
+    border-left: 3px solid hsl(var(--primary) / 0.5);
+    padding-left: 1em;
+    color: hsl(var(--muted-foreground));
+    margin: 0 0 0.85em;
+  }
+  .rich-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    margin: 0.5em 0;
+    display: block;
+  }
+  .rich-content img.kb-img-selected {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+  }
+  .rich-content .kb-attachment {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0.15em 0.25em;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85em;
+    color: hsl(var(--primary));
+    background-color: hsl(var(--accent));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .rich-content:empty::before {
+    content: attr(data-placeholder);
+    color: hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+}
+
+/* Paragraph-level copy button (injected into rich text body at runtime) */
+.rich-content [data-copy-bound] {
+  position: relative;
+}
+.para-copy-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: hsl(var(--primary));
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 9999px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.rich-content [data-copy-bound]:hover > .para-copy-btn {
+  opacity: 1;
+}
+@media (hover: none) {
+  .para-copy-btn {
+    opacity: 0.6;
+  }
+}
+
+/* Copyable block: one-click copy of the whole section (preserving line breaks) */
+.rich-content .kb-copy-block {
+  position: relative;
+  margin: 1rem 0;
+  border: 1px dashed hsl(var(--primary) / 0.45);
+  border-radius: 0.625rem;
+  background: hsl(var(--primary) / 0.05);
+  padding: 1rem 0.75rem 0.75rem;
+}
+.rich-content .kb-copy-block::before {
+  content: 'Copyable block';
+  position: absolute;
+  top: -0.55rem;
+  left: 0.625rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: hsl(var(--primary));
+  background: hsl(var(--card));
+  padding: 0 0.375rem;
+  border-radius: 0.25rem;
+}
+.block-copy-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: hsl(var(--primary));
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--primary) / 0.4);
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+/* Calendar marker state: small dot at the bottom */
+.kb-cal-dot {
+  position: relative;
+}
+.kb-cal-dot::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+}

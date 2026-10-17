@@ -1,0 +1,223 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: 8-bit pixel — NES palette: coin gold / electric blue / silver gray / near-black
+   Zero border-radius, thick outlines, hard-edged shadows, beveled 3D edges; motion driven by steps() frame-by-frame */
+
+@font-face {
+  font-family: 'HanChanDianZhengTi_16px';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/ChillBitmap_16px.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Silver-gray console shell base / near-black pixel text */
+    --background: 0 0% 88%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 96%;
+    --card-foreground: 0 0% 8%;
+    --popover: 0 0% 96%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Coin-gold primary color (NES bright yellow) */
+    --primary: 45 98% 29%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Electric blue secondary color */
+    --secondary: 240 100% 49%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 78%;
+    --muted-foreground: 0 0% 26%;
+
+    --accent: 240 100% 49%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 92% 42%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Thick outlines are always near-black */
+    --border: 0 0% 8%;
+    --input: 0 0% 8%;
+    --ring: 240 100% 49%;
+
+    --chart-1: 45 98% 49%;
+    --chart-2: 240 100% 49%;
+    --chart-3: 130 70% 38%;
+    --chart-4: 0 92% 42%;
+    --chart-5: 0 0% 45%;
+
+    --sidebar-background: 0 0% 82%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 45 98% 49%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 240 100% 49%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 8%;
+    --sidebar-ring: 240 100% 49%;
+
+    /* Non-color role variable: hard-edged pixel shadow */
+    --shadow-pixel: 4px 4px 0 0 hsl(0 0% 8%);
+    --shadow-pixel-lg: 6px 6px 0 0 hsl(0 0% 8%);
+  }
+
+  .dark {
+    --radius: 0rem;
+    /* Inverted into a CRT night screen: deep blue-black base, bright yellow remains the primary color */
+    --background: 240 40% 10%;
+    --foreground: 0 0% 94%;
+    --card: 240 34% 15%;
+    --card-foreground: 0 0% 94%;
+    --popover: 240 34% 15%;
+    --popover-foreground: 0 0% 94%;
+    --primary: 45 98% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 90% 62%;
+    --secondary-foreground: 240 20% 96%;
+    --muted: 240 24% 20%;
+    --muted-foreground: 0 0% 74%;
+    --accent: 190 90% 31%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 96%;
+    --input: 0 0% 96%;
+    --ring: 45 98% 55%;
+
+    --shadow-pixel: 4px 4px 0 0 hsl(0 0% 96%);
+    --shadow-pixel-lg: 6px 6px 0 0 hsl(0 0% 96%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'HanChanDianZhengTi_16px', 'Courier New', monospace;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    image-rendering: pixelated;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'HanChanDianZhengTi_16px', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: hard-edged pixel shadow — a blur-free block shadow */
+  .pixel-shadow {
+    box-shadow: var(--shadow-pixel);
+  }
+  .pixel-shadow-lg {
+    box-shadow: var(--shadow-pixel-lg);
+  }
+
+  /* Thick-outline pixel container */
+  .pixel-border {
+    border: 3px solid hsl(var(--border));
+    border-radius: 0;
+  }
+
+  /* Beveled 3D edge: a light-top/dark-bottom 3D button face */
+  .pixel-bevel {
+    border: 3px solid hsl(var(--border));
+    box-shadow:
+      inset 3px 3px 0 0 hsl(0 0% 100% / 0.6),
+      inset -3px -3px 0 0 hsl(0 0% 0% / 0.35),
+      var(--shadow-pixel);
+  }
+
+  /* Gamepad press feel: sinks along the Y axis and swallows the shadow */
+  .pixel-press {
+    transition: transform 60ms steps(2, end), box-shadow 60ms steps(2, end);
+  }
+  .pixel-press:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 hsl(var(--border));
+  }
+
+  /* Scanline overlay: CRT screen texture */
+  .crt-scanlines {
+    position: relative;
+  }
+  .crt-scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      hsl(0 0% 0% / 0.12) 0px,
+      hsl(0 0% 0% / 0.12) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Checkerboard pixel texture */
+  .pixel-checker {
+    background-image:
+      linear-gradient(45deg, hsl(var(--muted)) 25%, transparent 25% 75%, hsl(var(--muted)) 75%),
+      linear-gradient(45deg, hsl(var(--muted)) 25%, transparent 25% 75%, hsl(var(--muted)) 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+  }
+
+  /* Blinking block caret */
+  .pixel-caret {
+    display: inline-block;
+    width: 0.6em;
+    height: 1em;
+    background: hsl(var(--foreground));
+    vertical-align: text-bottom;
+    animation: pixel-blink 1s steps(1, end) infinite;
+  }
+
+  /* Frame-by-frame bounce (sprite idle) */
+  .pixel-bounce {
+    animation: pixel-bounce 0.6s steps(4, end) infinite alternate;
+  }
+
+  /* Flickering text (arcade prompt) */
+  .pixel-flicker {
+    animation: pixel-blink 0.9s steps(1, end) infinite;
+  }
+
+  @keyframes pixel-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @keyframes pixel-bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pixel-caret, .pixel-bounce, .pixel-flicker { animation: none; }
+    .pixel-press { transition: none; }
+  }
+}

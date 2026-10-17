@@ -1,0 +1,204 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Terminal — retro CRT command line
+   Extremely dark green-black base / phosphor green primary / amber orange secondary, monospace type, scanlines, ghost trails */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.125rem;
+
+    /* CRT extremely dark green-black base / phosphor green text */
+    --background: 84 40% 5%;
+    --foreground: 120 90% 72%;
+
+    --card: 84 34% 8%;
+    --card-foreground: 120 90% 72%;
+    --popover: 84 34% 8%;
+    --popover-foreground: 120 90% 72%;
+
+    /* Phosphor green glow as primary color */
+    --primary: 120 100% 26.5%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Amber orange secondary color */
+    --secondary: 41 100% 30.5%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 84 26% 12%;
+    --muted-foreground: 120 30% 62%;
+
+    --accent: 41 100% 30.5%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 48%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Low-brightness phosphor outline */
+    --border: 120 45% 24%;
+    --input: 120 45% 24%;
+    --ring: 120 100% 45%;
+
+    --chart-1: 120 100% 45%;
+    --chart-2: 41 100% 50%;
+    --chart-3: 120 60% 62%;
+    --chart-4: 84 40% 34%;
+    --chart-5: 41 60% 34%;
+
+    --sidebar-background: 84 42% 4%;
+    --sidebar-foreground: 120 90% 72%;
+    --sidebar-primary: 120 100% 45%;
+    --sidebar-primary-foreground: 84 40% 5%;
+    --sidebar-accent: 84 26% 11%;
+    --sidebar-accent-foreground: 41 100% 50%;
+    --sidebar-border: 120 45% 22%;
+    --sidebar-ring: 120 100% 45%;
+  }
+
+  /* The theme itself is dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --radius: 0.125rem;
+    --background: 84 40% 5%;
+    --foreground: 120 90% 72%;
+    --card: 84 34% 8%;
+    --card-foreground: 120 90% 72%;
+    --popover: 84 34% 8%;
+    --popover-foreground: 120 90% 72%;
+    --primary: 120 100% 26.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 41 100% 30.5%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 84 26% 12%;
+    --muted-foreground: 120 30% 62%;
+    --accent: 41 100% 30.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 45% 24%;
+    --input: 120 45% 24%;
+    --ring: 120 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Han Mono SC', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-variant-ligatures: none;
+    letter-spacing: 0.02em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: CRT scanline mask (evenly spaced dark stripes overlay) */
+  .crt-scanlines {
+    position: relative;
+  }
+  .crt-scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0 2px,
+      rgba(0, 0, 0, 0.28) 2px 4px
+    );
+  }
+
+  /* Phosphor glow text: simulates the glow of a phosphor screen */
+  .phosphor-glow {
+    color: hsl(var(--primary));
+    text-shadow:
+      0 0 2px hsl(var(--primary) / 0.9),
+      0 0 10px hsl(var(--primary) / 0.45);
+  }
+
+  /* Amber mode text: another classic monochrome phosphor look */
+  .amber-glow {
+    color: hsl(var(--secondary));
+    text-shadow:
+      0 0 2px hsl(var(--secondary) / 0.9),
+      0 0 10px hsl(var(--secondary) / 0.4);
+  }
+
+  /* Terminal panel: thin phosphor border + inner screen vignette */
+  .terminal-panel {
+    @apply border border-border bg-card;
+    box-shadow: inset 0 0 48px hsl(84 60% 2% / 0.9);
+  }
+
+  /* Block cursor: blinking input indicator */
+  .block-cursor::after {
+    content: '\2588';
+    margin-left: 0.15em;
+    color: hsl(var(--primary));
+    animation: cursor-blink 1s steps(1, end) infinite;
+  }
+
+  /* Character-by-character reveal: command-output style disclosure */
+  .type-reveal {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: type-reveal 900ms steps(32, end) both;
+  }
+
+  /* Signal interference: very slight positional jitter */
+  .signal-jitter {
+    animation: signal-jitter 2.4s steps(2, end) infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @keyframes type-reveal {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes signal-jitter {
+    0%, 92%, 100% { transform: translate(0, 0); }
+    94% { transform: translate(-1px, 0); }
+    96% { transform: translate(1px, 1px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .block-cursor::after,
+    .signal-jitter,
+    .type-reveal { animation: none; }
+    .type-reveal { width: auto; white-space: normal; }
+  }
+}

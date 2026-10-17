@@ -1,0 +1,223 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ==========================================================
+   Handwritten Notebook — full grayscale / paper texture / handwritten font
+   Surface: warm paper-white page base + slightly lighter paper cards, layered with a 1~2px hand-drawn feel outline.
+   Color: strictly limited to pure black, graphite gray, light gray, paper white, no color accents.
+   Material: horizontal ruled-note texture, paper surface noise, dashed hand-drawn border, gray highlighter correction marks.
+   Font: heading YangRenDongZhuShiTi-Semibold, body YangRenDongZhuShiTi-Regular.
+   On Mini Program, the same-named font must be loaded via Taro.loadFontFace in app.tsx;
+   the @font-face below only takes effect on H5.
+   ========================================================== */
+
+@font-face {
+  font-family: 'YangRenHeading';
+  src: url('https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'YangRenBody';
+  src: url('https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 0 0% 20%;
+    --card: 44 40% 99%;
+    --card-foreground: 0 0% 20%;
+    --popover: 44 40% 99%;
+    --popover-foreground: 0 0% 20%;
+    /* Charcoal black primary color: paper-white text on it far exceeds AA */
+    --primary: 0 0% 11%;
+    --primary-foreground: 40 33% 98%;
+    --secondary: 40 14% 90%;
+    --secondary-foreground: 0 0% 20%;
+    --muted: 40 16% 91%;
+    --muted-foreground: 40 5% 38%;
+    --accent: 0 0% 13%;
+    --accent-foreground: 40 33% 98%;
+    --destructive: 0 45% 40%;
+    --destructive-foreground: 40 33% 98%;
+    --border: 38 14% 72%;
+    --input: 38 14% 72%;
+    --ring: 0 0% 30%;
+    --radius: 0.5rem;
+    --rule-line: 38 14% 72%;
+    --shadow-paper: 0 1px 2px hsl(0 0% 20% / 0.08), 0 6px 14px -10px hsl(0 0% 20% / 0.18);
+    --chart-1: 0 0% 15%;
+    --chart-2: 0 0% 32%;
+    --chart-3: 0 0% 48%;
+    --chart-4: 0 0% 64%;
+    --chart-5: 0 0% 80%;
+    --sidebar-background: 42 30% 96%;
+    --sidebar-foreground: 0 0% 22%;
+    --sidebar-primary: 0 0% 11%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 40 16% 91%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 38 14% 78%;
+    --sidebar-ring: 0 0% 30%;
+  }
+
+  /* Dark mode flips to "slate + white chalk", carrying forward this theme's warm grayscale, never falling back to neutral gray-blue */
+  .dark {
+    --background: 36 9% 9%;
+    --foreground: 40 20% 92%;
+    --card: 36 9% 13%;
+    --card-foreground: 40 20% 92%;
+    --popover: 36 9% 13%;
+    --popover-foreground: 40 20% 92%;
+    --primary: 40 22% 90%;
+    --primary-foreground: 36 12% 12%;
+    --secondary: 36 8% 20%;
+    --secondary-foreground: 40 18% 90%;
+    --muted: 36 8% 18%;
+    --muted-foreground: 40 10% 68%;
+    --accent: 40 24% 84%;
+    --accent-foreground: 36 12% 12%;
+    --destructive: 0 45% 48%;
+    --destructive-foreground: 40 25% 96%;
+    --border: 36 8% 28%;
+    --input: 36 8% 28%;
+    --ring: 40 15% 70%;
+    --rule-line: 40 10% 40%;
+    --shadow-paper: 0 1px 2px hsl(0 0% 0% / 0.5), 0 6px 14px -10px hsl(0 0% 0% / 0.6);
+    --chart-1: 40 18% 92%;
+    --chart-2: 40 12% 76%;
+    --chart-3: 40 10% 60%;
+    --chart-4: 40 8% 44%;
+    --chart-5: 40 8% 30%;
+    --sidebar-background: 36 10% 7%;
+    --sidebar-foreground: 40 18% 90%;
+    --sidebar-primary: 40 22% 90%;
+    --sidebar-primary-foreground: 36 12% 12%;
+    --sidebar-accent: 36 8% 18%;
+    --sidebar-accent-foreground: 40 18% 90%;
+    --sidebar-border: 36 8% 26%;
+    --sidebar-ring: 40 15% 70%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'YangRenBody', 'STKaiti', 'KaiTi', serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: ruled notebook paper, evenly spaced baselines simulating an exercise book */
+  .paper-lined {
+    background-color: hsl(var(--background));
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 47px,
+      hsl(var(--rule-line) / 0.45) 47px,
+      hsl(var(--rule-line) / 0.45) 48px
+    );
+  }
+  /* Paper surface noise: fine grain simulating rough paper fiber */
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='1' cy='2' r='0.5' fill='hsl(0 0%25 0%25 / 0.05)'/%3E%3Ccircle cx='4' cy='5' r='0.5' fill='hsl(0 0%25 0%25 / 0.04)'/%3E%3C/svg%3E");
+  }
+  /* Left binding line: red/gray single-line anchor, page content remains freely laid out */
+  .binding-line {
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: hsl(var(--rule-line) / 0.8);
+    padding-left: 20px;
+  }
+  /* Hand-drawn dashed border: simulates the natural wobble of a hand-drawn stroke */
+  .doodle-border {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: hsl(var(--border));
+  }
+  /* Gray highlighter correction mark: covers only the lower half of the text */
+  .highlighter {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 58%,
+      hsl(var(--muted)) 58%,
+      hsl(var(--muted)) 92%,
+      transparent 92%
+    );
+  }
+  /* Pencil underline: bold baseline segment, replacing colored link styling */
+  .pencil-underline {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: hsl(var(--foreground) / 0.55);
+  }
+  /* Casual collage: 1~2 degree slight misalignment */
+  .paper-tilt {
+    transform: rotate(-1.2deg);
+  }
+  .paper-tilt-alt {
+    transform: rotate(1.4deg);
+  }
+  .shadow-paper {
+    box-shadow: var(--shadow-paper);
+  }
+  .font-hand-heading {
+    font-family: 'YangRenHeading', 'STKaiti', 'KaiTi', serif;
+  }
+  .font-hand-body {
+    font-family: 'YangRenBody', 'STKaiti', 'KaiTi', serif;
+  }
+}
+
+/* Motion: handwriting-like fade-in shift, pressed-paper sink, ink-deepening breath */
+@keyframes write-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) rotate(-0.6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes press-paper {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+@keyframes ink-deepen {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-write-in {
+  animation: write-in 0.42s ease-out both;
+}
+.animate-press-paper {
+  animation: press-paper 0.18s ease-in-out both;
+}
+.animate-ink-deepen {
+  animation: ink-deepen 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-write-in,
+  .animate-press-paper,
+  .animate-ink-deepen {
+    animation: none;
+  }
+}

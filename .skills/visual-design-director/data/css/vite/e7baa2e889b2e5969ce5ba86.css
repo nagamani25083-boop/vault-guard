@@ -1,0 +1,226 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Red Festive — Forbidden City red base, crimson-gold and rouge-red layered
+   Calligraphic titles / hairline gold lines / Chinese symmetry, no emoji */
+
+@font-face {
+  font-family: 'MaShanZheng';
+  src: url('https://resource-static.bj.bcebos.com/fonts/MaShanZheng-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.25rem;
+
+    /* Forbidden City red base / jade-white text */
+    --background: 0 71% 32%;
+    --foreground: 0 0% 95%;
+
+    /* A red one shade deeper for panels, distinct from the background */
+    --card: 0 71% 26%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 71% 24%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Crimson gold: primary accent, used for calligraphic titles, gold lines, key buttons */
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Rouge red secondary */
+    --secondary: 350 73% 45%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 55% 27%;
+    --muted-foreground: 40 30% 82%;
+
+    --accent: 350 73% 45%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 12 82% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Hairline gold serves as dividers and outlines */
+    --border: 46 55% 44%;
+    --input: 46 45% 38%;
+    --ring: 46 65% 52%;
+
+    --success: 152 40% 45%;
+    --warning: 46 65% 52%;
+    --info: 40 30% 82%;
+
+    --chart-1: 46 65% 52%;
+    --chart-2: 350 73% 45%;
+    --chart-3: 40 30% 82%;
+    --chart-4: 0 71% 40%;
+    --chart-5: 46 45% 34%;
+
+    --sidebar-background: 0 71% 24%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 46 65% 52%;
+    --sidebar-primary-foreground: 0 71% 20%;
+    --sidebar-accent: 350 73% 45%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 46 55% 40%;
+    --sidebar-ring: 46 65% 52%;
+
+    /* Gilded gradient (metallic sheen) */
+    --gradient-gold: linear-gradient(100deg,
+      hsl(44 50% 44%), hsl(48 82% 68%) 42%, hsl(44 55% 46%) 62%, hsl(50 88% 74%));
+  }
+
+  /* The theme itself is already a dark red base; .dark keeps identical values as a compatibility layer */
+  .dark {
+    --background: 0 71% 26%;
+    --foreground: 0 0% 95%;
+    --card: 0 71% 21%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 71% 19%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 73% 42%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 55% 22%;
+    --muted-foreground: 40 30% 80%;
+    --accent: 350 73% 42%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 12 82% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 46 55% 40%;
+    --input: 46 45% 34%;
+    --ring: 46 65% 56%;
+    --success: 152 40% 45%;
+    --warning: 46 65% 56%;
+    --info: 40 30% 80%;
+    --chart-1: 46 65% 56%;
+    --chart-2: 350 73% 42%;
+    --chart-3: 40 30% 80%;
+    --chart-4: 0 71% 34%;
+    --chart-5: 46 45% 30%;
+    --sidebar-background: 0 71% 19%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 46 65% 56%;
+    --sidebar-primary-foreground: 0 71% 16%;
+    --sidebar-accent: 350 73% 42%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 46 55% 36%;
+    --sidebar-ring: 46 65% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Songti SC', 'SimSun', 'STSong', serif;
+    /* Abstract lantern glow: blurred circular light patches in the background */
+    background-image:
+      radial-gradient(420px 420px at 14% 12%, hsl(46 70% 60% / 0.14), transparent 62%),
+      radial-gradient(360px 360px at 86% 22%, hsl(350 73% 55% / 0.16), transparent 60%),
+      radial-gradient(480px 480px at 50% 108%, hsl(46 70% 58% / 0.1), transparent 62%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'MaShanZheng', 'STKaiti', 'KaiTi', serif;
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  /* Core visual signature: gilded calligraphy (metallic-sheen gradient) */
+  .gold-calligraphy {
+    font-family: 'MaShanZheng', 'STKaiti', serif;
+    background-image: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Flowing gold line: a slowly moving golden light-effect line */
+  .gold-line {
+    height: 1px;
+    background-image: linear-gradient(90deg,
+      transparent, hsl(var(--primary) / 0.85) 30%, hsl(48 88% 76%) 50%,
+      hsl(var(--primary) / 0.85) 70%, transparent);
+    background-size: 220% 100%;
+    animation: gold-flow 6s linear infinite;
+  }
+  @keyframes gold-flow {
+    from { background-position: 0% 50%; }
+    to { background-position: 220% 50%; }
+  }
+
+  /* Hairline gold frame + Chinese fret-pattern lining */
+  .gold-frame {
+    border: 1px solid hsl(var(--border));
+    box-shadow: inset 0 0 0 3px hsl(var(--background)), inset 0 0 0 4px hsl(var(--primary) / 0.45);
+  }
+
+  /* Art Deco rays (composition aid for framed scenes) */
+  .deco-rays {
+    background-image: repeating-conic-gradient(
+      from 0deg,
+      hsl(var(--primary) / 0.1) 0deg 2deg,
+      transparent 2deg 12deg
+    );
+  }
+
+  /* Chinese fret pattern band */
+  .hui-pattern {
+    background-image:
+      repeating-linear-gradient(0deg, hsl(var(--primary) / 0.22) 0 1px, transparent 1px 8px),
+      repeating-linear-gradient(90deg, hsl(var(--primary) / 0.22) 0 1px, transparent 1px 8px);
+    background-size: 16px 16px;
+  }
+
+  /* Tap feedback: golden ripple */
+  .gold-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+  .gold-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, hsl(48 88% 72% / 0.5), transparent 62%);
+    opacity: 0;
+    transform: scale(0.3);
+    pointer-events: none;
+  }
+  .gold-ripple:active::after {
+    animation: gold-ripple 480ms ease-out;
+  }
+  @keyframes gold-ripple {
+    from { opacity: 0.9; transform: scale(0.3); }
+    to { opacity: 0; transform: scale(1.6); }
+  }
+
+  /* Stroke reveal: golden lines progressively trace out an element's outline */
+  .stroke-reveal {
+    animation: stroke-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes stroke-reveal {
+    from { opacity: 0; clip-path: inset(0 100% 0 0); }
+    to { opacity: 1; clip-path: inset(0 0 0 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gold-line,
+    .stroke-reveal { animation: none; }
+  }
+}

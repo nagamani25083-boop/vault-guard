@@ -1,0 +1,177 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dreamy Healing · Macaron Soft Healing Design System — all colors use HSL */
+
+@font-face {
+  font-family: 'ResourceHanRoundedCN';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/ResourceHanRoundedCN-Regular.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1.25rem;
+
+    --background: 252 44% 98%;
+    --foreground: 250 26% 26%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 26% 26%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 26% 26%;
+
+    --primary: 258 42% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 52% 92%;
+    --secondary-foreground: 250 28% 30%;
+
+    --muted: 252 32% 95%;
+    --muted-foreground: 250 12% 47%;
+
+    --accent: 344 60% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 53%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 252 30% 90%;
+    --input: 252 30% 90%;
+    --ring: 258 42% 55%;
+
+    /* Macaron color palette (used for module theme coloring) */
+    --macaron-mint: 158 54% 74%;
+    --macaron-sky: 200 66% 78%;
+    --macaron-blossom: 344 76% 86%;
+    --macaron-lavender: 262 56% 82%;
+    --macaron-peach: 20 86% 84%;
+    --macaron-butter: 45 88% 80%;
+
+    --chart-1: 258 45% 62%;
+    --chart-2: 200 60% 62%;
+    --chart-3: 158 48% 58%;
+    --chart-4: 344 62% 70%;
+    --chart-5: 45 78% 66%;
+
+    --sidebar-background: 252 40% 98%;
+    --sidebar-foreground: 250 20% 32%;
+    --sidebar-primary: 258 42% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 252 32% 95%;
+    --sidebar-accent-foreground: 250 26% 26%;
+    --sidebar-border: 252 30% 90%;
+    --sidebar-ring: 258 42% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(262 56% 74%), hsl(200 66% 78%));
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%), hsl(252 44% 98%));
+    --gradient-background: radial-gradient(120% 90% at 15% 0%, hsl(262 60% 95%) 0%, hsl(252 44% 98%) 45%, hsl(200 60% 96%) 100%);
+
+    --shadow-card: 0 12px 32px -14px hsl(258 40% 55% / 0.28);
+    --shadow-hover: 0 20px 44px -14px hsl(258 42% 50% / 0.36);
+  }
+
+  .dark {
+    --background: 258 24% 13%;
+    --foreground: 250 20% 92%;
+    --card: 258 22% 17%;
+    --card-foreground: 250 20% 92%;
+    --popover: 258 22% 17%;
+    --popover-foreground: 250 20% 92%;
+
+    --primary: 262 52% 58.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 258 18% 24%;
+    --secondary-foreground: 250 20% 92%;
+
+    --muted: 258 18% 22%;
+    --muted-foreground: 250 12% 68%;
+
+    --accent: 344 58% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 60% 53%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 258 16% 26%;
+    --input: 258 16% 26%;
+    --ring: 262 52% 72%;
+
+    --macaron-mint: 158 40% 56%;
+    --macaron-sky: 200 46% 60%;
+    --macaron-blossom: 344 50% 68%;
+    --macaron-lavender: 262 44% 66%;
+    --macaron-peach: 20 56% 66%;
+    --macaron-butter: 45 58% 62%;
+
+    --chart-1: 262 50% 68%;
+    --chart-2: 200 52% 60%;
+    --chart-3: 158 44% 56%;
+    --chart-4: 344 54% 68%;
+    --chart-5: 45 62% 62%;
+
+    --sidebar-background: 258 24% 13%;
+    --sidebar-foreground: 250 20% 92%;
+    --sidebar-primary: 262 52% 72%;
+    --sidebar-primary-foreground: 258 30% 14%;
+    --sidebar-accent: 258 18% 22%;
+    --sidebar-accent-foreground: 250 20% 92%;
+    --sidebar-border: 258 16% 26%;
+    --sidebar-ring: 262 52% 72%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(262 44% 42%), hsl(200 44% 40%));
+    --gradient-card: linear-gradient(160deg, hsl(258 22% 18%), hsl(258 24% 14%));
+    --gradient-background: radial-gradient(120% 90% at 15% 0%, hsl(262 30% 22%) 0%, hsl(258 24% 13%) 55%, hsl(200 26% 16%) 100%);
+
+    --shadow-card: 0 12px 32px -14px hsl(258 60% 6% / 0.5);
+    --shadow-hover: 0 20px 44px -14px hsl(258 60% 6% / 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'ResourceHanRoundedCN', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Slow, cloud-like floating up and down */
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-float-soft {
+    animation: float-soft 6s ease-in-out infinite;
+  }
+
+  /* Breathing scale */
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.12); opacity: 1; }
+  }
+}

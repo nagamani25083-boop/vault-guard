@@ -1,0 +1,189 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Forest Nature Design System
+   Vibe: Organic forms / irregular rounded corners and fluid shapes / emotional color and whitespace
+   ============================================================ */
+
+@font-face {
+  font-family: 'OPPOSans';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/OPPOSans4.0.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Base color (frost white) —— page background */
+    --background: 216 33% 97%;
+    --foreground: 155 22% 14%;
+
+    /* Card (near-white, forming a second elevation layer) */
+    --card: 0 0% 100%;
+    --card-foreground: 155 22% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 155 22% 14%;
+
+    /* Primary color (deep pine green) —— mountain feel, headings and key buttons */
+    --primary: 151 24% 30%;
+    --primary-foreground: 216 33% 97%;
+
+    /* Secondary (soft moss green) */
+    --secondary: 150 20% 91%;
+    --secondary-foreground: 151 26% 24%;
+
+    /* Muted surface (marble gray tone) */
+    --muted: 207 22% 92%;
+    --muted-foreground: 200 12% 38%;
+
+    /* Accent color (morning mist blue) —— links, icons, active states */
+    --accent: 201 20% 60%;
+    --accent-foreground: 155 30% 14%;
+
+    --destructive: 6 62% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 207 16% 84%;
+    --input: 207 16% 84%;
+    --ring: 151 24% 30%;
+
+    --success: 148 42% 38%;
+    --warning: 36 78% 52%;
+    --info: 201 30% 52%;
+    /* Feedback colors (forest-toned soft colors): positive = moss green, needs-improvement = terracotta orange */
+    --score-correct: 150 26% 48%;
+    --score-wrong: 14 50% 62%;
+    /* Progress status colors: mastered = forest green (#10B981 forest-toned), in-progress = warm orange (#F97316 forest-toned), not-started = marble gray */
+    --mastery-mastered: 158 52% 40%;
+    --mastery-mastered-foreground: 0 0% 100%;
+    --mastery-review: 24 80% 52%;
+    --mastery-review-foreground: 0 0% 100%;
+    --mastery-new: 200 10% 55%;
+    --mastery-new-foreground: 0 0% 100%;
+    --education-blue: 201 30% 52%;
+    --education-green: 151 24% 30%;
+
+    --chart-1: 151 24% 30%;
+    --chart-2: 201 30% 52%;
+    --chart-3: 36 60% 55%;
+    --chart-4: 168 30% 45%;
+    --chart-5: 6 55% 58%;
+
+    /* Sidebar (light moss base) */
+    --sidebar-background: 150 24% 96%;
+    --sidebar-foreground: 155 20% 22%;
+    --sidebar-primary: 151 24% 30%;
+    --sidebar-primary-foreground: 216 33% 97%;
+    --sidebar-accent: 150 22% 90%;
+    --sidebar-accent-foreground: 151 26% 22%;
+    --sidebar-border: 150 16% 86%;
+    --sidebar-ring: 151 24% 30%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(151 26% 34%), hsl(168 28% 42%));
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%), hsl(150 30% 98%));
+    --gradient-background: radial-gradient(1200px 600px at 15% -10%, hsl(150 40% 92%), transparent 60%), radial-gradient(1000px 500px at 100% 0%, hsl(201 40% 92%), transparent 55%);
+    --shadow-card: 0 10px 40px -12px hsl(155 30% 20% / 0.12);
+    --shadow-hover: 0 18px 50px -14px hsl(155 30% 20% / 0.2);
+  }
+
+  .dark {
+    --background: 155 24% 8%;
+    --foreground: 150 20% 92%;
+    --card: 155 20% 12%;
+    --card-foreground: 150 20% 92%;
+    --popover: 155 20% 12%;
+    --popover-foreground: 150 20% 92%;
+    --primary: 150 34% 55%;
+    --primary-foreground: 155 30% 10%;
+    --secondary: 155 14% 18%;
+    --secondary-foreground: 150 20% 90%;
+    --muted: 155 12% 18%;
+    --muted-foreground: 150 12% 62%;
+    --accent: 201 26% 52%;
+    --accent-foreground: 201 30% 8%;
+    --destructive: 6 55% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 155 12% 22%;
+    --input: 155 12% 22%;
+    --ring: 150 34% 55%;
+    --success: 148 42% 48%;
+    --warning: 36 74% 56%;
+    --info: 201 36% 60%;
+    /* Feedback colors (forest-toned soft colors): slightly brightened in dark mode */
+    --score-correct: 150 30% 62%;
+    --score-wrong: 14 54% 66%;
+    /* Progress status colors (slightly brightened in dark mode) */
+    --mastery-mastered: 158 46% 48%;
+    --mastery-mastered-foreground: 155 30% 10%;
+    --mastery-review: 24 74% 56%;
+    --mastery-review-foreground: 155 30% 10%;
+    --mastery-new: 200 10% 60%;
+    --mastery-new-foreground: 155 30% 10%;
+    --education-blue: 201 36% 60%;
+    --education-green: 150 34% 55%;
+    --chart-1: 150 34% 55%;
+    --chart-2: 201 36% 60%;
+    --chart-3: 36 60% 58%;
+    --chart-4: 168 34% 52%;
+    --chart-5: 6 55% 60%;
+    --sidebar-background: 155 22% 11%;
+    --sidebar-foreground: 150 18% 86%;
+    --sidebar-primary: 150 34% 55%;
+    --sidebar-primary-foreground: 155 30% 10%;
+    --sidebar-accent: 155 14% 18%;
+    --sidebar-accent-foreground: 150 18% 88%;
+    --sidebar-border: 155 12% 20%;
+    --sidebar-ring: 150 34% 55%;
+    --gradient-primary: linear-gradient(135deg, hsl(150 34% 40%), hsl(168 30% 46%));
+    --gradient-card: linear-gradient(160deg, hsl(155 20% 13%), hsl(155 24% 10%));
+    --gradient-background: radial-gradient(1200px 600px at 15% -10%, hsl(150 30% 16%), transparent 60%), radial-gradient(1000px 500px at 100% 0%, hsl(201 30% 16%), transparent 55%);
+    --shadow-card: 0 10px 40px -12px hsl(0 0% 0% / 0.5);
+    --shadow-hover: 0 18px 50px -14px hsl(0 0% 0% / 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'OPPOSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* Slowly drifting organic shapes in the background */
+  .blob {
+    filter: blur(48px);
+    animation: blob-drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes blob-drift {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(24px, -18px, 0) scale(1.08); }
+    100% { transform: translate3d(-18px, 20px, 0) scale(0.96); }
+  }
+}

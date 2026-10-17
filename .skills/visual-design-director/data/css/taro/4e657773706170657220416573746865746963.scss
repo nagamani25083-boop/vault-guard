@@ -1,0 +1,190 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Newspaper Aesthetics —— newsprint off-white / ink black / editorial red
+   Zero border-radius, 1px ink hairlines and 4px thick rules, dot-grid paper texture, hard-edged offset shadows, black/white inverted interaction
+   Font: @font-face only takes effect on H5; on mini-program clients the same-named font must be loaded via Taro.loadFontFace in app.tsx */
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Paper white #F9F9F7 / ink black #111111 / editorial red #CC0000 */
+    --background: 60 20% 97%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    /* Ink black as the primary color: black background with white text by default, inverted on press */
+    --primary: 0 0% 7%;
+    --primary-foreground: 60 20% 97%;
+    /* Light gray #E5E5E0 as a secondary divider surface */
+    --secondary: 60 7% 90%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 60 7% 90%;
+    --muted-foreground: 0 0% 32%;
+    /* Editorial red: used only for breaking-news labels, key buttons, and a few status indicators */
+    --accent: 0 100% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 40%;
+    --destructive-foreground: 0 0% 100%;
+    /* Borders are layout structural lines, using ink black rather than light gray */
+    --border: 0 0% 7%;
+    --input: 0 0% 7%;
+    --ring: 0 0% 7%;
+    --radius: 0rem;
+    --chart-1: 0 0% 7%;
+    --chart-2: 0 100% 40%;
+    --chart-3: 0 0% 45%;
+    --chart-4: 0 0% 68%;
+    --chart-5: 60 7% 84%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 60 20% 97%;
+    --sidebar-primary: 0 100% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 60 20% 97%;
+    --sidebar-border: 0 0% 22%;
+    --sidebar-ring: 0 100% 40%;
+    /* Material: hard-edged clipping shadow (no blur, no floating) */
+    --shadow-clip: 4px 4px 0 0 hsl(0 0% 7%);
+    --shadow-clip-sm: 2px 2px 0 0 hsl(0 0% 7%);
+  }
+
+  /* Night edition: ink-black paper surface, keeping the same paper-white and editorial-red hues rather than neutral gray-blue */
+  .dark {
+    --background: 60 6% 8%;
+    --foreground: 60 20% 96%;
+    --card: 60 5% 12%;
+    --card-foreground: 60 20% 96%;
+    --popover: 60 5% 12%;
+    --popover-foreground: 60 20% 96%;
+    --primary: 60 20% 96%;
+    --primary-foreground: 60 6% 8%;
+    --secondary: 60 4% 18%;
+    --secondary-foreground: 60 20% 96%;
+    --muted: 60 4% 18%;
+    --muted-foreground: 60 6% 70%;
+    --accent: 0 100% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 12% 82%;
+    --input: 60 12% 82%;
+    --ring: 60 20% 96%;
+    --shadow-clip: 4px 4px 0 0 hsl(60 20% 96%);
+    --shadow-clip-sm: 2px 2px 0 0 hsl(60 20% 96%);
+    --chart-1: 0 0% 22%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+@layer utilities {
+  /* Core visual signature: newsprint dot-grid noise, laid over the paper-white background */
+  .paper-grain {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  /* Layout grid: crossing thin ink lines, reinforcing the newsprint column-grid feel */
+  .press-grid {
+    background-image:
+      linear-gradient(hsl(var(--foreground) / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  /* Masthead double rule: a thick top line + thin bottom line */
+  .rule-double {
+    border-top: 3px solid hsl(var(--foreground));
+    border-bottom: 1px solid hsl(var(--foreground));
+  }
+  /* A 4px thick ink border for emphasized areas */
+  .rule-heavy {
+    border: 4px solid hsl(var(--foreground));
+  }
+  /* Clipping hard shadow: no blur, no spread */
+  .shadow-clip {
+    box-shadow: var(--shadow-clip);
+  }
+  /* Press displacement + tightened shadow, simulating a clipping being pressed down */
+  .press-clip:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-clip-sm);
+  }
+  /* Label / date / category: small size, wide letter-spacing, uppercase */
+  .kicker {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 22rpx;
+  }
+  /* Inverted black block (a black/white reversed layout block) */
+  .ink-invert {
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  /* Editorial-red thick underline, used for emphasized links */
+  .underline-editorial {
+    border-bottom: 3px solid hsl(var(--accent));
+  }
+  /* Grayscale images, with a subtle vintage sepia allowed on active state */
+  .img-halftone {
+    filter: grayscale(100%) contrast(1.1);
+  }
+  .img-halftone:active {
+    filter: sepia(35%) contrast(1.05);
+  }
+  /* A brief fade-in with vertical shift, a calm editorial rhythm */
+  .animate-column-in {
+    animation: column-in 180ms ease-out both;
+  }
+  /* Scrolling news ticker */
+  .animate-ticker {
+    animation: ticker 18s linear infinite;
+  }
+}
+
+@keyframes column-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-column-in,
+  .animate-ticker {
+    animation: none;
+  }
+}

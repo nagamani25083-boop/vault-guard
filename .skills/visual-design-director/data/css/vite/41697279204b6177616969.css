@@ -1,0 +1,203 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system —— Kawaii Light Oxygen
+   All colors MUST be HSL. Pastel, rounded, soft, airy, refined.
+   Heading: Xiaolai (soft kawaii) · Body: MiSans (clean geometric) */
+
+@font-face {
+  font-family: 'Xiaolai';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/Xiaolai-Regular-Font.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MiSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MiSans_Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MiSans_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1.25rem;
+
+    --background: 24 56% 98%;
+    --foreground: 15 20% 26%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 15 20% 26%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 15 20% 26%;
+
+    --primary: 4 66% 51.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 16 72% 94%;
+    --secondary-foreground: 8 42% 42%;
+
+    --muted: 22 45% 96%;
+    --muted-foreground: 15 14% 45%;
+
+    --accent: 10 74% 96%;
+    --accent-foreground: 8 42% 42%;
+
+    --destructive: 0 75% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 16 48% 91%;
+    --input: 16 44% 88%;
+    --ring: 4 66% 56%;
+
+    /* decorative pastels */
+    --rose: 6 88% 85%;
+    --rose-foreground: 6 50% 42%;
+    --lilac: 255 90% 82%;
+    --lilac-foreground: 258 42% 42%;
+    --sky: 187 86% 72%;
+    --sky-foreground: 194 56% 30%;
+    --butter: 46 96% 74%;
+    --butter-foreground: 38 54% 34%;
+
+    --chart-1: 4 70% 64%;
+    --chart-2: 255 90% 76%;
+    --chart-3: 187 78% 58%;
+    --chart-4: 46 92% 64%;
+    --chart-5: 300 62% 72%;
+
+    --sidebar-background: 24 56% 98%;
+    --sidebar-foreground: 15 20% 26%;
+    --sidebar-primary: 4 66% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 10 74% 96%;
+    --sidebar-accent-foreground: 8 42% 42%;
+    --sidebar-border: 16 48% 91%;
+    --sidebar-ring: 4 66% 56%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(8 88% 82%), hsl(342 80% 84%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(22 60% 99%));
+    --gradient-background: radial-gradient(130% 90% at 50% -12%, hsl(12 82% 95%) 0%, hsl(22 55% 98%) 52%, hsl(0 0% 100%) 100%);
+
+    --shadow-card: 0 12px 34px -22px hsl(8 48% 52% / 0.22);
+    --shadow-hover: 0 20px 48px -22px hsl(8 48% 52% / 0.30);
+  }
+
+  .dark {
+    --background: 258 24% 12%;
+    --foreground: 33 40% 92%;
+
+    --card: 258 22% 16%;
+    --card-foreground: 33 40% 92%;
+
+    --popover: 258 22% 16%;
+    --popover-foreground: 33 40% 92%;
+
+    --primary: 4 74% 50.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 258 20% 24%;
+    --secondary-foreground: 33 40% 92%;
+
+    --muted: 258 18% 22%;
+    --muted-foreground: 33 20% 72%;
+
+    --accent: 258 20% 26%;
+    --accent-foreground: 33 40% 92%;
+
+    --destructive: 0 62% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 258 18% 28%;
+    --input: 258 18% 28%;
+    --ring: 4 74% 74%;
+
+    --rose: 6 66% 68%;
+    --rose-foreground: 8 90% 92%;
+    --lilac: 255 58% 68%;
+    --lilac-foreground: 255 92% 93%;
+    --sky: 187 52% 56%;
+    --sky-foreground: 187 90% 92%;
+    --butter: 46 66% 62%;
+    --butter-foreground: 46 92% 92%;
+
+    --chart-1: 4 72% 70%;
+    --chart-2: 255 84% 76%;
+    --chart-3: 187 66% 60%;
+    --chart-4: 46 82% 66%;
+    --chart-5: 300 56% 72%;
+
+    --sidebar-background: 258 24% 12%;
+    --sidebar-foreground: 33 40% 92%;
+    --sidebar-primary: 4 74% 74%;
+    --sidebar-primary-foreground: 12 30% 12%;
+    --sidebar-accent: 258 20% 26%;
+    --sidebar-accent-foreground: 33 40% 92%;
+    --sidebar-border: 258 18% 28%;
+    --sidebar-ring: 4 74% 74%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(8 74% 72%), hsl(342 66% 74%));
+    --gradient-card: linear-gradient(180deg, hsl(258 22% 17%), hsl(258 22% 15%));
+    --gradient-background: radial-gradient(120% 110% at 50% 0%, hsl(258 30% 16%) 0%, hsl(258 24% 12%) 55%, hsl(258 26% 10%) 100%);
+
+    --shadow-card: 0 10px 30px -18px hsl(258 40% 4% / 0.55);
+    --shadow-hover: 0 16px 42px -16px hsl(258 40% 4% / 0.65);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'MiSans', 'HarmonyOS Sans', system-ui, -apple-system, sans-serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Resource Han Rounded', 'HarmonyOS Sans', sans-serif;
+  }
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}

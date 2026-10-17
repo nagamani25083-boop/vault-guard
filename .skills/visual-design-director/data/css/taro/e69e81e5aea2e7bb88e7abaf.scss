@@ -1,0 +1,213 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Geek Terminal · CRT Phosphor / CLI-First / Lo-Fi Nostalgia
+   Extremely deep green-black as the monitor base, phosphor green as primary, amber orange as accent,
+   hierarchy conveyed purely through phosphor brightness and opacity shifts. Text-first, graphics-secondary.
+   Mini-program fonts must be loaded in app.tsx via Taro.loadFontFace:
+     Source Han Mono SC (body monospace), ChillBitmap 16px (bitmap headings)
+   ============================================================ */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ChillBitmap 16px';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.cdn.bcebos.com/fonts/ChillBitmap_16px.ttf') format('truetype');
+}
+
+@layer base {
+  :root {
+    /* CRT deep green-black base + phosphor green / amber orange foreground */
+    --background: 128 30% 5%;
+    --foreground: 120 55% 80%;
+    --card: 130 28% 8%;
+    --card-foreground: 120 55% 82%;
+    --popover: 130 30% 7%;
+    --popover-foreground: 120 55% 82%;
+    --primary: 135 100% 50%; /* Phosphor green, paired with deep green-black text at 13.6:1 */
+    --primary-foreground: 130 45% 6%;
+    --secondary: 130 20% 14%;
+    --secondary-foreground: 120 55% 82%;
+    --muted: 130 18% 13%;
+    --muted-foreground: 120 22% 55%;
+    --accent: 39 100% 52%; /* Amber orange, paired with deep brown text at 9.3:1 */
+    --accent-foreground: 36 45% 8%;
+    --destructive: 0 85% 60%; /* Warning red is also a phosphor color, using the same deep-base text (5.0:1) */
+    --destructive-foreground: 0 45% 8%;
+    --border: 128 40% 18%;
+    --input: 128 40% 18%;
+    --ring: 135 100% 50%;
+    --radius: 0.125rem;
+    --chart-1: 135 100% 50%;
+    --chart-2: 39 100% 52%;
+    --chart-3: 0 85% 60%;
+    --chart-4: 190 90% 55%;
+    --chart-5: 280 70% 65%;
+    --gradient-primary: linear-gradient(135deg, hsl(135 100% 50% / 0.22), hsl(160 100% 45% / 0.05));
+    --gradient-subtle: linear-gradient(180deg, hsl(130 30% 8%), hsl(128 30% 5%));
+    --glow-phosphor: 0 0 8px hsl(135 100% 50% / 0.55);
+    --glow-amber: 0 0 8px hsl(39 100% 52% / 0.55);
+    --sidebar-background: 130 30% 7%;
+    --sidebar-foreground: 120 55% 80%;
+    --sidebar-primary: 135 100% 50%;
+    --sidebar-primary-foreground: 130 45% 6%;
+    --sidebar-accent: 130 20% 14%;
+    --sidebar-accent-foreground: 120 55% 82%;
+    --sidebar-border: 128 40% 18%;
+    --sidebar-ring: 135 100% 50%;
+  }
+
+  /* The theme itself is already dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 128 30% 5%;
+    --foreground: 120 55% 80%;
+    --card: 130 28% 8%;
+    --card-foreground: 120 55% 82%;
+    --popover: 130 30% 7%;
+    --popover-foreground: 120 55% 82%;
+    --primary: 135 100% 50%;
+    --primary-foreground: 130 45% 6%;
+    --secondary: 130 20% 14%;
+    --secondary-foreground: 120 55% 82%;
+    --muted: 130 18% 13%;
+    --muted-foreground: 120 22% 55%;
+    --accent: 39 100% 52%;
+    --accent-foreground: 36 45% 8%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 45% 8%;
+    --border: 128 40% 18%;
+    --input: 128 40% 18%;
+    --ring: 135 100% 50%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Mono SC', 'Courier New', ui-monospace, Consolas, monospace;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: CRT scanlines — evenly spaced horizontal phosphor stripes, mimicking CRT refresh artifacts */
+  .crt-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      hsl(var(--primary) / 0.05) 0px,
+      hsl(var(--primary) / 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Phosphor afterglow: text glow bloom, the signature look of a phosphor screen */
+  .text-glow {
+    text-shadow: var(--glow-phosphor);
+  }
+  .text-glow-amber {
+    text-shadow: var(--glow-amber);
+  }
+
+  /* Terminal panel: single-pixel phosphor outline + subtle inner glow, no blurred glass */
+  .terminal-panel {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 24px hsl(var(--primary) / 0.06);
+  }
+
+  /* Bitmap heading text: lo-fi pixelated feel */
+  .font-bitmap {
+    font-family: 'ChillBitmap 16px', 'Source Han Mono SC', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* Command prompt: auto-generated CLI leading marker at line start */
+  .prompt-line::before {
+    content: '> ';
+    color: hsl(var(--primary));
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Blinking block cursor */
+  .cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  /* Whole-screen subtle flicker from unstable voltage */
+  .crt-flicker {
+    animation: crt-flicker 3.5s linear infinite;
+  }
+
+  /* Signal interference: a single horizontal jitter, used for entrance or state transitions */
+  .glitch-in {
+    animation: glitch-in 0.4s steps(4, end) both;
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-flicker {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.7;
+  }
+  94% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes glitch-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink,
+  .crt-flicker,
+  .glitch-in {
+    animation: none;
+  }
+}

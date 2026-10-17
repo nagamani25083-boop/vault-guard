@@ -1,0 +1,148 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* High-End Apparel · Quiet luxury whitespace / pearl white · oat / midnight black · charcoal gray / matte silver hairlines
+   Fonts: Mini Program clients must load the same-named font via Taro.loadFontFace in app.tsx; H5 is handled by the @font-face below */
+@font-face {
+  font-family: 'SourceHanSerif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHui';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: pearl-white base + pure white cards; text is midnight black, secondary text charcoal gray */
+    --background: 40 30% 98%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    /* Primary actions are midnight-black outlines/fills, paired with pearl-white text */
+    --primary: 0 0% 7%;
+    --primary-foreground: 40 30% 98%;
+    --secondary: 40 20% 92%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 40 20% 92%;
+    --muted-foreground: 0 0% 38%;
+    /* Matte silver, paired with midnight-black text (8.5:1); avoid white text so the silver surface doesn't read gray */
+    --accent: 225 4% 71%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 40 30% 98%;
+    --border: 225 4% 71%;
+    --input: 225 4% 84%;
+    --ring: 0 0% 7%;
+    --radius: 0.125rem;
+    /* Material-named colors: matte silver, oat, charcoal gray */
+    --silver: 225 4% 71%;
+    --oat: 40 20% 92%;
+    --charcoal: 0 0% 18%;
+    /* Charts follow an achromatic scale + oat, no highly saturated colors introduced */
+    --chart-1: 0 0% 12%;
+    --chart-2: 0 0% 32%;
+    --chart-3: 225 4% 60%;
+    --chart-4: 40 16% 78%;
+    --chart-5: 40 20% 79%;
+    --sidebar-background: 40 30% 98%;
+    --sidebar-foreground: 0 0% 18%;
+    --sidebar-primary: 0 0% 7%;
+    --sidebar-primary-foreground: 40 30% 98%;
+    --sidebar-accent: 40 20% 92%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 225 4% 71%;
+    --sidebar-ring: 0 0% 7%;
+  }
+
+  /* Dark mode follows the same achromatic system: midnight black rises to the surface, pearl white shifts to text, silver lines remain */
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 40 24% 94%;
+    --card: 0 0% 11%;
+    --card-foreground: 40 24% 94%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 40 24% 94%;
+    --primary: 40 24% 94%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 40 20% 92%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 40 8% 68%;
+    --accent: 225 4% 62%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 58% 46%;
+    --destructive-foreground: 40 30% 96%;
+    --border: 225 3% 32%;
+    --input: 225 3% 32%;
+    --ring: 40 24% 88%;
+    --silver: 225 4% 62%;
+    --oat: 40 10% 24%;
+    --charcoal: 0 0% 82%;
+    --chart-1: 0 0% 21%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHui', -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: 1px matte silver line — dividers, decoration, and boundaries all establish order through this alone, no shadows */
+  .silver-line { border-bottom: 1px solid hsl(var(--silver)); }
+  .silver-line-top { border-top: 1px solid hsl(var(--silver)); }
+  /* Silver hairline frame: shadow-free card, outline defined only by a single hairline */
+  .silver-frame { border: 1px solid hsl(var(--silver)); }
+  /* Couture outline button: transparent fill + midnight-black border, shifts to a silver line when pressed */
+  .btn-couture {
+    background-color: transparent;
+    border: 1px solid hsl(var(--foreground));
+    color: hsl(var(--foreground));
+    transition: border-color 0.35s ease, color 0.35s ease, transform 0.35s ease;
+  }
+  .btn-couture:active {
+    border-color: hsl(var(--silver));
+    color: hsl(var(--muted-foreground));
+    transform: scale(0.99);
+  }
+  /* Fabric weave: extremely faint crosshatch lines, simulating a wool/silk surface */
+  .fabric-weave {
+    background-color: hsl(var(--oat));
+    background-image:
+      repeating-linear-gradient(0deg, hsl(var(--silver) / 0.16) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(90deg, hsl(var(--silver) / 0.12) 0 1px, transparent 1px 5px);
+  }
+  /* Section heading letter-spacing: widened tracking to build an architectural, quiet sense of order */
+  .tracking-couture { letter-spacing: 0.18em; }
+  .font-heading { font-family: 'SourceHanSerif', 'Source Han Serif', STSong, SimSun, serif; }
+  .font-body { font-family: 'AlibabaPuHui', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+  /* Imagery touch: only an extremely subtle scale, never stealing the spotlight */
+  .press-couture { transition: transform 0.5s ease-out; }
+  .press-couture:active { transform: scale(1.02); }
+}
+
+@keyframes fade-up { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes line-extend { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+@keyframes silver-breathe { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+
+.animate-fade-up { animation: fade-up 0.5s ease-out both; }
+.animate-line-extend { animation: line-extend 0.6s ease-out both; transform-origin: left center; }
+.animate-silver-breathe { animation: silver-breathe 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-line-extend,
+  .animate-silver-breathe { animation: none; }
+}

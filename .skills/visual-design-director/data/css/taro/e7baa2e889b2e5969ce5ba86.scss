@@ -1,0 +1,226 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Festive Red — Forbidden-City red base × imperial gold × rouge red, jade-white accents
+   Ceremonial festive atmosphere: calligraphic titles, hairline gold lines, Chinese symmetry and Art Deco motifs.
+   Fonts: @font-face only takes effect on H5; for the Mini Program target,
+   load the same-named font via Taro.loadFontFace in app.tsx before use.
+   ============================================================ */
+
+@font-face {
+  font-family: 'MaShanZheng';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts/MaShanZheng-Regular.ttf') format('truetype');
+}
+
+@layer base {
+  :root {
+    /* Forbidden-City red base / jade-white text */
+    --background: 0 71% 32%;
+    --foreground: 0 0% 95%;
+    /* A shade deeper red for panels, layered against the base */
+    --card: 0 71% 26%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 71% 24%;
+    --popover-foreground: 0 0% 95%;
+    /* Imperial gold primary color: calligraphic titles, gold lines, key buttons (darkened to meet contrast with white text) */
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+    /* Rouge-red secondary color */
+    --secondary: 350 73% 45%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 55% 27%;
+    --muted-foreground: 40 30% 84%;
+    --accent: 350 73% 45%;
+    --accent-foreground: 0 0% 95%;
+    /* Bright imperial gold: used only for the decorative layer of gold lines, sheen and outlines */
+    --gold: 46 68% 58%;
+    --gold-foreground: 0 60% 14%;
+    --destructive: 12 82% 40%;
+    --destructive-foreground: 0 0% 98%;
+    /* Hairline gold used for dividers and outlines */
+    --border: 46 55% 44%;
+    --input: 46 50% 42%;
+    --ring: 46 68% 58%;
+    --radius: 0.25rem;
+    --chart-1: 46 68% 58%;
+    --chart-2: 350 73% 45%;
+    --chart-3: 40 30% 84%;
+    --chart-4: 0 71% 42%;
+    --chart-5: 46 45% 36%;
+    --sidebar-background: 0 71% 24%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 46 68% 58%;
+    --sidebar-primary-foreground: 0 60% 14%;
+    --sidebar-accent: 350 73% 45%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 46 55% 40%;
+    --sidebar-ring: 46 68% 58%;
+    /* Gilded gradient (metallic sheen, decorative layer only) */
+    --gradient-gold: linear-gradient(
+      100deg,
+      hsl(44 50% 44%),
+      hsl(48 82% 68%) 42%,
+      hsl(44 55% 46%) 62%,
+      hsl(50 88% 74%)
+    );
+  }
+
+  /* The theme itself is dark (Forbidden-City red deep base); .dark follows the same hue family darkened one more step, as a compatibility layer */
+  .dark {
+    --background: 0 71% 24%;
+    --foreground: 0 0% 95%;
+    --card: 0 71% 20%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 71% 18%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 46 65% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 73% 42%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 55% 20%;
+    --muted-foreground: 40 30% 84%;
+    --accent: 350 73% 42%;
+    --accent-foreground: 0 0% 95%;
+    --gold: 46 68% 60%;
+    --gold-foreground: 0 60% 12%;
+    --destructive: 12 82% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 46 55% 40%;
+    --input: 46 50% 38%;
+    --ring: 46 68% 60%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Songti SC', 'SimSun', 'STSong', serif;
+    /* Abstract lantern glow: soft-focus circular light and shadow in the background */
+    background-image:
+      radial-gradient(420px 420px at 14% 12%, hsl(46 70% 60% / 0.14), transparent 62%),
+      radial-gradient(360px 360px at 86% 22%, hsl(350 73% 55% / 0.16), transparent 60%),
+      radial-gradient(480px 480px at 50% 106%, hsl(46 70% 58% / 0.1), transparent 62%);
+  }
+}
+
+@layer utilities {
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  /* Core visual signature: gilded calligraphy — metallic-sheen large type (simulated with solid color + double-layer light/shadow, Mini Program compatible) */
+  .gold-calligraphy {
+    font-family: 'MaShanZheng', 'STKaiti', 'KaiTi', serif;
+    font-weight: 400;
+    color: hsl(var(--gold));
+    text-shadow: 0 1px 0 hsl(44 55% 36%), 0 0 10px hsl(48 88% 72% / 0.45);
+  }
+  /* Flowing gold line: slowly moving golden light-effect line */
+  .gold-line {
+    height: 1px;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--gold) / 0.85) 30%,
+      hsl(48 88% 78%) 50%,
+      hsl(var(--gold) / 0.85) 70%,
+      transparent
+    );
+    background-size: 220% 100%;
+    animation: gold-flow 6s linear infinite;
+  }
+  /* Gilded plaque: metallic-sheen gradient solid fill + deep-red text, for titles, buttons and other ceremonial surfaces */
+  .gold-plate {
+    background-image: var(--gradient-gold);
+    color: hsl(var(--gold-foreground));
+  }
+  /* Hairline gold frame + double inner lining, the base border decoration for a framed composition */
+  .gold-frame {
+    border: 1px solid hsl(var(--border));
+    box-shadow:
+      inset 0 0 0 3px hsl(var(--background)),
+      inset 0 0 0 4px hsl(var(--gold) / 0.45);
+  }
+  /* Chinese fret pattern band: continuous motif woven from orthogonal hairlines */
+  .hui-pattern {
+    background-image:
+      repeating-linear-gradient(0deg, hsl(var(--gold) / 0.22) 0 1px, transparent 1px 8px),
+      repeating-linear-gradient(90deg, hsl(var(--gold) / 0.22) 0 1px, transparent 1px 8px);
+    background-size: 16px 16px;
+  }
+  /* Art Deco radiating-ray band: evenly spaced gold lines going from dense to sparse */
+  .deco-rays {
+    background-image: repeating-linear-gradient(
+      -60deg,
+      hsl(var(--gold) / 0.18) 0 1px,
+      transparent 1px 10px
+    );
+  }
+  /* Gold ripple tap feedback */
+  .gold-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+  .gold-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, hsl(48 88% 72% / 0.5), transparent 62%);
+    opacity: 0;
+    transform: scale(0.3);
+    pointer-events: none;
+  }
+  .gold-ripple:active::after {
+    animation: gold-ripple 480ms ease-out;
+  }
+  /* Outline reveal: a gold line tracing an element's contour from left to right */
+  .animate-stroke-reveal {
+    animation: stroke-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes gold-flow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 220% 50%;
+  }
+}
+
+@keyframes gold-ripple {
+  from {
+    opacity: 0.9;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+@keyframes stroke-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-line,
+  .animate-stroke-reveal {
+    animation: none;
+  }
+  .gold-ripple:active::after {
+    animation: none;
+  }
+}

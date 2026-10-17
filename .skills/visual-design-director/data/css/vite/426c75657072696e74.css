@@ -1,0 +1,225 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Blueprint — engineering drawing aesthetic
+   Pure white drafting-paper base / engineering deep-blue primary / grid indigo hairlines / safety-orange accent
+   Visible 1px grid, dimension lines, corner marks, hard right angles, no soft shadows */
+
+@font-face {
+  font-family: 'Coda';
+  src: url('https://resource-static.bj.bcebos.com/fonts/Coda-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Drafting-paper white base / engineering deep-blue ink lines */
+    --background: 0 0% 100%;
+    --foreground: 217 84% 22%;
+
+    --card: 210 40% 99%;
+    --card-foreground: 217 84% 22%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 84% 22%;
+
+    /* Primary: engineering deep blue, used only for small color blocks */
+    --primary: 217 84% 34%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: grid indigo */
+    --secondary: 226 100% 58%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 214 32% 95%;
+    --muted-foreground: 217 30% 40%;
+
+    /* Accent: safety-orange CTA */
+    --accent: 14 91% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Grid lines / strokes */
+    --border: 226 60% 78%;
+    --input: 226 60% 70%;
+    --ring: 226 100% 58%;
+
+    --chart-1: 217 84% 34%;
+    --chart-2: 226 100% 58%;
+    --chart-3: 14 91% 43%;
+    --chart-4: 45 100% 51%;
+    --chart-5: 217 30% 55%;
+
+    --sidebar-background: 214 40% 97%;
+    --sidebar-foreground: 217 84% 22%;
+    --sidebar-primary: 217 84% 34%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 226 100% 94%;
+    --sidebar-accent-foreground: 217 84% 22%;
+    --sidebar-border: 226 60% 80%;
+    --sidebar-ring: 226 100% 58%;
+
+    /* Grid and dimension lines (non color-role variables, may hold full CSS values) */
+    --grid-line: hsl(226 100% 58% / 0.3);
+    --shadow-hard: 3px 3px 0 0 hsl(217 84% 22%);
+  }
+
+  /* Dark blueprint mode: deep-blue drawing sheet + white ink lines, surfaces truly inverted */
+  .dark {
+    --radius: 0rem;
+    --background: 220 60% 9%;
+    --foreground: 210 40% 96%;
+    --card: 219 55% 13%;
+    --card-foreground: 210 40% 96%;
+    --popover: 219 55% 13%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 226 100% 61%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 60% 26%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 219 40% 18%;
+    --muted-foreground: 214 30% 72%;
+    --accent: 24 95% 39.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 65% 53%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 219 40% 32%;
+    --input: 219 40% 38%;
+    --ring: 226 100% 70%;
+    --grid-line: hsl(226 100% 70% / 0.3);
+    --shadow-hard: 3px 3px 0 0 hsl(210 40% 96%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Source Han Mono SC', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Coda', 'Source Han Mono SC', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  ::selection {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: visible engineering grid base (1px indigo lines, 30% opacity) */
+  .bp-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* CAD block: visible border + hard offset shadow, sharp corners with no rounding */
+  .bp-block {
+    @apply border border-input bg-card;
+    box-shadow: var(--shadow-hard);
+  }
+
+  /* Corner marks: crosshair registration lines at the four corners */
+  .bp-corner-marks {
+    position: relative;
+  }
+  .bp-corner-marks::before,
+  .bp-corner-marks::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: hsl(var(--secondary));
+  }
+  .bp-corner-marks::before {
+    top: -1px; left: -1px;
+    border-top: 2px solid; border-left: 2px solid;
+  }
+  .bp-corner-marks::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 2px solid; border-right: 2px solid;
+  }
+
+  /* Dimension line: horizontal measurement line with end caps on both sides */
+  .bp-dimension-line {
+    height: 1px;
+    background: hsl(var(--secondary));
+    position: relative;
+  }
+  .bp-dimension-line::before,
+  .bp-dimension-line::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    width: 1px;
+    height: 9px;
+    background: hsl(var(--secondary));
+  }
+  .bp-dimension-line::before { left: 0; }
+  .bp-dimension-line::after { right: 0; }
+
+  /* Dashed connector line: for secondary info / relational guidance */
+  .bp-dashed-link {
+    border-top: 1px dashed hsl(var(--border));
+  }
+
+  /* Small monospace technical label */
+  .bp-label {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Mechanical-frequency blinking indicator caret, no easing */
+  .bp-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    background: hsl(var(--accent));
+    vertical-align: text-bottom;
+    animation: bp-blink 1s steps(1, end) infinite;
+  }
+
+  @keyframes bp-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  /* Grid-snapped instant hover feedback, no easing */
+  .bp-snap {
+    transition: none;
+  }
+  .bp-snap:hover {
+    outline: 1px solid hsl(var(--secondary));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-caret { animation: none; opacity: 1; }
+  }
+}

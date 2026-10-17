@@ -1,0 +1,213 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ==========================================================
+   Dreamy Healing — macaron colors / low contrast / soft-edged cloud feel
+   Surface: misty mint page base + pure white cards, layered via soft shadows and stacked depth rather than borders.
+   Color: mint green as primary, pearl purple as secondary, peach orange as accent, sky blue and cream yellow used as highlights.
+   Material: large radii, extremely soft diffuse shadows, translucent "soft-focus glass" (simulated with
+   translucent background + inner highlight + fine outline, since Mini Program doesn't support blur filters), cloud gradients.
+   Font: global "ResourceHanRounded".
+   On Mini Program, the same-named font must be loaded via Taro.loadFontFace in app.tsx;
+   the @font-face below only takes effect on H5.
+   ========================================================== */
+
+@font-face {
+  font-family: 'ResourceHanRounded';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/ResourceHanRoundedCN-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 150 38% 97%;
+    --foreground: 155 22% 26%;
+    --card: 0 0% 100%;
+    --card-foreground: 155 22% 26%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 155 22% 26%;
+    /* Mint primary color: brightness dialed down to hit AA against white text, while retaining the soft green hue */
+    --primary: 152 46% 32%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 150 56% 80%;
+    --secondary: 265 45% 92%;
+    --secondary-foreground: 265 28% 40%;
+    --muted: 146 30% 94%;
+    --muted-foreground: 152 16% 38%;
+    /* Peach accent color: paired with deep brown text to avoid ineffective white text at low contrast */
+    --accent: 22 92% 72%;
+    --accent-foreground: 20 55% 26%;
+    --destructive: 4 68% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 146 28% 89%;
+    --input: 146 28% 89%;
+    --ring: 152 46% 45%;
+    --radius: 1.25rem;
+    --gradient-primary: linear-gradient(135deg, hsl(152 48% 52%), hsl(150 56% 78%));
+    --gradient-subtle: linear-gradient(180deg, hsl(150 42% 97%), hsl(150 38% 92%));
+    --gradient-sky: linear-gradient(165deg, hsl(224 74% 90%), hsl(150 45% 94%));
+    --gradient-macaron: linear-gradient(135deg, hsl(47 100% 88%), hsl(348 100% 88%) 50%, hsl(224 74% 90%));
+    --shadow-soft: 0 10px 30px -12px hsl(152 40% 30% / 0.22);
+    --shadow-glow: 0 0 24px hsl(150 56% 78% / 0.55);
+    --shadow-card: 0 6px 20px -10px hsl(152 30% 40% / 0.18);
+    --chart-1: 152 48% 52%;
+    --chart-2: 348 80% 76%;
+    --chart-3: 265 50% 74%;
+    --chart-4: 224 70% 76%;
+    --chart-5: 47 88% 72%;
+    --sidebar-background: 150 38% 97%;
+    --sidebar-foreground: 155 22% 26%;
+    --sidebar-primary: 152 46% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 146 30% 94%;
+    --sidebar-accent-foreground: 155 22% 26%;
+    --sidebar-border: 146 28% 89%;
+    --sidebar-ring: 152 46% 45%;
+  }
+
+  /* Dark mode carries forward this theme's mint/sage hue as "dusk cloud sea", never falling back to neutral gray-blue */
+  .dark {
+    --background: 158 20% 10%;
+    --foreground: 150 18% 92%;
+    --card: 158 18% 14%;
+    --card-foreground: 150 18% 92%;
+    --popover: 158 18% 14%;
+    --popover-foreground: 150 18% 92%;
+    --primary: 150 46% 66%;
+    --primary-foreground: 158 40% 12%;
+    --primary-glow: 150 40% 34%;
+    --secondary: 265 22% 24%;
+    --secondary-foreground: 265 25% 90%;
+    --muted: 158 14% 19%;
+    --muted-foreground: 150 12% 72%;
+    --accent: 22 74% 68%;
+    --accent-foreground: 20 55% 14%;
+    --destructive: 4 60% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 158 14% 25%;
+    --input: 158 14% 25%;
+    --ring: 150 46% 62%;
+    --gradient-primary: linear-gradient(135deg, hsl(152 40% 40%), hsl(150 34% 56%));
+    --gradient-subtle: linear-gradient(180deg, hsl(158 20% 12%), hsl(158 18% 16%));
+    --gradient-sky: linear-gradient(165deg, hsl(224 26% 20%), hsl(158 20% 14%));
+    --gradient-macaron: linear-gradient(135deg, hsl(47 40% 32%), hsl(348 38% 34%) 50%, hsl(224 34% 32%));
+    --shadow-soft: 0 10px 30px -12px hsl(158 45% 3% / 0.6);
+    --shadow-glow: 0 0 24px hsl(150 40% 40% / 0.45);
+    --shadow-card: 0 6px 20px -10px hsl(158 45% 3% / 0.55);
+    --chart-1: 150 46% 62%;
+    --chart-2: 348 62% 70%;
+    --chart-3: 265 44% 70%;
+    --chart-4: 224 56% 70%;
+    --chart-5: 47 70% 66%;
+    --sidebar-background: 158 22% 8%;
+    --sidebar-foreground: 150 16% 90%;
+    --sidebar-primary: 150 46% 66%;
+    --sidebar-primary-foreground: 158 40% 12%;
+    --sidebar-accent: 158 14% 18%;
+    --sidebar-accent-foreground: 150 16% 90%;
+    --sidebar-border: 158 14% 24%;
+    --sidebar-ring: 150 46% 62%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'ResourceHanRounded', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: soft-focus glass layer. Mini Program doesn't support blur filters,
+     so translucent background + inner highlight + hairline outline is used to simulate the frosted thickness instead */
+  .glass-soft {
+    background-color: hsl(var(--card) / 0.72);
+    border: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.55), var(--shadow-card);
+  }
+  /* Cloud gradient base: large-area soft transition background */
+  .bg-gradient-cloud {
+    background-image: var(--gradient-subtle);
+  }
+  .bg-gradient-sky {
+    background-image: var(--gradient-sky);
+  }
+  .bg-gradient-macaron {
+    background-image: var(--gradient-macaron);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  /* Three tiers of extremely soft shadows: depth only, no hard edges */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  /* Soft glow: breathing outer glow around buttons and key cards */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  /* Irregular rounded corners: soft-edged form that breaks the rigid grid */
+  .rounded-blob {
+    border-radius: 42% 58% 52% 48% / 48% 44% 56% 52%;
+  }
+}
+
+/* Motion: slow fade-in, marshmallow bounce, floating up and down, slide-in from top */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes marshmallow-pop {
+  0% {
+    transform: scale(0.88);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-down {
+  0% {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-floaty {
+  animation: floaty 3.6s ease-in-out infinite;
+}
+.animate-marshmallow {
+  animation: marshmallow-pop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.animate-slide-in-down {
+  animation: slide-in-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty,
+  .animate-marshmallow,
+  .animate-slide-in-down {
+    animation: none;
+  }
+}

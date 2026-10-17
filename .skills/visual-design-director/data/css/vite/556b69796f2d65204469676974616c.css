@@ -1,0 +1,128 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Source Han Serif CN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --radius: 0.25rem;
+    --background: 45 44% 92%;
+    --foreground: 218 53% 22%;
+    --card: 44 46% 96%;
+    --card-foreground: 218 53% 22%;
+    --popover: 44 46% 96%;
+    --popover-foreground: 218 53% 22%;
+    --primary: 218 53% 22%;
+    --primary-foreground: 45 44% 94%;
+    --secondary: 44 28% 85%;
+    --secondary-foreground: 218 53% 22%;
+    --muted: 44 28% 87%;
+    --muted-foreground: 218 20% 40%;
+    --accent: 44 32% 84%;
+    --accent-foreground: 218 53% 22%;
+    --destructive: 11 64% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 218 28% 52%;
+    --input: 218 28% 52%;
+    --ring: 218 53% 22%;
+    --vermillion: 11 64% 53%;
+    --vermillion-foreground: 45 44% 94%;
+    --gold: 46 67% 47%;
+    --gold-foreground: 218 53% 22%;
+    --chart-1: 218 53% 32%;
+    --chart-2: 11 64% 53%;
+    --chart-3: 46 67% 47%;
+    --chart-4: 200 40% 45%;
+    --chart-5: 160 30% 40%;
+    --sidebar-background: 44 46% 94%;
+    --sidebar-foreground: 218 53% 22%;
+    --sidebar-primary: 218 53% 22%;
+    --sidebar-primary-foreground: 45 44% 94%;
+    --sidebar-accent: 44 32% 84%;
+    --sidebar-accent-foreground: 218 53% 22%;
+    --sidebar-border: 218 28% 52%;
+    --sidebar-ring: 218 53% 22%;
+  }
+
+  .dark {
+    --background: 218 40% 10%;
+    --foreground: 45 40% 90%;
+    --card: 218 38% 14%;
+    --card-foreground: 45 40% 90%;
+    --popover: 218 38% 14%;
+    --popover-foreground: 45 40% 90%;
+    --primary: 45 44% 90%;
+    --primary-foreground: 218 53% 18%;
+    --secondary: 218 30% 20%;
+    --secondary-foreground: 45 40% 90%;
+    --muted: 218 30% 20%;
+    --muted-foreground: 45 20% 70%;
+    --accent: 218 30% 22%;
+    --accent-foreground: 45 40% 90%;
+    --destructive: 11 64% 48.5%;
+    --border: 218 25% 32%;
+    --input: 218 25% 32%;
+    --ring: 45 44% 90%;
+    --vermillion: 11 70% 58%;
+    --vermillion-foreground: 218 53% 12%;
+    --gold: 46 67% 55%;
+    --gold-foreground: 218 53% 12%;
+    --chart-1: 45 44% 70%;
+    --chart-2: 11 64% 58%;
+    --chart-3: 46 67% 55%;
+    --chart-4: 200 40% 55%;
+    --chart-5: 160 30% 50%;
+    --sidebar-background: 218 40% 10%;
+    --sidebar-foreground: 45 40% 90%;
+    --sidebar-primary: 45 44% 90%;
+    --sidebar-primary-foreground: 218 53% 18%;
+    --sidebar-accent: 218 30% 22%;
+    --sidebar-accent-foreground: 45 40% 90%;
+    --sidebar-border: 218 25% 32%;
+    --sidebar-ring: 45 44% 90%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'HarmonyOS Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Source Han Serif CN', serif;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: 'Source Han Serif CN', serif;
+  }
+  .seigaiha {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(circle at 50% 100%, transparent 33%, hsl(var(--primary) / 0.06) 33%, hsl(var(--primary) / 0.06) 40%, transparent 40%);
+    background-size: 40px 20px;
+  }
+}

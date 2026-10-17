@@ -1,0 +1,163 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Duotone — international orange × deep teal green, near-black deep cyan-green base
+   Monospace font used globally throughout, hard-edged containers + bold borders, never render the duotone as a gradient */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Digital void: near-black deep cyan-green */
+    --background: 180 100% 8%;
+    --foreground: 180 28% 92%;
+
+    --card: 180 60% 11%;
+    --card-foreground: 180 28% 92%;
+    --popover: 180 65% 10%;
+    --popover-foreground: 180 28% 92%;
+
+    /* Primary color: international orange, used only for headings/borders/high-intensity emphasis */
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 42% 18%;
+    --secondary-foreground: 180 28% 92%;
+
+    --muted: 180 32% 15%;
+    --muted-foreground: 180 16% 68%;
+
+    /* Secondary color: deep teal green */
+    --accent: 181 100% 26%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 78% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 38% 22%;
+    --input: 180 38% 22%;
+    --ring: 16 100% 50%;
+
+    --chart-1: 16 100% 50%;
+    --chart-2: 181 100% 41%;
+    --chart-3: 40 82% 55%;
+    --chart-4: 200 70% 50%;
+    --chart-5: 340 68% 55%;
+
+    --sidebar-background: 180 70% 9%;
+    --sidebar-foreground: 180 28% 92%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 180 100% 8%;
+    --sidebar-accent: 180 42% 16%;
+    --sidebar-accent-foreground: 180 28% 92%;
+    --sidebar-border: 180 38% 20%;
+    --sidebar-ring: 16 100% 50%;
+  }
+
+  /* This theme is inherently dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 180 100% 8%;
+    --foreground: 180 28% 92%;
+    --card: 180 60% 11%;
+    --card-foreground: 180 28% 92%;
+    --popover: 180 65% 10%;
+    --popover-foreground: 180 28% 92%;
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 42% 18%;
+    --secondary-foreground: 180 28% 92%;
+    --muted: 180 32% 15%;
+    --muted-foreground: 180 16% 68%;
+    --accent: 181 100% 26%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 78% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 180 38% 22%;
+    --input: 180 38% 22%;
+    --ring: 16 100% 50%;
+    --chart-1: 16 100% 50%;
+    --chart-2: 181 100% 41%;
+    --chart-3: 40 82% 55%;
+    --chart-4: 200 70% 50%;
+    --chart-5: 340 68% 55%;
+    --sidebar-background: 180 70% 9%;
+    --sidebar-foreground: 180 28% 92%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 180 100% 8%;
+    --sidebar-accent: 180 42% 16%;
+    --sidebar-accent-foreground: 180 28% 92%;
+    --sidebar-border: 180 38% 20%;
+    --sidebar-ring: 16 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Source Han Mono SC', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Han Mono SC', ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Giant monospace typography: allowed to break the grid and overlap elements */
+  .mono-display {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  /* Core visual signature: hard-edge image container + bold border + orange hard offset */
+  .hard-edge {
+    border-width: 2px;
+    border-color: hsl(var(--foreground) / 0.9);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 hsl(var(--primary) / 0.85);
+  }
+
+  /* Duotone image mapping: duotone by default, restores original image on interaction */
+  .duotone-img {
+    filter: grayscale(1) contrast(1.15)
+            sepia(1) hue-rotate(150deg) saturate(3.5);
+    transition: filter 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .duotone-img:hover,
+  .duotone-img:active {
+    filter: none;
+  }
+
+  /* Fine grid texture, kept subtle so it doesn't overpower the image subject */
+  .grid-texture {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Accent color text glow (small-area accent) */
+  .text-glow-primary {
+    text-shadow: 0 0 18px hsl(var(--primary) / 0.55);
+  }
+  .text-glow-accent {
+    text-shadow: 0 0 18px hsl(var(--accent) / 0.55);
+  }
+}

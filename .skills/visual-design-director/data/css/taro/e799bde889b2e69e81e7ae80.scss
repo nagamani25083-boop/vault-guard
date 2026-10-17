@@ -1,0 +1,191 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ==========================================================
+   White Minimal — airy feel / generous whitespace / one signal color
+   Surface: pure white page base, cards also white, hierarchy distinguished only by hairline borders and spacing;
+   secondary backgrounds (--secondary/--muted) grouped by extremely subtle color differences, no decorative color blocks.
+   Color: primary text is dark gray rather than pure black, secondary text is medium gray, the single signal color
+   is a restrained indigo, used only for selected states, primary actions, and current status indicators.
+   Material: shadows approaching zero, borders ≤1px, no gradients, no glow effects.
+   Font: global "Glow Sans SC".
+   On Mini Program, the same-named font must be loaded via Taro.loadFontFace in app.tsx;
+   the @font-face below only takes effect on H5.
+   ========================================================== */
+
+@font-face {
+  font-family: 'GlowSansSC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 39% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 39% 11%;
+    /* The single signal color: restrained indigo, white text hits AA */
+    --primary: 222 58% 52%;
+    --primary-foreground: 0 0% 100%;
+    /* Secondary background: hierarchy distinguished only by an extremely subtle color difference */
+    --secondary: 220 25% 98%;
+    --secondary-foreground: 220 39% 11%;
+    --muted: 220 25% 98%;
+    --muted-foreground: 220 9% 42%;
+    /* Signal color light background, used for selected states; text takes a deeper tone of the same color */
+    --accent: 222 58% 96%;
+    --accent-foreground: 222 58% 42%;
+    --destructive: 0 72% 47%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 42% 34%;
+    --warning: 32 80% 38%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 222 58% 52%;
+    --radius: 0.75rem;
+    --hairline: 220 13% 88%;
+    --chart-1: 222 58% 52%;
+    --chart-2: 220 9% 46%;
+    --chart-3: 190 50% 45%;
+    --chart-4: 262 45% 58%;
+    --chart-5: 220 13% 78%;
+    --sidebar-background: 220 25% 98%;
+    --sidebar-foreground: 220 25% 24%;
+    --sidebar-primary: 222 58% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 58% 96%;
+    --sidebar-accent-foreground: 222 58% 42%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 222 58% 52%;
+  }
+
+  /* Dark mode carries forward this theme's cool neutral 220 hue, forming a low-stimulation "deep ink paper",
+     equally keeping zero decoration and the single signal color; never falls back to the scaffold's default gray-blue */
+  .dark {
+    --background: 220 18% 9%;
+    --foreground: 220 14% 95%;
+    --card: 220 16% 12%;
+    --card-foreground: 220 14% 95%;
+    --popover: 220 16% 12%;
+    --popover-foreground: 220 14% 95%;
+    --primary: 222 72% 66%;
+    --primary-foreground: 222 60% 12%;
+    --secondary: 220 14% 16%;
+    --secondary-foreground: 220 14% 94%;
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 68%;
+    --accent: 222 30% 20%;
+    --accent-foreground: 222 60% 84%;
+    --destructive: 0 62% 54%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 40% 58%;
+    --warning: 32 74% 60%;
+    --border: 220 12% 22%;
+    --input: 220 12% 22%;
+    --ring: 222 72% 66%;
+    --hairline: 220 12% 26%;
+    --chart-1: 222 72% 66%;
+    --chart-2: 220 10% 68%;
+    --chart-3: 190 46% 58%;
+    --chart-4: 262 42% 68%;
+    --chart-5: 220 12% 34%;
+    --sidebar-background: 220 18% 7%;
+    --sidebar-foreground: 220 14% 92%;
+    --sidebar-primary: 222 72% 66%;
+    --sidebar-primary-foreground: 222 60% 12%;
+    --sidebar-accent: 220 14% 16%;
+    --sidebar-accent-foreground: 222 60% 84%;
+    --sidebar-border: 220 12% 22%;
+    --sidebar-ring: 222 72% 66%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'GlowSansSC', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: 0.5px hairline divider, replacing shadows for hierarchy separation */
+  .hairline-b {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: hsl(var(--hairline));
+  }
+  .hairline-t {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: hsl(var(--hairline));
+  }
+  /* Hairline outline container: cards have no shadow, only a single extremely light border ring */
+  .hairline-box {
+    border: 1px solid hsl(var(--hairline));
+    background-color: hsl(var(--card));
+  }
+  /* Subtle color-difference grouping background: only one brightness step off page white */
+  .surface-subtle {
+    background-color: hsl(var(--secondary));
+  }
+  /* Text-only primary action: de-emphasized button feel, using signal color text + thin underline */
+  .action-text {
+    color: hsl(var(--primary));
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: hsl(var(--primary) / 0.4);
+  }
+  /* Current status indicator: signal-colored thin vertical bar, the only color block allowed */
+  .signal-bar {
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: hsl(var(--primary));
+  }
+  /* Minimal linear outline: uniform stroke weight, unfilled, for graphics and charts */
+  .stroke-thin {
+    border: 1px solid hsl(var(--foreground) / 0.5);
+    background-color: transparent;
+  }
+}
+
+/* Motion: linear, no bounce, slides into place along the grid, ease-out finish */
+@keyframes fade-in-grid {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide-in-x {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in-grid 0.32s ease-out both;
+}
+.animate-slide-in-x {
+  animation: slide-in-x 0.36s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-in-x {
+    animation: none;
+  }
+}

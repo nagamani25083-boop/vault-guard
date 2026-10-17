@@ -1,0 +1,194 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= Hand-drawn Style Design System ================= */
+@font-face {
+  font-family: 'MuyaoSoftbrush';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ResourceHanRounded';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    --background: 40 44% 95%;
+    --foreground: 30 9% 18%;
+
+    --card: 42 55% 98%;
+    --card-foreground: 30 9% 18%;
+
+    --popover: 42 55% 98%;
+    --popover-foreground: 30 9% 18%;
+
+    --primary: 0 62% 48%;
+    --primary-foreground: 40 60% 98%;
+
+    --secondary: 40 30% 88%;
+    --secondary-foreground: 30 9% 18%;
+
+    --muted: 40 24% 88%;
+    --muted-foreground: 30 7% 38%;
+
+    --accent: 215 55% 40%;
+    --accent-foreground: 40 60% 98%;
+
+    --destructive: 0 65% 44%;
+    --destructive-foreground: 40 60% 98%;
+
+    --border: 30 11% 22%;
+    --input: 30 11% 22%;
+    --ring: 215 55% 40%;
+
+    --chart-1: 0 62% 48%;
+    --chart-2: 215 55% 40%;
+    --chart-3: 45 88% 52%;
+    --chart-4: 150 42% 40%;
+    --chart-5: 30 8% 42%;
+
+    --sidebar-background: 40 44% 95%;
+    --sidebar-foreground: 30 9% 18%;
+    --sidebar-primary: 0 62% 48%;
+    --sidebar-primary-foreground: 40 60% 98%;
+    --sidebar-accent: 40 30% 88%;
+    --sidebar-accent-foreground: 30 9% 18%;
+    --sidebar-border: 30 11% 22%;
+    --sidebar-ring: 215 55% 40%;
+  }
+
+  .dark {
+    --background: 30 8% 12%;
+    --foreground: 40 30% 90%;
+    --card: 30 8% 16%;
+    --card-foreground: 40 30% 90%;
+    --popover: 30 8% 16%;
+    --popover-foreground: 40 30% 90%;
+    --primary: 0 62% 51%;
+    --primary-foreground: 40 30% 96%;
+    --secondary: 30 8% 22%;
+    --secondary-foreground: 40 30% 90%;
+    --muted: 30 8% 22%;
+    --muted-foreground: 40 12% 66%;
+    --accent: 215 55% 50.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 40 30% 96%;
+    --border: 40 12% 72%;
+    --input: 40 12% 72%;
+    --ring: 215 55% 58%;
+    --chart-1: 0 62% 55%;
+    --chart-2: 215 55% 58%;
+    --chart-3: 45 82% 58%;
+    --chart-4: 150 42% 52%;
+    --chart-5: 40 12% 60%;
+    --sidebar-background: 30 8% 12%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 0 62% 55%;
+    --sidebar-primary-foreground: 40 30% 96%;
+    --sidebar-accent: 30 8% 22%;
+    --sidebar-accent-foreground: 40 30% 90%;
+    --sidebar-border: 40 12% 72%;
+    --sidebar-ring: 215 55% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'ResourceHanRounded', system-ui, -apple-system, sans-serif;
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.14) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'MuyaoSoftbrush', 'ResourceHanRounded', cursive;
+  }
+
+  /* Paper dot-grid texture */
+  .paper-dots {
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.16) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* Hand-drawn irregular rounded corners + pencil-black outline */
+  .hand-border {
+    border: 2.5px solid hsl(var(--border));
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  }
+  .hand-border-alt {
+    border: 2.5px solid hsl(var(--border));
+    border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px;
+  }
+  .hand-border-thin {
+    border: 2px solid hsl(var(--border));
+    border-radius: 18px 6px 20px 8px / 8px 20px 6px 18px;
+  }
+
+  /* Hard-offset shadow (no blur, paper-cutout feel) */
+  .hard-shadow {
+    box-shadow: 5px 5px 0 0 hsl(var(--border));
+  }
+  .hard-shadow-sm {
+    box-shadow: 3px 3px 0 0 hsl(var(--border));
+  }
+  .hard-shadow-primary {
+    box-shadow: 5px 5px 0 0 hsl(var(--primary));
+  }
+  .hard-shadow-accent {
+    box-shadow: 5px 5px 0 0 hsl(var(--accent));
+  }
+
+  /* Paper-press feedback */
+  .press-paper {
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .press-paper:hover {
+    transform: translate(-1px, -1px) rotate(-0.6deg);
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+  .press-paper:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+
+  /* Doodle underline */
+  .sketch-underline {
+    background-image: linear-gradient(hsl(var(--primary)), hsl(var(--primary)));
+    background-repeat: no-repeat;
+    background-position: 0 92%;
+    background-size: 100% 5px;
+    padding-bottom: 2px;
+  }
+
+  .rotate-tape {
+    transform: rotate(-2deg);
+  }
+}

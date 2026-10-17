@@ -1,0 +1,437 @@
+/* stylelint-disable */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Fonts: Glitch Canvas ===== */
+@font-face {
+  font-family: 'GlowSansSC';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/GlowSansSC-Normal-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+/* Chinese pixel font Zpix — used for pixel dialogs / HUD / pixel titles */
+@font-face {
+  font-family: 'Zpix';
+  src: url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@master/dist/Zpix.ttf') format('truetype');
+  font-display: swap;
+}
+
+/*
+  Design system: Glitch Canvas
+  Cyberpunk glitch art · black background neon · high tech, low life
+  All colors use HSL. Dark mode only, no light mode.
+*/
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Background layer */
+    --background: 240 20% 5%;      /* #0A0A0F */
+    --foreground: 0 0% 88%;        /* #E0E0E0 */
+    --card: 240 18% 9%;            /* #12121A */
+    --card-foreground: 0 0% 88%;
+    --popover: 240 18% 9%;
+    --popover-foreground: 0 0% 88%;
+
+    /* Neon green primary */
+    --primary: 152 100% 26%;       /* #00FF88 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Magenta accent / glitch color */
+    --accent: 300 100% 40.5%;        /* #FF00FF */
+    --accent-foreground: 0 0% 100%;
+
+    /* Cyan-blue secondary */
+    --secondary: 190 100% 30%;     /* #00D4FF */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Secondary / muted text */
+    --muted: 240 14% 14%;
+    --muted-foreground: 220 9% 55%; /* #6B7280 -> brightened for contrast */
+
+    /* Danger / warning */
+    --destructive: 345 100% 45.5%;   /* #FF3366 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 16% 20%;         /* #2A2A3A */
+    --input: 240 16% 20%;
+    --ring: 152 100% 50%;
+
+    /* Pixel dark palette */
+    --blood: 0 88% 32%;      /* dark red #8b0000 family */
+    --rot: 96 52% 22%;       /* dark green #2d5016 family */
+    --ghost: 210 52% 28%;    /* ghost blue #1e3a5f family */
+
+    /* Chart colors: derived from the neon hues */
+    --chart-1: 152 100% 50%;
+    --chart-2: 300 100% 60%;
+    --chart-3: 190 100% 50%;
+    --chart-4: 345 100% 60%;
+    --chart-5: 270 70% 60%;
+
+    /* Sidebar */
+    --sidebar-background: 240 20% 6%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 152 100% 50%;
+    --sidebar-primary-foreground: 240 20% 5%;
+    --sidebar-accent: 240 16% 12%;
+    --sidebar-accent-foreground: 152 100% 60%;
+    --sidebar-border: 240 16% 18%;
+    --sidebar-ring: 152 100% 50%;
+
+    /* Gradients / lighting effects */
+    --gradient-primary: linear-gradient(135deg, hsl(152 100% 50%), hsl(190 100% 50%));
+    --gradient-card: linear-gradient(160deg, hsl(240 18% 9%), hsl(240 20% 6%));
+    --gradient-background: radial-gradient(circle at 50% 0%, hsl(270 40% 10% / 0.6), hsl(240 20% 5%) 60%);
+    --shadow-card: 0 0 0 1px hsl(240 16% 20%), 0 8px 24px hsl(240 40% 2% / 0.6);
+    --shadow-hover: 0 0 18px hsl(152 100% 50% / 0.35);
+  }
+
+  .dark {
+    --background: 240 20% 5%;
+    --foreground: 0 0% 88%;
+    --card: 240 18% 9%;
+    --card-foreground: 0 0% 88%;
+    --popover: 240 18% 9%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 152 100% 26%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 300 100% 40.5%;
+    --accent-foreground: 0 0% 100%;
+    --secondary: 190 100% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 14% 14%;
+    --muted-foreground: 220 9% 55%;
+    --destructive: 345 100% 45.5%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 16% 20%;
+    --input: 240 16% 20%;
+    --ring: 152 100% 50%;
+    --blood: 0 88% 32%;
+    --rot: 96 52% 22%;
+    --ghost: 210 52% 28%;
+    --chart-1: 152 100% 50%;
+    --chart-2: 300 100% 60%;
+    --chart-3: 190 100% 50%;
+    --chart-4: 345 100% 60%;
+    --chart-5: 270 70% 60%;
+    --sidebar-background: 240 20% 6%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 152 100% 50%;
+    --sidebar-primary-foreground: 240 20% 5%;
+    --sidebar-accent: 240 16% 12%;
+    --sidebar-accent-foreground: 152 100% 60%;
+    --sidebar-border: 240 16% 18%;
+    --sidebar-ring: 152 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GlowSansSC', 'AlibabaPuHuiTi', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border: 1px solid hsl(var(--primary) / 0.2);
+  }
+}
+
+/* ===== Glitch Canvas visual signature ===== */
+@layer components {
+  /* Monospace terminal font stack */
+  .font-mono-terminal {
+    font-family: 'JetBrains Mono', 'Courier New', ui-monospace, monospace;
+  }
+
+  /* Scanline overlay: old-monitor texture */
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    background: repeating-linear-gradient(
+      to bottom,
+      hsl(0 0% 0% / 0) 0px,
+      hsl(0 0% 0% / 0) 2px,
+      hsl(0 0% 0% / 0.35) 3px,
+      hsl(0 0% 0% / 0.35) 4px
+    );
+    background-size: 100% 4px;
+  }
+
+  /* Full-screen noise + vignette overlay */
+  .crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 55%, hsl(240 40% 2% / 0.75) 100%),
+      repeating-linear-gradient(to bottom, hsl(0 0% 0% / 0) 0px, hsl(0 0% 0% / 0) 2px, hsl(0 0% 0% / 0.18) 3px, hsl(0 0% 0% / 0.18) 4px);
+    mix-blend-mode: multiply;
+  }
+
+  /* Circuit / grid texture */
+  .circuit-grid {
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Neon-outline card */
+  .neon-border {
+    border: 1px solid hsl(var(--border));
+    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.08);
+  }
+  .neon-border-active {
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow: 0 0 12px hsl(var(--primary) / 0.25), inset 0 0 0 1px hsl(var(--primary) / 0.2);
+  }
+
+  /* Notched corner clip */
+  .clip-notch {
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  }
+  .clip-notch-sm {
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  /* Glitch text: RGB channel offset */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+    text-shadow: 0.03em 0 hsl(var(--accent) / 0.7), -0.03em 0 hsl(var(--secondary) / 0.7);
+  }
+  .glitch-text[data-text]::before,
+  .glitch-text[data-text]::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .glitch-text[data-text]::before {
+    color: hsl(var(--accent));
+    animation: glitch-shift-1 2.6s infinite linear alternate-reverse;
+    clip-path: inset(0 0 55% 0);
+  }
+  .glitch-text[data-text]::after {
+    color: hsl(var(--secondary));
+    animation: glitch-shift-2 3.1s infinite linear alternate-reverse;
+    clip-path: inset(50% 0 0 0);
+  }
+
+  /* Terminal cursor */
+  .terminal-cursor::after {
+    content: '';
+    display: inline-block;
+    width: 0.6em;
+    height: 1.05em;
+    margin-left: 0.15em;
+    background: hsl(var(--primary));
+    vertical-align: text-bottom;
+    animation: cursor-blink 1s steps(2, start) infinite;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 8px hsl(var(--primary) / 0.6);
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* ===== Keyframes ===== */
+@keyframes glitch-shift-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(-1px, -1px); }
+  60% { transform: translate(2px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+@keyframes glitch-shift-2 {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -1px); }
+  50% { transform: translate(-2px, 1px); }
+  75% { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.4; }
+  94% { opacity: 1; }
+  96% { opacity: 0.7; }
+  97% { opacity: 1; }
+}
+@keyframes scanline-move {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes text-corrupt {
+  0%, 100% { transform: translate(0); filter: none; }
+  50% { transform: translate(1px, -1px); filter: hue-rotate(20deg); }
+}
+
+/* ===== Pixel dialog layer ===== */
+@layer components {
+  /* Pixel font */
+  .font-pixel {
+    font-family: 'Zpix', 'Press Start 2P', ui-monospace, 'Courier New', monospace;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    letter-spacing: 0.02em;
+  }
+
+  /* Pixel dialog window (dark variant): thick white border + double inner outline + hard shadow */
+  .rpg-window {
+    position: relative;
+    background:
+      linear-gradient(180deg, hsl(230 55% 9% / 0.97), hsl(232 65% 5% / 0.98));
+    border: 3px solid hsl(210 30% 88%);
+    box-shadow:
+      0 0 0 3px hsl(232 70% 4%),
+      0 0 0 5px hsl(210 40% 55% / 0.55),
+      0 6px 0 hsl(0 0% 0% / 0.55);
+    image-rendering: pixelated;
+  }
+  .rpg-window::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid hsl(210 30% 70% / 0.35);
+    pointer-events: none;
+  }
+
+  /* Pixel portrait frame */
+  .pixel-frame {
+    image-rendering: pixelated;
+    border: 3px solid hsl(var(--foreground) / 0.85);
+    box-shadow:
+      0 0 0 3px hsl(var(--background)),
+      0 0 0 5px hsl(var(--primary) / 0.5);
+  }
+
+  /* Mottled pixel texture overlay */
+  .blood-splatter {
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, hsl(var(--blood) / 0.9) 40%, transparent 45%),
+      radial-gradient(3px 3px at 24% 33%, hsl(var(--blood) / 0.75) 40%, transparent 45%),
+      radial-gradient(2px 2px at 70% 20%, hsl(var(--blood) / 0.8) 40%, transparent 45%),
+      radial-gradient(4px 6px at 68% 24%, hsl(var(--blood) / 0.6) 40%, transparent 46%),
+      radial-gradient(2px 2px at 45% 75%, hsl(var(--blood) / 0.85) 40%, transparent 45%),
+      radial-gradient(3px 5px at 82% 68%, hsl(var(--blood) / 0.5) 40%, transparent 46%);
+    background-repeat: no-repeat;
+  }
+
+  /* Pixel scan grid (coarser grain than CRT, evoking retro console feel) */
+  .pixel-crt {
+    background-image: repeating-linear-gradient(
+      0deg,
+      hsl(0 0% 0% / 0.25) 0px,
+      hsl(0 0% 0% / 0.25) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  }
+}
+
+@layer utilities {
+  .pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }
+  .text-blood { color: hsl(var(--blood)); }
+  .shadow-blood { box-shadow: 0 0 14px hsl(var(--blood) / 0.55); }
+  .text-glow-blood { text-shadow: 0 0 10px hsl(var(--blood) / 0.8); }
+}
+
+/* ===== Pixel-layer keyframes ===== */
+@keyframes glitch-flash {
+  0% { opacity: 0; }
+  8% { opacity: 1; filter: hue-rotate(0deg); transform: translate(0); }
+  10% { transform: translate(-6px, 3px); filter: hue-rotate(90deg) invert(0.1); }
+  16% { transform: translate(5px, -2px); }
+  24% { transform: translate(-3px, 2px); filter: invert(0.2); }
+  40% { transform: translate(0); filter: none; opacity: 1; }
+  92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes jump-scare {
+  0% { transform: scale(0.2); opacity: 0; filter: brightness(3); }
+  10% { transform: scale(1.25); opacity: 1; }
+  14% { transform: scale(1.05) translate(-8px, 4px); }
+  18% { transform: scale(1.18) translate(6px, -3px); }
+  22% { transform: scale(1.02) translate(-4px, 2px); }
+  30%, 82% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; filter: brightness(0); }
+}
+@keyframes dread-pulse {
+  0%, 100% { box-shadow: inset 0 0 60px hsl(var(--blood) / 0.15); }
+  50% { box-shadow: inset 0 0 140px hsl(var(--blood) / 0.4); }
+}
+@keyframes sprite-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes blood-drip {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 0.85; }
+  100% { transform: scaleY(1); transform-origin: top; opacity: 0.55; }
+}
+@keyframes static-burst {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.5; }
+}

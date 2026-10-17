@@ -1,0 +1,236 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: African Textile — West African Kente weaving x Adire tie-dye
+   Deep wood-tone base / sand-colored cards / Kente orange / gold / forest green, hard-edged offset shadows */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HarmonyOSSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Earthy base: deep wood tone */
+    --background: 17 47% 12%;
+    --foreground: 38 53% 81%;
+
+    /* Sand-colored card */
+    --card: 38 53% 81%;
+    --card-foreground: 17 47% 12%;
+    --popover: 38 53% 81%;
+    --popover-foreground: 17 47% 12%;
+
+    /* Kente orange: primary accent */
+    --primary: 18 73% 44%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Forest green: secondary */
+    --secondary: 144 42% 22%;
+    --secondary-foreground: 40 33% 98%;
+
+    /* Gold: accent highlight */
+    --accent: 43 83% 32%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 20 40% 22%;
+    --muted-foreground: 36 40% 76%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 33% 98%;
+
+    /* Gold stroke: the only visible structural line on the deep wood-tone areas */
+    --border: 43 60% 46%;
+    --input: 43 45% 38%;
+    --ring: 43 83% 65%;
+
+    --chart-1: 18 73% 44%;
+    --chart-2: 43 83% 65%;
+    --chart-3: 144 42% 22%;
+    --chart-4: 33 38% 70%;
+    --chart-5: 17 47% 20%;
+
+    --sidebar-background: 17 47% 12%;
+    --sidebar-foreground: 38 53% 81%;
+    --sidebar-primary: 18 73% 44%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 144 42% 22%;
+    --sidebar-accent-foreground: 40 33% 98%;
+    --sidebar-border: 17 47% 20%;
+    --sidebar-ring: 43 83% 65%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(18 73% 44%), hsl(43 83% 65%));
+    --gradient-card: linear-gradient(160deg, hsl(38 53% 84%), hsl(35 45% 76%));
+    --gradient-background: linear-gradient(180deg, hsl(17 47% 10%), hsl(17 47% 14%));
+
+    --shadow-card: 4px 4px 0 0 hsl(17 47% 12% / 0.9);
+    --shadow-hover: 6px 6px 0 0 hsl(17 47% 12% / 0.9);
+  }
+
+  /* Theme is inherently a dark base; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 17 47% 12%;
+    --foreground: 38 53% 81%;
+    --card: 38 53% 81%;
+    --card-foreground: 17 47% 12%;
+    --popover: 38 53% 81%;
+    --popover-foreground: 17 47% 12%;
+    --primary: 18 73% 44%;
+    --primary-foreground: 40 33% 98%;
+    --secondary: 144 42% 22%;
+    --secondary-foreground: 40 33% 98%;
+    --accent: 43 83% 32%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 20 40% 22%;
+    --muted-foreground: 36 40% 76%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 33% 98%;
+    /* Gold stroke: the only visible structural line on the deep wood-tone areas */
+    --border: 43 60% 46%;
+    --input: 43 45% 38%;
+    --ring: 43 83% 65%;
+    --chart-1: 18 73% 44%;
+    --chart-2: 43 83% 65%;
+    --chart-3: 144 42% 22%;
+    --chart-4: 33 38% 70%;
+    --chart-5: 17 47% 20%;
+    --sidebar-background: 17 47% 12%;
+    --sidebar-foreground: 38 53% 81%;
+    --sidebar-primary: 18 73% 44%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 144 42% 22%;
+    --sidebar-accent-foreground: 40 33% 98%;
+    --sidebar-border: 17 47% 20%;
+    --sidebar-ring: 43 83% 65%;
+  }
+
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'HarmonyOSSans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    /* Fabric warp/weft grain noise on dark areas */
+    background-image:
+      repeating-linear-gradient(0deg, hsl(38 53% 81% / 0.015) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(90deg, hsl(38 53% 81% / 0.015) 0 1px, transparent 1px 5px);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'SourceHanSerifCN', 'SimSun', 'STSong', serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Core visual signature: Kente weave stripes */
+  .kente-stripe {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        hsl(var(--primary)) 0 28px,
+        hsl(43 83% 65%) 28px 40px,
+        hsl(var(--secondary)) 40px 52px,
+        hsl(40 33% 98%) 52px 56px,
+        hsl(var(--primary)) 56px 64px,
+        hsl(144 42% 30%) 64px 92px
+      );
+  }
+
+  .kente-stripe-thin {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        hsl(var(--primary)) 0 10px,
+        hsl(43 83% 65%) 10px 16px,
+        hsl(var(--secondary)) 16px 22px,
+        hsl(40 33% 98%) 22px 24px
+      );
+  }
+
+  /* Kente geometric color-block patchwork */
+  .kente-blocks {
+    background-image:
+      linear-gradient(135deg, hsl(var(--primary)) 0 25%, hsl(43 83% 65%) 25% 50%, hsl(var(--secondary)) 50% 75%, hsl(144 42% 30%) 75% 100%);
+    background-size: 16px 16px;
+  }
+
+  /* Fabric warp/weft texture (light areas) */
+  .weave-texture {
+    background-image:
+      repeating-linear-gradient(0deg, hsl(17 47% 6% / 0.05) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, hsl(17 47% 6% / 0.05) 0 1px, transparent 1px 4px);
+  }
+
+  /* Adire tie-dye mottled spots */
+  .adire-pattern {
+    background-image:
+      radial-gradient(hsl(18 73% 44% / 0.16) 2px, transparent 2px),
+      radial-gradient(hsl(43 83% 65% / 0.12) 1.5px, transparent 1.5px);
+    background-size: 26px 26px, 18px 18px;
+    background-position: 0 0, 9px 12px;
+  }
+
+  /* Hard-edged offset shadow (on sand-colored cards) */
+  .hard-shadow {
+    box-shadow: 4px 4px 0 0 hsl(17 47% 12%);
+  }
+  .hard-shadow-sm {
+    box-shadow: 2px 2px 0 0 hsl(17 47% 12%);
+  }
+  .hard-shadow-hover {
+    transition: box-shadow 160ms ease-out, transform 160ms ease-out;
+  }
+  .hard-shadow-hover:hover {
+    box-shadow: 6px 6px 0 0 hsl(17 47% 12%);
+    transform: translate(-2px, -2px);
+  }
+  .hard-shadow-hover:active {
+    box-shadow: 1px 1px 0 0 hsl(17 47% 12%);
+    transform: translate(1px, 1px);
+  }
+
+  /* Gold hard shadow on dark backgrounds */
+  .hard-shadow-gold {
+    box-shadow: 5px 5px 0 0 hsl(43 83% 65% / 0.85);
+  }
+
+  /* Wide heading letter-spacing (Kente rhythmic feel) */
+  .tracking-display {
+    letter-spacing: 0.14em;
+  }
+
+  /* Fabric unfurl entrance */
+  .reveal-anim {
+    animation: fabric-reveal 480ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  }
+
+  @keyframes fabric-reveal {
+    from { opacity: 0; transform: scaleY(0.6) translateY(12px); }
+    to { opacity: 1; transform: scaleY(1) translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-anim { animation: none; }
+  }
+}

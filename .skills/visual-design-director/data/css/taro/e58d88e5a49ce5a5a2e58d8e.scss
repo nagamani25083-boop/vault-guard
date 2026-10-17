@@ -1,0 +1,171 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Midnight Luxury · dark velvet base + champagne-gold trim lines
+   On Mini Program targets, the heading font must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ global: true, family: 'JiYingHuiPianWenSong',
+     source: 'url("https://resource-static.cdn.bcebos.com/fonts/JiYingHuiPianWenSong.woff2")' })
+   ============================================================ */
+
+@font-face {
+  font-family: 'JiYingHuiPianWenSong';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/JiYingHuiPianWenSong.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Curtain-like deep ink-green base: deep, restrained, ceremonial */
+    --background: 158 60% 8%;
+    --foreground: 45 40% 94%; /* Pearl-white body text */
+    --card: 158 55% 14%; /* Velvet surface */
+    --card-foreground: 45 40% 94%;
+    --popover: 158 55% 12%;
+    --popover-foreground: 45 40% 94%;
+    --primary: 45 65% 52%; /* Champagne gold: the soul color for lines, borders, and emphasized text */
+    --primary-foreground: 158 60% 8%;
+    --secondary: 158 45% 20%;
+    --secondary-foreground: 45 40% 94%;
+    --muted: 158 40% 18%;
+    --muted-foreground: 150 15% 70%;
+    --accent: 44 78% 71%; /* Gold-leaf highlight */
+    --accent-foreground: 158 60% 8%;
+    --destructive: 356 70% 42%;
+    --destructive-foreground: 45 40% 96%;
+    --border: 45 40% 40%; /* Gold outline */
+    --input: 158 40% 22%;
+    --ring: 45 65% 52%;
+    --radius: 0.75rem;
+
+    /* Materials: velvet center highlight / gold-leaf glow */
+    --gradient-gold: linear-gradient(135deg, hsl(44 78% 71%), hsl(45 65% 48%));
+    --gradient-velvet: radial-gradient(circle at 50% 42%, hsl(156 60% 26%), hsl(158 58% 15%) 62%, hsl(158 60% 8%) 100%);
+    --shadow-gold: 0 0 16rpx hsl(45 80% 55% / 0.55), 0 8rpx 24rpx hsl(158 60% 4% / 0.6);
+    --shadow-card: 0 12rpx 36rpx hsl(158 60% 4% / 0.5);
+
+    /* Charts: gold—amber—emerald, carrying the luxury tonality forward */
+    --chart-1: 45 65% 52%;
+    --chart-2: 44 78% 71%;
+    --chart-3: 158 45% 42%;
+    --chart-4: 30 60% 50%;
+    --chart-5: 356 55% 52%;
+
+    --sidebar-background: 158 60% 6%;
+    --sidebar-foreground: 45 30% 88%;
+    --sidebar-primary: 45 65% 52%;
+    --sidebar-primary-foreground: 158 60% 8%;
+    --sidebar-accent: 158 50% 13%;
+    --sidebar-accent-foreground: 45 40% 94%;
+    --sidebar-border: 45 30% 24%;
+    --sidebar-ring: 45 65% 52%;
+  }
+
+  /* Theme is inherently dark; .dark mirrors the same values as a compatibility layer */
+  .dark {
+    --background: 158 60% 8%;
+    --foreground: 45 40% 94%;
+    --card: 158 55% 14%;
+    --card-foreground: 45 40% 94%;
+    --popover: 158 55% 12%;
+    --popover-foreground: 45 40% 94%;
+    --primary: 45 65% 52%;
+    --primary-foreground: 158 60% 8%;
+    --secondary: 158 45% 20%;
+    --secondary-foreground: 45 40% 94%;
+    --muted: 158 40% 18%;
+    --muted-foreground: 150 15% 70%;
+    --accent: 44 78% 71%;
+    --accent-foreground: 158 60% 8%;
+    --destructive: 356 70% 42%;
+    --destructive-foreground: 45 40% 96%;
+    --border: 45 40% 40%;
+    --input: 158 40% 22%;
+    --ring: 45 65% 52%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  .bg-gradient-velvet {
+    background-image: var(--gradient-velvet);
+  }
+  /* Core visual signature: double gold-line outline + inset whitespace turn, a decorative ceremonial frame */
+  .gold-frame {
+    border: 2rpx solid hsl(var(--primary) / 0.55);
+    box-shadow:
+      inset 0 0 0 6rpx hsl(var(--background)),
+      inset 0 0 0 8rpx hsl(var(--primary) / 0.28),
+      var(--shadow-card);
+  }
+
+  /* Radiating sunburst pattern: background texture and section divider, conveying a sense of expansion */
+  .sunburst {
+    background-image: repeating-conic-gradient(
+      from 0deg,
+      hsl(var(--primary) / 0.08) 0deg 10deg,
+      transparent 10deg 20deg
+    );
+  }
+
+  /* Velvet surface: bright at the center, receding into shadow at the edges */
+  .bg-velvet {
+    background: var(--gradient-velvet);
+  }
+
+  /* Champagne-gold gradient, used for buttons and trim strips */
+  .bg-gold {
+    background: var(--gradient-gold);
+  }
+
+  .text-gold {
+    color: hsl(45 72% 60%);
+  }
+
+  /* Vertical gold line: reinforces the rhythm of vertical division */
+  .gold-rule-y {
+    width: 2rpx;
+    background: linear-gradient(180deg, transparent, hsl(var(--primary) / 0.7) 50%, transparent);
+  }
+
+  .shadow-gold-aura {
+    box-shadow: var(--shadow-gold);
+  }
+}
+
+/* Interaction emphasis and entrance: an extremely subtle pulsing scale */
+@keyframes lux-pulse {
+  0%,
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: lux-pulse 1.6s ease-in-out infinite;
+  }
+  .animate-entrance-pulse {
+    animation: lux-pulse 0.4s ease-in-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-slow,
+  .animate-entrance-pulse {
+    animation: none;
+  }
+}

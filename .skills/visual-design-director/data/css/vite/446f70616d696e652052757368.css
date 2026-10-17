@@ -1,0 +1,189 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    --background: 320 60% 99%;
+    --foreground: 240 33% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 33% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 33% 14%;
+
+    --primary: 334 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 265 84% 58%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 320 40% 96%;
+    --muted-foreground: 245 18% 42%;
+
+    --accent: 45 100% 29%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 12 96% 44.5%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 320 40% 90%;
+    --input: 320 40% 90%;
+    --ring: 334 100% 50%;
+
+    --neon-pink: 334 100% 50%;
+    --neon-purple: 265 84% 58%;
+    --neon-blue: 217 100% 61%;
+    --neon-cyan: 162 95% 40%;
+    --neon-orange: 16 98% 51%;
+    --neon-yellow: 45 100% 52%;
+
+    --chart-1: 334 100% 50%;
+    --chart-2: 265 84% 58%;
+    --chart-3: 217 100% 61%;
+    --chart-4: 162 95% 40%;
+    --chart-5: 45 100% 52%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 33% 14%;
+    --sidebar-primary: 334 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 320 40% 96%;
+    --sidebar-accent-foreground: 240 33% 14%;
+    --sidebar-border: 320 40% 90%;
+    --sidebar-ring: 334 100% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(334 100% 50%), hsl(265 84% 58%) 55%, hsl(217 100% 61%));
+    --gradient-warm: linear-gradient(135deg, hsl(45 100% 52%), hsl(16 98% 51%));
+    --gradient-cool: linear-gradient(135deg, hsl(265 84% 58%), hsl(162 95% 40%));
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%), hsl(320 60% 98%));
+    --gradient-background: radial-gradient(circle at 12% 12%, hsl(334 100% 95%), transparent 42%), radial-gradient(circle at 88% 18%, hsl(217 100% 94%), transparent 40%);
+
+    --shadow-card: 0 10px 30px -8px hsl(334 100% 50% / 0.18);
+    --shadow-hover: 0 18px 46px -10px hsl(265 84% 58% / 0.32);
+  }
+
+  .dark {
+    --background: 258 40% 8%;
+    --foreground: 320 30% 96%;
+    --card: 258 36% 12%;
+    --card-foreground: 320 30% 96%;
+    --popover: 258 36% 12%;
+    --popover-foreground: 320 30% 96%;
+    --primary: 334 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 265 84% 62%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 258 28% 18%;
+    --muted-foreground: 300 14% 72%;
+    --accent: 45 100% 29%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 12 90% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 258 28% 22%;
+    --input: 258 28% 22%;
+    --ring: 334 100% 62%;
+    --neon-pink: 334 100% 62%;
+    --neon-purple: 265 84% 68%;
+    --neon-blue: 217 100% 68%;
+    --neon-cyan: 162 88% 50%;
+    --neon-orange: 16 95% 58%;
+    --neon-yellow: 45 100% 56%;
+    --chart-1: 334 100% 62%;
+    --chart-2: 265 84% 68%;
+    --chart-3: 217 100% 68%;
+    --chart-4: 162 88% 50%;
+    --chart-5: 45 100% 56%;
+    --sidebar-background: 258 36% 12%;
+    --sidebar-foreground: 320 30% 96%;
+    --sidebar-primary: 334 100% 62%;
+    --sidebar-primary-foreground: 258 40% 8%;
+    --sidebar-accent: 258 28% 18%;
+    --sidebar-accent-foreground: 320 30% 96%;
+    --sidebar-border: 258 28% 22%;
+    --sidebar-ring: 334 100% 62%;
+    --gradient-primary: linear-gradient(135deg, hsl(334 100% 62%), hsl(265 84% 68%) 55%, hsl(217 100% 68%));
+    --gradient-warm: linear-gradient(135deg, hsl(45 100% 56%), hsl(16 95% 58%));
+    --gradient-cool: linear-gradient(135deg, hsl(265 84% 68%), hsl(162 88% 50%));
+    --gradient-card: linear-gradient(160deg, hsl(258 36% 14%), hsl(258 40% 10%));
+    --gradient-background: radial-gradient(circle at 12% 12%, hsl(334 100% 18%), transparent 42%), radial-gradient(circle at 88% 18%, hsl(217 100% 18%), transparent 40%);
+    --shadow-card: 0 10px 30px -8px hsl(334 100% 50% / 0.28);
+    --shadow-hover: 0 18px 46px -10px hsl(265 84% 58% / 0.42);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'YouSheBiaoTiHei', 'AlibabaPuHuiTi', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-warm {
+    background-image: var(--gradient-warm);
+  }
+
+  .bg-gradient-cool {
+    background-image: var(--gradient-cool);
+  }
+
+  .glow-pink { box-shadow: 0 10px 34px -8px hsl(var(--neon-pink) / 0.45); }
+  .glow-purple { box-shadow: 0 10px 34px -8px hsl(var(--neon-purple) / 0.45); }
+  .glow-blue { box-shadow: 0 10px 34px -8px hsl(var(--neon-blue) / 0.45); }
+  .glow-cyan { box-shadow: 0 10px 34px -8px hsl(var(--neon-cyan) / 0.45); }
+  .glow-yellow { box-shadow: 0 10px 34px -8px hsl(var(--neon-yellow) / 0.45); }
+  .glow-orange { box-shadow: 0 10px 34px -8px hsl(var(--neon-orange) / 0.45); }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}

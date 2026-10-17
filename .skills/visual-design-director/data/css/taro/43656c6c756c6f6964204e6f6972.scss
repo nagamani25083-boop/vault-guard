@@ -1,0 +1,173 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Retro Film Noir · Neo-noir cinema / underground zine
+   Material logic: deep caramel-black base + warm off-white text + gray-brown secondary info, the single accent color is electric orange;
+   global right angles, no drop shadows, hairline dividers, overlaid with subtle grain and scanlines simulating old CRT monitors and film projection.
+   On the mini-program end, fonts must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ family: 'MuyaoSoftbrush', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf")' })
+   Taro.loadFontFace({ family: 'SourceHanSerifCN', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2")' }) */
+
+@font-face {
+  font-family: 'MuyaoSoftbrush';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: deep caramel-black base + dark slate-gray modules, layered darkness */
+    --background: 30 13% 6%;
+    --foreground: 39 21% 81%;
+    --card: 30 13% 9%;
+    --card-foreground: 39 21% 81%;
+    --popover: 30 13% 9%;
+    --popover-foreground: 39 21% 81%;
+    /* Single accent color: electric orange, used for numbering, status dots, outlines and thick bars */
+    --primary: 16 100% 50%;
+    --primary-foreground: 30 13% 6%;
+    /* Touch state / secondary blocks, still on the same warm brown hue */
+    --secondary: 30 13% 14%;
+    --secondary-foreground: 39 21% 81%;
+    --muted: 30 12% 10%;
+    --muted-foreground: 36 10% 59%;
+    --accent: 16 100% 50%;
+    --accent-foreground: 30 13% 6%;
+    /* Warning state: low-saturation deep brick red, avoiding any high-saturation color other than orange */
+    --destructive: 4 62% 40%;
+    --destructive-foreground: 39 21% 92%;
+    /* Hairline: 1px extremely dark warm gray, borders sit flush without leaving gaps */
+    --border: 30 10% 16%;
+    --input: 30 10% 16%;
+    --ring: 16 100% 50%;
+    --radius: 0px;
+    --chart-1: 16 100% 50%;
+    --chart-2: 39 21% 81%;
+    --chart-3: 36 10% 59%;
+    --chart-4: 30 13% 20%;
+    --chart-5: 30 10% 16%;
+    --sidebar-background: 30 13% 9%;
+    --sidebar-foreground: 39 21% 81%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 30 13% 6%;
+    --sidebar-accent: 30 13% 14%;
+    --sidebar-accent-foreground: 39 21% 81%;
+    --sidebar-border: 30 10% 16%;
+    --sidebar-ring: 16 100% 50%;
+  }
+
+  /* The theme itself is already dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 30 13% 6%;
+    --foreground: 39 21% 81%;
+    --card: 30 13% 9%;
+    --card-foreground: 39 21% 81%;
+    --popover: 30 13% 9%;
+    --popover-foreground: 39 21% 81%;
+    --primary: 16 100% 50%;
+    --primary-foreground: 30 13% 6%;
+    --secondary: 30 13% 14%;
+    --secondary-foreground: 39 21% 81%;
+    --muted: 30 12% 10%;
+    --muted-foreground: 36 10% 59%;
+    --accent: 16 100% 50%;
+    --accent-foreground: 30 13% 6%;
+    --destructive: 4 62% 40%;
+    --destructive-foreground: 39 21% 92%;
+    --border: 30 10% 16%;
+    --input: 30 10% 16%;
+    --ring: 16 100% 50%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'SourceHanSerifCN', 'Songti SC', 'SimSun', serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: film grain — dense fine warm-white dot pattern overlay, simulating grain and projector jitter */
+  .film-grain {
+    background-image:
+      radial-gradient(hsl(39 21% 81% / 0.05) 0.5px, transparent 0.6px),
+      radial-gradient(hsl(39 21% 81% / 0.04) 0.5px, transparent 0.6px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1px 2px;
+  }
+  /* Monitor scanlines: line-by-line darkening, simulating CRT interlacing */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      hsl(30 13% 4% / 0) 0 2px,
+      hsl(30 13% 4% / 0.18) 3px
+    );
+  }
+  /* Still-frame darkening: image fades to base color at the bottom so overlaid text stays readable */
+  .film-dim {
+    background-image: linear-gradient(
+      to top,
+      hsl(30 13% 6% / 0.95) 0%,
+      hsl(30 13% 6% / 0.35) 45%,
+      hsl(30 13% 6% / 0.1) 100%
+    );
+  }
+  /* Hairline divider: 1px right angle edge, no border radius, no drop shadow */
+  .hairline {
+    border: 1px solid hsl(var(--border));
+    border-radius: 0;
+  }
+  /* Emphasis bar: 4px solid electric orange bar marking the start of a block */
+  .accent-bar {
+    border-left: 4px solid hsl(var(--primary));
+  }
+  /* Crosshair marker: two 1px coordinate lines crossing */
+  .crosshair {
+    background-image:
+      linear-gradient(to right, hsl(var(--primary)) 0 100%),
+      linear-gradient(to bottom, hsl(var(--primary)) 0 100%);
+    background-size: 100% 1px, 1px 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  /* Technical metadata label: monospace + wide letter spacing, carries characters like timecode / FPS / LUT */
+  .font-tech {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  /* Handwritten title: Muyao Softbrush, the only tier with a brushstroke feel */
+  .font-display {
+    font-family: 'MuyaoSoftbrush', 'STKaiti', 'KaiTi', serif;
+    letter-spacing: 0.02em;
+  }
+  /* Live status dot: brief hard-cut blink, no gradient transition */
+  .rec-blink {
+    animation: rec-blink 1.4s steps(1, end) infinite;
+  }
+  /* Press feedback: fast and crisp, only toggles background color with no shift/bounce */
+  .press-flat:active {
+    background-color: hsl(var(--secondary));
+    transition: background-color 60ms linear;
+  }
+}
+
+@keyframes rec-blink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-blink {
+    animation: none;
+  }
+}

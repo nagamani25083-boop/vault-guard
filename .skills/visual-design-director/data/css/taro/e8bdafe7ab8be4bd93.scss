@@ -1,0 +1,248 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Soft 3D (Neumorphism) · elements share the same hue as the background, shaped only by a top-left highlight / bottom-right diffuse shadow
+   Large rounded corners, no sharp edges, low-saturation supporting colors, a plush pillowy touch
+   On Mini Program targets, the font must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ global: true, family: 'Glow Sans SC',
+     source: 'url("https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.ttf")' })
+   ============================================================ */
+
+@font-face {
+  font-family: 'Glow Sans SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Base color and element fill share the same hue; hierarchy is carried only by subtle tonal differences */
+    --neu-base: 220 16% 90%;
+    --background: 220 16% 90%; /* Warm sand neutral base, avoiding pure white/black to leave room for light and shadow */
+    --foreground: 220 18% 20%;
+    --card: 220 16% 90%;
+    --card-foreground: 220 18% 20%;
+    --popover: 220 16% 93%;
+    --popover-foreground: 220 18% 20%;
+    --primary: 222 34% 46%; /* Soft warm gold, the single slightly stronger supporting color */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 80%;
+    --secondary-foreground: 220 18% 20%;
+    --muted: 220 14% 84%;
+    --muted-foreground: 220 12% 34%;
+    --accent: 172 22% 36%; /* Low-saturation jade accent */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 6 59% 44%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 72%;
+    --input: 220 14% 72%;
+    --ring: 222 34% 46%;
+    --radius: 1rem;
+
+    /* Three light-and-shadow states: raised / lightly raised / pressed-in */
+    --shadow-neu-flat: 8rpx 8rpx 18rpx hsl(220 22% 42% / 0.34), -8rpx -8rpx 16rpx hsl(0 0% 100% / 0.85);
+    --shadow-neu-sm: 5rpx 5rpx 12rpx hsl(220 22% 42% / 0.28), -5rpx -5rpx 10rpx hsl(0 0% 100% / 0.8);
+    --shadow-neu-pressed: inset 6rpx 6rpx 12rpx hsl(220 22% 42% / 0.40), inset -6rpx -6rpx 10rpx hsl(0 0% 100% / 0.75);
+    --gradient-primary: linear-gradient(135deg, hsl(42 80% 72%), hsl(38 62% 50%));
+    --gradient-subtle: linear-gradient(180deg, hsl(39 44% 80%), hsl(36 30% 64%));
+
+    --chart-1: 38 62% 56%;
+    --chart-2: 172 22% 42%;
+    --chart-3: 24 40% 52%;
+    --chart-4: 214 26% 52%;
+    --chart-5: 6 45% 50%;
+
+    --sidebar-background: 39 38% 78%;
+    --sidebar-foreground: 32 30% 22%;
+    --sidebar-primary: 38 62% 56%;
+    --sidebar-primary-foreground: 36 60% 13%;
+    --sidebar-accent: 39 33% 70%;
+    --sidebar-accent-foreground: 32 35% 17%;
+    --sidebar-border: 36 26% 60%;
+    --sidebar-ring: 38 62% 56%;
+  }
+
+  /* Dark inversion: surfaces shift to a warm-toned deep brown, carrying the theme's warm hue forward;
+     highlight/shadow are correspondingly reduced to a faint white and deep brown, preserving the pressable embossed relationship */
+  .dark {
+    --neu-base: 30 25% 16%;
+    --background: 30 25% 16%;
+    --foreground: 40 25% 86%;
+    --card: 30 24% 18%;
+    --card-foreground: 40 25% 86%;
+    --popover: 30 24% 19%;
+    --popover-foreground: 40 25% 86%;
+    --primary: 38 62% 56%;
+    --primary-foreground: 30 40% 10%;
+    --secondary: 30 22% 24%;
+    --secondary-foreground: 40 25% 86%;
+    --muted: 30 22% 22%;
+    --muted-foreground: 36 15% 66%;
+    --accent: 172 26% 44%;
+    --accent-foreground: 30 40% 10%;
+    --destructive: 6 55% 46%;
+    --destructive-foreground: 40 45% 92%;
+    --border: 30 18% 28%;
+    --input: 30 18% 28%;
+    --ring: 38 62% 56%;
+    --shadow-neu-flat: 8rpx 8rpx 18rpx hsl(30 40% 5% / 0.55), -8rpx -8rpx 16rpx hsl(40 30% 80% / 0.06);
+    --shadow-neu-sm: 5rpx 5rpx 12rpx hsl(30 40% 5% / 0.5), -5rpx -5rpx 10rpx hsl(40 30% 80% / 0.05);
+    --shadow-neu-pressed: inset 6rpx 6rpx 12rpx hsl(30 40% 5% / 0.6), inset -6rpx -6rpx 10rpx hsl(40 30% 80% / 0.06);
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Glow Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: same-hue base color + bidirectional diffuse light and shadow, elements look "bulged" out from the surface */
+  .neu-flat {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-flat);
+    border: 1rpx solid hsl(40 80% 95% / 0.25);
+  }
+
+  /* Pressed-in indented state, replicating the physical travel of a button press */
+  .neu-pressed {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-pressed);
+  }
+
+  .neu-sm {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+    border: 1rpx solid hsl(40 80% 95% / 0.25);
+  }
+
+  /* Faint edge glow, used for emphasis on non-text components */
+  .neu-glow {
+    box-shadow: var(--shadow-neu-flat), 0 0 22rpx hsl(var(--primary) / 0.5);
+  }
+
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Uniform large rounding to eliminate sharp edges */
+  .radius-pillow {
+    border-radius: 40rpx;
+  }
+}
+
+@layer components {
+  .neu-card {
+    padding: 48rpx;
+    border-radius: 40rpx;
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-flat);
+    border: 1rpx solid hsl(40 80% 95% / 0.25);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .neu-card-active {
+    box-shadow: var(--shadow-neu-pressed);
+    transform: scale(0.98);
+  }
+
+  .neu-btn {
+    padding: 24rpx 48rpx;
+    border-radius: 28rpx;
+    font-weight: 600;
+    text-align: center;
+    color: hsl(var(--foreground));
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+    border: 1rpx solid hsl(40 80% 95% / 0.25);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .neu-btn-active {
+    box-shadow: var(--shadow-neu-pressed);
+    transform: scale(0.97);
+  }
+
+  .neu-btn-primary {
+    padding: 24rpx 48rpx;
+    border-radius: 28rpx;
+    font-weight: 600;
+    text-align: center;
+    color: hsl(var(--primary-foreground));
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-neu-flat);
+    border: 1rpx solid hsl(40 80% 95% / 0.4);
+    transition: transform 300ms ease;
+  }
+
+  .neu-icon-btn {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+    border: 1rpx solid hsl(40 80% 95% / 0.3);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .neu-icon-btn-active {
+    box-shadow: var(--shadow-neu-pressed);
+    transform: scale(0.94);
+  }
+
+  /* Input field is naturally indented */
+  .neu-input {
+    border-radius: 24rpx;
+    background: hsl(var(--secondary));
+    box-shadow: var(--shadow-neu-pressed);
+    overflow: hidden;
+  }
+}
+
+/* Transitions are slowed down, with a damped feel */
+@keyframes neu-rise {
+  0% {
+    transform: translateY(20rpx);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes neu-breathe {
+  0%,
+  100% {
+    box-shadow: var(--shadow-neu-sm);
+  }
+  50% {
+    box-shadow: var(--shadow-neu-flat);
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: neu-rise 0.4s ease-out both;
+  }
+  .animate-breathe {
+    animation: neu-breathe 2.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-breathe {
+    animation: none;
+  }
+}

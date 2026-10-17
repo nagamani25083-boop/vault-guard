@@ -1,0 +1,174 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Pixel Art Style — retro 8-bit arcade aesthetic
+   Classic pixel palette (red/green/blue/yellow), pixel-black structural lines, zero radius, no blur, hard-edged offset shadows.
+   On the Mini Program client, load the two fonts below via Taro.loadFontFace in app.tsx. */
+
+@font-face {
+  font-family: 'ChillBitmap';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ChillBitmap_16px.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Bright white base + pure white panels + pixel-black structural lines, accent colors are 8-bit red/green/blue/yellow */
+    --background: 0 0% 96%;
+    --foreground: 233 26% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 233 26% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 233 26% 14%;
+    /* Colored surfaces always pair with white text, lightness tuned to just meet AA */
+    --primary: 342 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 134 100% 26%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 233 15% 30%;
+    --accent: 203 100% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 342 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    /* Borders are pixel black itself, the structural line of this style */
+    --border: 233 26% 14%;
+    --input: 233 26% 14%;
+    --ring: 342 100% 50%;
+    --radius: 0rem;
+    /* Raw palette values, for pure decorative color blocks */
+    --pixel-red: 342 100% 50%;
+    --pixel-green: 134 100% 45%;
+    --pixel-blue: 203 100% 58%;
+    --pixel-yellow: 55 100% 58%;
+    --pixel-dark: 233 26% 14%;
+    --chart-1: 342 100% 50%;
+    --chart-2: 134 100% 45%;
+    --chart-3: 203 100% 58%;
+    --chart-4: 55 100% 42%;
+    --chart-5: 38 100% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 233 26% 14%;
+    --sidebar-primary: 342 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 90%;
+    --sidebar-accent-foreground: 233 26% 14%;
+    --sidebar-border: 233 26% 14%;
+    --sidebar-ring: 342 100% 50%;
+  }
+
+  /* Dark mode: nighttime arcade — surfaces invert to pixel black, structural lines turn white, accent colors keep the same palette */
+  .dark {
+    --background: 233 26% 10%;
+    --foreground: 0 0% 96%;
+    --card: 233 26% 14%;
+    --card-foreground: 0 0% 96%;
+    --popover: 233 26% 14%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 342 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 134 100% 26%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 233 26% 20%;
+    --muted-foreground: 233 20% 70%;
+    --accent: 203 100% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 342 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 96%;
+    --input: 0 0% 96%;
+    --ring: 55 100% 58%;
+    --radius: 0rem;
+    --pixel-dark: 233 26% 10%;
+    --sidebar-background: 233 26% 12%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 342 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 233 26% 20%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 0 0% 96%;
+    --sidebar-ring: 55 100% 58%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: hard-edged offset shadow (zero blur, stacked-pixel-block feel) */
+  .pixel-shadow {
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+  .pixel-shadow-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+  /* Thick pixel outline, zero radius */
+  .pixel-border {
+    border: 4px solid hsl(var(--border));
+    border-radius: 0;
+  }
+  .pixel-border-thin {
+    border: 2px solid hsl(var(--border));
+    border-radius: 0;
+  }
+  /* Dot-matrix heading font + hard-edged text shadow */
+  .font-pixel {
+    font-family: 'ChillBitmap', 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+  .pixel-text-shadow {
+    text-shadow: 3px 3px 0 hsl(var(--border));
+  }
+  /* CRT scanline texture */
+  .pixel-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 2px,
+      hsla(233, 26%, 14%, 0.06) 2px,
+      hsla(233, 26%, 14%, 0.06) 4px
+    );
+  }
+  /* Pixel grid texture */
+  .pixel-grid {
+    background-image:
+      linear-gradient(hsla(233, 26%, 14%, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(233, 26%, 14%, 0.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  /* Instant hard-cut press: shifts 2px down-right, shadow shortens, no easing, no transition */
+  .pixel-press {
+    transition: none;
+  }
+  .pixel-press:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+  /* Accent-color blink (hard steps cutover, no opacity transition) */
+  .pixel-blink {
+    animation: pixel-blink 1s steps(1, end) infinite;
+  }
+}
+
+@keyframes pixel-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-blink {
+    animation: none;
+  }
+}

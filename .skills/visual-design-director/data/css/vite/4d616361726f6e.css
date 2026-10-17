@@ -1,0 +1,204 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Macaron — soft-focus macaron pastels, low-contrast creamy palette
+   Cream yellow / mist blue / marshmallow pink, large radii, ultra-soft shadows, frosted glass */
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('https://resource-static.bj.bcebos.com/fonts/Nunito-VariableFont_wght.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1.25rem;
+
+    /* Creamy white base / soft dark purple-gray text (not pure black, keeps low contrast) */
+    --background: 45 60% 97%;
+    --foreground: 260 22% 22%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 22% 22%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 22% 22%;
+
+    /* Marshmallow pink as primary color */
+    --primary: 346 100% 45.5%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Mist blue secondary */
+    --secondary: 224 76% 88%;
+    --secondary-foreground: 230 32% 26%;
+
+    /* Cream yellow muted zone */
+    --muted: 48 90% 92%;
+    --muted-foreground: 260 12% 46%;
+
+    /* Pearl purple accent */
+    --accent: 268 55% 88%;
+    --accent-foreground: 268 34% 24%;
+
+    --destructive: 358 68% 53%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 30% 91%;
+    --input: 260 30% 91%;
+    --ring: 346 100% 74%;
+
+    --chart-1: 346 100% 78%;
+    --chart-2: 224 76% 82%;
+    --chart-3: 48 90% 58%;
+    --chart-4: 268 55% 84%;
+    --chart-5: 160 45% 76%;
+
+    --sidebar-background: 268 45% 96%;
+    --sidebar-foreground: 260 22% 22%;
+    --sidebar-primary: 346 100% 74%;
+    --sidebar-primary-foreground: 340 40% 16%;
+    --sidebar-accent: 224 76% 92%;
+    --sidebar-accent-foreground: 230 32% 26%;
+    --sidebar-border: 268 30% 90%;
+    --sidebar-ring: 346 100% 74%;
+
+    /* Non-color role variables: cloud-mist background and frosted shadows */
+    --gradient-pastel: radial-gradient(
+        60% 60% at 15% 20%,
+        hsl(346 100% 88% / 0.55) 0%,
+        transparent 70%
+      ),
+      radial-gradient(55% 55% at 85% 15%, hsl(224 90% 90% / 0.55) 0%, transparent 70%),
+      radial-gradient(60% 60% at 50% 95%, hsl(48 95% 88% / 0.6) 0%, transparent 70%);
+    --shadow-soft: 0 18px 40px -18px hsl(260 40% 60% / 0.28), 0 2px 10px hsl(260 40% 60% / 0.08);
+    --shadow-glow: 0 0 24px hsl(346 100% 80% / 0.4);
+  }
+
+  .dark {
+    /* Dark soft mist: surfaces truly inverted, still keeping the low-contrast creamy feel */
+    --background: 258 24% 13%;
+    --foreground: 45 45% 92%;
+    --card: 258 22% 17%;
+    --card-foreground: 45 45% 92%;
+    --popover: 258 22% 18%;
+    --popover-foreground: 45 45% 92%;
+    --primary: 346 82% 76%;
+    --primary-foreground: 340 40% 14%;
+    --secondary: 224 40% 30%;
+    --secondary-foreground: 224 70% 92%;
+    --muted: 258 18% 22%;
+    --muted-foreground: 258 14% 70%;
+    --accent: 268 34% 34%;
+    --accent-foreground: 268 60% 92%;
+    --destructive: 358 58% 53.5%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 258 16% 28%;
+    --input: 258 16% 28%;
+    --ring: 346 82% 76%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Nunito', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.8;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', 'PingFang SC', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: 1.15em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  .bg-gradient-pastel {
+    background-image: var(--gradient-pastel);
+  }
+  /* Core visual signature: soft-focus cloud-mist background (multi-layer pastel radial gradients) */
+  .pastel-haze {
+    background-image: var(--gradient-pastel);
+    background-color: hsl(var(--background));
+  }
+
+  /* Frosted sugar card: large radius + ultra-soft shadow, no hard border */
+  .macaron-card {
+    @apply rounded-3xl bg-card;
+    border: 0;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Frosted glass layer: semi-transparent candy-wrapper texture */
+  .frosted-pane {
+    background-color: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    @apply rounded-3xl;
+  }
+
+  /* Irregular radius: soft candy-like outline via CSS deformation */
+  .blob-radius {
+    border-radius: 62% 38% 46% 54% / 54% 46% 58% 42%;
+  }
+
+  /* Soft glowing outline: subtle glow on buttons/cards */
+  .soft-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Marshmallow press: gentle bounce on tap instead of a hard color change */
+  .marshmallow-press {
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 320ms ease;
+  }
+  .marshmallow-press:active {
+    transform: scale(0.95) translateY(2px);
+  }
+
+  /* Slow up-and-down float, like a cloud */
+  .cloud-float {
+    animation: cloud-float 6s ease-in-out infinite;
+  }
+
+  @keyframes cloud-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Slow slide-in: gentle drop-in entrance */
+  .slide-in-soft {
+    animation: slide-in-soft 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes slide-in-soft {
+    from { opacity: 0; transform: translateY(-22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cloud-float,
+    .slide-in-soft { animation: none; }
+    .marshmallow-press { transition: none; }
+  }
+}

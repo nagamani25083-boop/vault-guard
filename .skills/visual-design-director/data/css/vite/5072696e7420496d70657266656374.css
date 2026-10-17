@@ -1,0 +1,135 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --radius: 0.25rem;
+    --background: 40 33% 98%;
+    --foreground: 30 8% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 8% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 8% 12%;
+    --primary: 340 100% 45.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 22% 92%;
+    --secondary-foreground: 30 8% 12%;
+    --muted: 40 22% 93%;
+    --muted-foreground: 30 6% 38%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 74% 48%;
+    --border: 30 12% 18%;
+    --input: 30 12% 18%;
+    --ring: 340 100% 71%;
+    --chart-1: 340 100% 71%;
+    --chart-2: 221 83% 53%;
+    --chart-3: 28 92% 55%;
+    --chart-4: 160 52% 42%;
+    --chart-5: 30 8% 25%;
+    --sidebar-background: 40 30% 96%;
+    --sidebar-foreground: 30 8% 20%;
+    --sidebar-primary: 340 100% 71%;
+    --sidebar-primary-foreground: 30 10% 12%;
+    --sidebar-accent: 40 24% 90%;
+    --sidebar-accent-foreground: 30 8% 12%;
+    --sidebar-border: 30 12% 18%;
+    --sidebar-ring: 340 100% 71%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 30 8% 10%;
+    --foreground: 40 20% 92%;
+    --card: 30 8% 14%;
+    --card-foreground: 40 20% 92%;
+    --popover: 30 8% 14%;
+    --popover-foreground: 40 20% 92%;
+    --primary: 340 90% 47.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 6% 20%;
+    --secondary-foreground: 40 20% 92%;
+    --muted: 30 6% 20%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 221 83% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 68% 52%;
+    --border: 40 14% 60%;
+    --input: 40 14% 60%;
+    --ring: 340 90% 68%;
+    --chart-1: 340 90% 68%;
+    --chart-2: 221 83% 62%;
+    --chart-3: 28 90% 60%;
+    --chart-4: 160 52% 50%;
+    --chart-5: 40 20% 80%;
+    --sidebar-background: 30 8% 12%;
+    --sidebar-foreground: 40 18% 88%;
+    --sidebar-primary: 340 90% 68%;
+    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-accent: 30 6% 20%;
+    --sidebar-accent-foreground: 40 18% 88%;
+    --sidebar-border: 40 14% 55%;
+    --sidebar-ring: 340 90% 68%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'YouSheBiaoTiHei', 'AlibabaPuHuiTi', sans-serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer components {
+  /* Halftone dot texture: a print-style visual signature */
+  .print-halftone {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.16) 1px, transparent 1.5px);
+    background-size: 9px 9px;
+  }
+
+  /* Hard-edge registration card: bold black border + hard shadow */
+  .print-panel {
+    @apply border-2 border-foreground bg-card;
+    border-radius: var(--radius);
+    box-shadow: 4px 4px 0 0 hsl(var(--foreground));
+  }
+  .print-panel-primary {
+    @apply border-2 border-foreground bg-card;
+    border-radius: var(--radius);
+    box-shadow: 4px 4px 0 0 hsl(var(--primary));
+  }
+  .print-panel-accent {
+    @apply border-2 border-foreground bg-card;
+    border-radius: var(--radius);
+    box-shadow: 4px 4px 0 0 hsl(var(--accent));
+  }
+}

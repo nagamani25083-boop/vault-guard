@@ -1,0 +1,170 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: High-end Apparel —— quiet luxury with negative space, haute-couture tailoring
+   Pearl white / oat / midnight black / charcoal gray / matte silver, no gradients, no heavy shadows, sharp right angles */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Pearl-white base / midnight-black text */
+    --background: 45 29% 97%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    /* Primary color is midnight black, restrained and achromatic */
+    --primary: 0 0% 7%;
+    --primary-foreground: 45 29% 96%;
+
+    /* Charcoal gray secondary */
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 45 29% 96%;
+
+    /* Oat-colored quiet zone */
+    --muted: 45 18% 93%;
+    --muted-foreground: 0 0% 32%;
+
+    --accent: 0 0% 18%;
+    --accent-foreground: 45 29% 96%;
+
+    --destructive: 0 45% 32%;
+    --destructive-foreground: 45 29% 96%;
+
+    /* Matte silver decorative line */
+    --border: 220 3% 56%;
+    --input: 220 3% 56%;
+    --ring: 0 0% 7%;
+
+    --chart-1: 0 0% 7%;
+    --chart-2: 0 0% 32%;
+    --chart-3: 220 4% 60%;
+    --chart-4: 45 18% 84%;
+    --chart-5: 0 0% 55%;
+
+    --sidebar-background: 45 20% 94%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 0 0% 7%;
+    --sidebar-primary-foreground: 45 29% 96%;
+    --sidebar-accent: 45 18% 90%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 220 3% 62%;
+    --sidebar-ring: 0 0% 7%;
+  }
+
+  .dark {
+    --radius: 0rem;
+    --background: 0 0% 14%;
+    --foreground: 45 25% 94%;
+    --card: 0 0% 17%;
+    --card-foreground: 45 25% 94%;
+    --popover: 0 0% 17%;
+    --popover-foreground: 45 25% 94%;
+    --primary: 45 25% 92%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 45 12% 88%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 21%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 0 0% 24%;
+    --accent-foreground: 45 25% 94%;
+    --destructive: 0 40% 53%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 38%;
+    --input: 0 0% 38%;
+    --ring: 45 25% 92%;
+    --chart-1: 45 25% 92%;
+    --chart-2: 0 0% 72%;
+    --chart-3: 45 12% 80%;
+    --chart-4: 0 0% 45%;
+    --chart-5: 220 4% 55%;
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 45 25% 94%;
+    --sidebar-primary: 45 25% 92%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 45 25% 94%;
+    --sidebar-border: 0 0% 30%;
+    --sidebar-ring: 45 25% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'SourceHanSerifCN', 'SimSun', 'STSong', serif;
+    font-weight: 700;
+  }
+
+  ::selection {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+}
+
+@layer components {
+  /* Core visual signature: an ultra-thin silver hairline (a matte horizontal line fading out on both sides) */
+  .sig-hairline {
+    height: 1px;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--border)),
+      transparent
+    );
+  }
+
+  /* Quiet-luxury frame container: thin silver edge + no shadow */
+  .lux-frame {
+    @apply border border-border bg-card;
+  }
+
+  /* Chapter-style entrance: fade in + move up, a magazine page-turn rhythm */
+  .lux-reveal {
+    animation: lux-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes lux-reveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lux-reveal { animation: none; }
+  }
+}

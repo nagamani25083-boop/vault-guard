@@ -1,0 +1,145 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Geometric Grid · De Stijl / Bauhaus / Hard-edge Painting
+   Compositional logic: paper-white base + thick black line skeleton + red/yellow/blue primary solid blocks, everything built on rectangles and straight lines,
+   no gradients, no soft shadows, almost no border radius; color creates dynamic balance through area and position.
+   On the mini-program end, the font must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ family: 'Source Han Mono SC', global: true,
+     source: 'url("https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf")' }) */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: warm paper-white base + near-black ink text */
+    --background: 40 33% 96%;
+    --foreground: 220 18% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 18% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 18% 8%;
+    /* Primary triad: red (primary) · yellow (secondary) · blue (accent), lightness pushed down until it passes contrast against white text */
+    --primary: 4 82% 47%;
+    --primary-foreground: 40 33% 96%;
+    --secondary: 45 100% 51%;
+    --secondary-foreground: 220 18% 8%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 220 10% 35%;
+    --accent: 215 90% 48%;
+    --accent-foreground: 40 33% 96%;
+    --destructive: 4 82% 47%;
+    --destructive-foreground: 40 33% 96%;
+    /* Outline is composition itself: border shares color with ink, forming the thick black grid skeleton */
+    --border: 220 18% 8%;
+    --input: 220 18% 8%;
+    --ring: 215 90% 48%;
+    --radius: 0.125rem;
+    --chart-1: 4 82% 47%;
+    --chart-2: 45 100% 51%;
+    --chart-3: 215 90% 48%;
+    --chart-4: 220 18% 8%;
+    --chart-5: 40 20% 77%;
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 40 33% 96%;
+    --sidebar-primary: 4 82% 47%;
+    --sidebar-primary-foreground: 40 33% 96%;
+    --sidebar-accent: 45 100% 51%;
+    --sidebar-accent-foreground: 220 18% 8%;
+    --sidebar-border: 40 33% 96%;
+    --sidebar-ring: 215 90% 48%;
+  }
+
+  /* Dark: surface inverts to ink base + paper-white text, primary triad keeps the same hues with only lightness adjusted */
+  .dark {
+    --background: 220 16% 9%;
+    --foreground: 40 24% 95%;
+    --card: 220 15% 13%;
+    --card-foreground: 40 24% 95%;
+    --popover: 220 15% 13%;
+    --popover-foreground: 40 24% 95%;
+    --primary: 4 82% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 100% 52%;
+    --secondary-foreground: 220 18% 8%;
+    --muted: 220 12% 17%;
+    --muted-foreground: 40 14% 70%;
+    --accent: 215 90% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 4 82% 47%;
+    --destructive-foreground: 0 0% 100%;
+    /* The skeleton inverts to a white line on the dark base, still the main subject of the composition */
+    --border: 40 20% 90%;
+    --input: 40 20% 90%;
+    --ring: 215 90% 55%;
+    --chart-4: 220 18% 23%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Mono SC', ui-monospace, Menlo, monospace;
+  }
+}
+
+/* Entrance: linear translation and rectangle reveal, instantaneous / stop-motion feel, no fade-in allowed */
+@keyframes grid-push-in {
+  from { transform: translateX(-14%); }
+  to { transform: translateX(0); }
+}
+@keyframes grid-reveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@layer utilities {
+  /* Core visual signature: thick black rectangular skeleton, the border itself is both division and composition */
+  .grid-frame {
+    border: 3px solid hsl(var(--border));
+    border-radius: 0;
+    background-color: hsl(var(--card));
+  }
+  /* Skeleton solid line: part of the content itself rather than a decorative divider */
+  .grid-rule {
+    height: 6px;
+    background-color: hsl(var(--border));
+  }
+  /* Hard-edge solid fill: explicitly removes gradients and drop shadows, keeping an absolutely flat surface */
+  .grid-flat {
+    background-image: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  /* Grid texture: lines stay visually fixed while scrolling, content slides within the grid */
+  .grid-mesh {
+    background-image:
+      repeating-linear-gradient(to right, hsl(var(--border) / 0.16) 0 2px, transparent 2px 48px),
+      repeating-linear-gradient(to bottom, hsl(var(--border) / 0.16) 0 2px, transparent 2px 48px);
+  }
+  /* Touch inversion: color block and text swap, simulating a physical puzzle flip */
+  .grid-invert:active {
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  .grid-push-in {
+    animation: grid-push-in 160ms steps(4, end) both;
+  }
+  .grid-reveal {
+    transform-origin: left center;
+    animation: grid-reveal 200ms steps(5, end) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-push-in,
+  .grid-reveal {
+    animation: none;
+  }
+}

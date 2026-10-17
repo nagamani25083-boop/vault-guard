@@ -1,0 +1,193 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============ Watercolor Painting Style Design System ============
+   Soft gradients, paper texture, layered semi-transparent color washes. All colors in HSL. */
+
+@font-face {
+  font-family: "Muyao Softbrush";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Resource Han Rounded";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Warm white paper background #FAF8F5 */
+    --background: 36 33% 97%;
+    --foreground: 215 28% 24%;
+
+    /* Semi-transparent card base */
+    --card: 40 40% 99%;
+    --card-foreground: 215 28% 24%;
+    --popover: 40 40% 99%;
+    --popover-foreground: 215 28% 24%;
+
+    /* Calm blue #4A6FA5 */
+    --primary: 216 38% 47%;
+    --primary-foreground: 40 40% 98%;
+
+    /* Secondary: a light wash of the primary color */
+    --secondary: 216 34% 92%;
+    --secondary-foreground: 216 38% 34%;
+
+    --muted: 36 24% 93%;
+    --muted-foreground: 220 12% 44%;
+
+    /* Terracotta orange accent #E8A87C */
+    --accent: 24 68% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 53.5%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Extremely light blue-gray border */
+    --border: 216 26% 86%;
+    --input: 216 26% 86%;
+    --ring: 216 38% 47%;
+
+    /* Category colors */
+    --cat-water: 178 40% 58%;
+    --cat-water-foreground: 185 45% 20%;
+    --cat-electric: 30 62% 60%;
+    --cat-electric-foreground: 28 55% 20%;
+    --cat-heating: 352 40% 62%;
+    --cat-heating-foreground: 352 40% 22%;
+
+    --chart-1: 216 38% 47%;
+    --chart-2: 178 40% 58%;
+    --chart-3: 24 68% 70%;
+    --chart-4: 352 40% 62%;
+    --chart-5: 30 62% 60%;
+
+    --sidebar-background: 40 36% 98%;
+    --sidebar-foreground: 215 24% 30%;
+    --sidebar-primary: 216 38% 47%;
+    --sidebar-primary-foreground: 40 40% 98%;
+    --sidebar-accent: 216 34% 92%;
+    --sidebar-accent-foreground: 216 38% 34%;
+    --sidebar-border: 216 26% 88%;
+    --sidebar-ring: 216 38% 47%;
+
+    /* Watercolor gradient */
+    --gradient-primary: linear-gradient(135deg, hsl(216 44% 52%), hsl(178 40% 58%));
+    --gradient-card: linear-gradient(160deg, hsl(40 40% 99% / 0.92), hsl(216 38% 47% / 0.06));
+    --gradient-background: radial-gradient(
+        60% 50% at 12% 8%,
+        hsl(178 45% 62% / 0.16),
+        transparent 70%
+      ),
+      radial-gradient(55% 45% at 92% 4%, hsl(24 70% 72% / 0.16), transparent 70%),
+      radial-gradient(60% 55% at 88% 96%, hsl(352 45% 66% / 0.12), transparent 72%),
+      radial-gradient(50% 45% at 4% 92%, hsl(216 44% 56% / 0.12), transparent 72%);
+
+    --shadow-card: 0 8px 30px -12px hsl(216 38% 47% / 0.18);
+    --shadow-hover: 0 14px 40px -12px hsl(216 38% 47% / 0.28);
+  }
+
+  .dark {
+    --background: 220 22% 12%;
+    --foreground: 40 30% 92%;
+    --card: 220 20% 16%;
+    --card-foreground: 40 30% 92%;
+    --popover: 220 20% 16%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 216 46% 50.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 20% 24%;
+    --secondary-foreground: 40 30% 92%;
+    --muted: 220 16% 22%;
+    --muted-foreground: 220 12% 66%;
+    --accent: 24 55% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 55% 52%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 14% 28%;
+    --input: 220 14% 28%;
+    --ring: 216 46% 62%;
+    --cat-water: 178 38% 52%;
+    --cat-water-foreground: 185 40% 90%;
+    --cat-electric: 30 55% 56%;
+    --cat-electric-foreground: 28 40% 92%;
+    --cat-heating: 352 38% 58%;
+    --cat-heating-foreground: 352 35% 92%;
+    --chart-1: 216 46% 62%;
+    --chart-2: 178 38% 52%;
+    --chart-3: 24 55% 62%;
+    --chart-4: 352 38% 58%;
+    --chart-5: 30 55% 56%;
+    --sidebar-background: 220 20% 15%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 216 46% 62%;
+    --sidebar-primary-foreground: 220 22% 12%;
+    --sidebar-accent: 216 20% 24%;
+    --sidebar-accent-foreground: 40 30% 92%;
+    --sidebar-border: 220 14% 28%;
+    --sidebar-ring: 216 46% 62%;
+    --gradient-primary: linear-gradient(135deg, hsl(216 46% 52%), hsl(178 38% 46%));
+    --gradient-card: linear-gradient(160deg, hsl(220 20% 18% / 0.92), hsl(216 46% 62% / 0.08));
+    --gradient-background: radial-gradient(60% 50% at 12% 8%, hsl(178 40% 40% / 0.18), transparent 70%),
+      radial-gradient(55% 45% at 92% 4%, hsl(24 55% 45% / 0.16), transparent 70%);
+    --shadow-card: 0 8px 30px -12px hsl(0 0% 0% / 0.5);
+    --shadow-hover: 0 14px 40px -12px hsl(0 0% 0% / 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Resource Han Rounded", ui-sans-serif, system-ui, sans-serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: "Muyao Softbrush", "Resource Han Rounded", cursive;
+  }
+
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Paper grain texture */
+  .paper-grain {
+    position: relative;
+  }
+  .paper-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}

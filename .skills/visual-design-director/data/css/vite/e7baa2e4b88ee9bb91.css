@@ -1,0 +1,216 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Red & Black — Brutalism
+   Void black base / stark white typography / warning-red accent lines, thick solid borders, zero radius, no fades */
+
+@font-face {
+  font-family: 'DouyinSansBold';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/DouyinSansBold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0px;
+
+    /* Void black: the visual canvas */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Warning red: borders / dividers / calls to action */
+    --primary: 0 100% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 100% 46%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 100% 50%;
+
+    /* Chart colors derived from shades of red, keeping a disciplined two-tone palette */
+    --chart-1: 0 100% 50%;
+    --chart-2: 0 85% 40%;
+    --chart-3: 0 60% 30%;
+    --chart-4: 0 100% 65%;
+    --chart-5: 0 50% 22%;
+
+    --success: 0 0% 70%;
+    --warning: 0 100% 50%;
+    --info: 0 0% 70%;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 100% 50%;
+  }
+
+  /* The theme itself is dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 100% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 100% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 100% 50%;
+    --chart-1: 0 100% 50%;
+    --chart-2: 0 85% 40%;
+    --chart-3: 0 60% 30%;
+    --chart-4: 0 100% 65%;
+    --chart-5: 0 50% 22%;
+    --success: 0 0% 70%;
+    --warning: 0 100% 50%;
+    --info: 0 0% 70%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Han Mono SC', 'Noto Sans SC', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DouyinSansBold', 'Source Han Mono SC', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: brutalist red solid hard-offset shadow */
+  .brutal-shadow {
+    box-shadow: 6px 6px 0 hsl(var(--primary));
+  }
+  .brutal-shadow-sm {
+    box-shadow: 4px 4px 0 hsl(var(--primary));
+  }
+
+  /* Button: instant positional offset, not a color transition */
+  .brutal-btn {
+    border: 2px solid hsl(var(--primary));
+    box-shadow: 4px 4px 0 hsl(var(--primary));
+    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
+  }
+  .brutal-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 hsl(var(--primary));
+  }
+  .brutal-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 hsl(var(--primary));
+  }
+
+  /* Red outlined hollow text */
+  .graffiti-outline {
+    -webkit-text-stroke: 2px hsl(var(--primary));
+    color: transparent;
+  }
+
+  /* High-speed slide-in (no fade, strong directionality) */
+  .hard-slide-in {
+    animation: hard-slide-in 0.28s ease-out both;
+  }
+  @keyframes hard-slide-in {
+    from { opacity: 0; transform: translateX(-48px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .hard-slide-in-right {
+    animation: hard-slide-in-right 0.28s ease-out both;
+  }
+  @keyframes hard-slide-in-right {
+    from { opacity: 0; transform: translateX(48px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .hard-drop-in {
+    animation: hard-drop-in 0.3s ease-out both;
+  }
+  @keyframes hard-drop-in {
+    from { opacity: 0; transform: translateY(-32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Horizontal marquee (edge-extending visual tension) */
+  .marquee-x {
+    animation: marquee-x 18s linear infinite;
+  }
+  @keyframes marquee-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hard-slide-in,
+    .hard-slide-in-right,
+    .hard-drop-in,
+    .marquee-x {
+      animation: none;
+    }
+  }
+}

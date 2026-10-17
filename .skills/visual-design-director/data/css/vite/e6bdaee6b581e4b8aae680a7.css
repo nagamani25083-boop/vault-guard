@@ -1,0 +1,148 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Design system: Trendy Personality (Neo-Brutalism)
+   High-contrast neon palette + bold black outlines + blur-free solid drop shadows + sticker collage
+   All colors MUST be HSL.
+   ============================================================ */
+
+@font-face {
+  font-family: 'DouyinSansBold';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/DouyinSansBold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.25rem;
+
+    --background: 48 44% 96%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Primary: neon acid-lime green #7EFF73 */
+    --primary: 115 100% 72%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 48 30% 91%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 48 24% 92%;
+    --muted-foreground: 0 0% 34%;
+
+    /* shadcn accent as highlight touch: vibrant lemon yellow #FFE135 */
+    --accent: 51 100% 26.5%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Brand clash color: millennial rose pink #FF4B91 */
+    --brand-pink: 337 100% 64%;
+    --brand-pink-foreground: 0 0% 100%;
+    --brand-yellow: 51 100% 60%;
+    --brand-yellow-foreground: 0 0% 8%;
+
+    --destructive: 0 84% 49.5%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 8%;
+    --input: 0 0% 8%;
+    --ring: 337 100% 64%;
+
+    --chart-1: 115 100% 60%;
+    --chart-2: 337 100% 64%;
+    --chart-3: 51 100% 55%;
+    --chart-4: 199 100% 55%;
+    --chart-5: 268 90% 65%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 115 100% 72%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 48 30% 91%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 8%;
+    --sidebar-ring: 337 100% 64%;
+  }
+
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 48 44% 96%;
+
+    --card: 0 0% 13%;
+    --card-foreground: 48 44% 96%;
+    --popover: 0 0% 13%;
+    --popover-foreground: 48 44% 96%;
+
+    --primary: 115 90% 28%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 48 44% 96%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 66%;
+
+    --accent: 51 95% 27%;
+    --accent-foreground: 0 0% 100%;
+
+    --brand-pink: 337 90% 62%;
+    --brand-pink-foreground: 0 0% 100%;
+    --brand-yellow: 51 95% 58%;
+    --brand-yellow-foreground: 0 0% 8%;
+
+    --destructive: 0 74% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 48 44% 96%;
+    --input: 48 44% 96%;
+    --ring: 337 90% 62%;
+
+    --chart-1: 115 90% 60%;
+    --chart-2: 337 90% 64%;
+    --chart-3: 51 95% 58%;
+    --chart-4: 199 90% 58%;
+    --chart-5: 268 85% 68%;
+
+    --sidebar-background: 0 0% 13%;
+    --sidebar-foreground: 48 44% 96%;
+    --sidebar-primary: 115 90% 62%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 48 44% 96%;
+    --sidebar-border: 48 44% 96%;
+    --sidebar-ring: 337 90% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--foreground)) transparent;
+  }
+}
+
+@layer components {
+  /* Horizontal scrolling marquee */
+  .marquee-track {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 22s linear infinite;
+  }
+}

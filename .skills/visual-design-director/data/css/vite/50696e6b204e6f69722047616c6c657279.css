@@ -1,0 +1,180 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pink-Black Gallery
+   Ultra-deep black background + high-saturation pink accent + minimalist magazine-style gallery layout
+   All colors MUST be HSL. */
+
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 340 80% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 22%;
+    --ring: 340 80% 62%;
+
+    --chart-1: 340 80% 62%;
+    --chart-2: 320 60% 55%;
+    --chart-3: 350 65% 70%;
+    --chart-4: 300 40% 60%;
+    --chart-5: 0 0% 70%;
+
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 340 80% 62%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 340 80% 62%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(340 80% 62%), hsl(320 70% 52%));
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 13%), hsl(0 0% 9%));
+    --gradient-background: radial-gradient(circle at 50% 0%, hsl(340 40% 14%), hsl(0 0% 7%) 55%);
+    --shadow-card: 0 18px 50px -24px hsl(0 0% 0% / 0.8);
+    --shadow-hover: 0 26px 70px -20px hsl(340 80% 40% / 0.35);
+
+    --font-sans: 'HarmonyOS Sans', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    --font-display: 'Playfair Display', 'HarmonyOS Sans', 'Songti SC', serif;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 340 80% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 22%;
+    --ring: 340 80% 62%;
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 340 80% 62%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 340 80% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  /* Gallery-plaque-style label: uppercase Latin + wide letter spacing + pink */
+  .gallery-label {
+    font-family: var(--font-display);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+
+  /* Large editorial display typeface (Latin / numerals) */
+  .display-serif {
+    font-family: var(--font-display);
+  }
+
+  /* Spotlight glow: simulates a piece placed under a spotlight */
+  .spotlight {
+    position: relative;
+  }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 50% 30%, hsl(340 80% 55% / 0.28), transparent 62%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Thin pink hairline divider */
+  .hairline-pink {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.7), transparent);
+  }
+}
+
+@layer components {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}

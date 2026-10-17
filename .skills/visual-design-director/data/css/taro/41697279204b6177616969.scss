@@ -1,0 +1,148 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Cute Light Oxygen · Japanese pastel / rounded whitespace / light and soft
+   Fonts: Mini Program clients must load the same-named font via Taro.loadFontFace in app.tsx; H5 is handled by the @font-face below */
+@font-face {
+  font-family: 'ResourceRounded';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOSSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: warm-white cream paper base + pure white cards, soft dark gray text replaces pure black */
+    --background: 34 100% 97%;
+    --foreground: 215 14% 32%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 14% 32%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 14% 32%;
+    /* Brand soft pink: lightness compressed so white text stays readable (AA 4.8:1); light pink reserved for glow and strokes */
+    --primary: 330 74% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 322 88% 82%;
+    --secondary: 327 73% 95%;
+    --secondary-foreground: 336 58% 32%;
+    --muted: 327 40% 96%;
+    --muted-foreground: 215 12% 44%;
+    /* Accent light purple, lightness also compressed to support white text */
+    --accent: 255 68% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 326 62% 88%;
+    --input: 326 62% 88%;
+    --ring: 330 74% 55%;
+    --radius: 1rem;
+    /* Decorative pastel: only for dots, floating blocks, and other light accents — never carries text */
+    --pastel-sky: 187 92% 76%;
+    --pastel-butter: 45 96% 78%;
+    --gradient-primary: linear-gradient(135deg, hsl(330 74% 56%), hsl(322 82% 72%));
+    --gradient-subtle: linear-gradient(180deg, hsl(34 100% 98%), hsl(327 60% 96%));
+    --shadow-soft: 0 8px 24px -8px hsl(329 60% 58% / 0.26);
+    --shadow-lift: 0 14px 34px -12px hsl(329 60% 58% / 0.32);
+    --chart-1: 330 74% 60%;
+    --chart-2: 255 80% 72%;
+    --chart-3: 187 82% 62%;
+    --chart-4: 45 92% 66%;
+    --chart-5: 336 70% 52%;
+    --sidebar-background: 34 100% 98%;
+    --sidebar-foreground: 215 14% 32%;
+    --sidebar-primary: 330 74% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 327 73% 95%;
+    --sidebar-accent-foreground: 336 58% 32%;
+    --sidebar-border: 326 62% 90%;
+    --sidebar-ring: 330 74% 55%;
+  }
+
+  /* Dark mode follows this theme's pink-purple hue: deep plum base + pink-white text, not falling back to neutral gray-blue */
+  .dark {
+    --background: 330 16% 10%;
+    --foreground: 330 22% 94%;
+    --card: 330 15% 14%;
+    --card-foreground: 330 22% 94%;
+    --popover: 330 15% 14%;
+    --popover-foreground: 330 22% 94%;
+    --primary: 330 76% 60%;
+    --primary-foreground: 330 40% 12%;
+    --primary-glow: 322 70% 72%;
+    --secondary: 330 14% 20%;
+    --secondary-foreground: 330 22% 92%;
+    --muted: 330 12% 18%;
+    --muted-foreground: 330 12% 72%;
+    --accent: 255 60% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 64% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 330 12% 26%;
+    --input: 330 12% 26%;
+    --ring: 330 76% 66%;
+    --gradient-primary: linear-gradient(135deg, hsl(330 66% 58%), hsl(322 56% 66%));
+    --gradient-subtle: linear-gradient(180deg, hsl(330 15% 13%), hsl(330 14% 10%));
+    --shadow-soft: 0 8px 24px -10px hsl(330 40% 4% / 0.6);
+    --shadow-lift: 0 14px 34px -12px hsl(330 40% 4% / 0.7);
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'HarmonyOSSans', -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: pastel soft-edge card — large rounded corners + pastel stroke + non-offset soft glow */
+  .card-soft {
+    background-color: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+  }
+  .pill-soft {
+    border-radius: 9999px;
+    background-image: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-soft);
+  }
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-subtle { background-image: var(--gradient-subtle); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-lift { box-shadow: var(--shadow-lift); }
+  /* Semi-transparent pastel dot: for floating decorations */
+  .dot-pastel {
+    border-radius: 9999px;
+    background-color: hsl(var(--primary-glow) / 0.45);
+  }
+  .font-rounded { font-family: 'ResourceRounded', 'HarmonyOSSans', sans-serif; }
+  /* Jelly press: slight scale feedback */
+  .press-soft { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .press-soft:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@keyframes bubble-in { 0% { opacity: 0; transform: translateY(8px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes float-soft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes breathe-soft { 0%, 100% { opacity: 0.35; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1); } }
+
+.animate-bubble-in { animation: bubble-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-float { animation: float-soft 3.5s ease-in-out infinite; }
+.animate-breathe { animation: breathe-soft 1.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bubble-in,
+  .animate-float,
+  .animate-breathe { animation: none; }
+}

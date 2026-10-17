@@ -1,0 +1,178 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Gothic Style -- medieval cathedral aesthetic
+   Pure black base / pale gold text / gothic gold primary / deep purple secondary / blood red accent / sharp corners, no radius */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Gothic sharp-corner style */
+    --radius: 0rem;
+
+    --background: 0 0% 4%;
+    --foreground: 43 100% 87%;
+    --card: 0 0% 7%;
+    --card-foreground: 43 100% 87%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 43 100% 87%;
+
+    /* Gothic gold */
+    --primary: 43 74% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Deep purple secondary */
+    --secondary: 270 50% 18%;
+    --secondary-foreground: 43 100% 87%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 43 30% 72%;
+
+    /* Blood red accent */
+    --accent: 0 100% 27%;
+    --accent-foreground: 43 100% 87%;
+
+    --destructive: 0 100% 27%;
+    --destructive-foreground: 43 100% 87%;
+
+    /* The border is a gold outline, the structural line of this style */
+    --border: 43 74% 49%;
+    --input: 0 0% 14%;
+    --ring: 43 74% 49%;
+
+    /* Semantic status colors */
+    --success: 152 40% 28%;
+    --success-foreground: 152 60% 75%;
+    --warning: 43 74% 49%;
+    --info: 270 40% 45%;
+
+    /* Chart colors (derived from the gothic palette) */
+    --chart-1: 43 74% 49%;
+    --chart-2: 0 100% 35%;
+    --chart-3: 270 40% 40%;
+    --chart-4: 43 50% 65%;
+    --chart-5: 0 0% 50%;
+
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 43 80% 82%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 270 50% 18%;
+    --sidebar-accent-foreground: 43 100% 87%;
+    --sidebar-border: 43 40% 30%;
+    --sidebar-ring: 43 74% 49%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(43 74% 49%), hsl(43 90% 65%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 7%), hsl(0 0% 5%));
+    --gradient-background: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(270 20% 8%) 100%);
+    --shadow-card: 0 4px 24px hsl(43 74% 49% / 0.1), inset 0 1px 0 hsl(43 74% 49% / 0.15);
+    --shadow-hover: 0 0 20px hsl(43 74% 49% / 0.3), 0 4px 32px hsl(0 0% 0% / 0.5);
+  }
+
+  /* The theme itself is dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 43 100% 87%;
+    --card: 0 0% 7%;
+    --card-foreground: 43 100% 87%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 43 100% 87%;
+    --primary: 43 74% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 50% 18%;
+    --secondary-foreground: 43 100% 87%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 43 30% 72%;
+    --accent: 0 100% 27%;
+    --accent-foreground: 43 100% 87%;
+    --destructive: 0 100% 27%;
+    --destructive-foreground: 43 100% 87%;
+    --border: 43 74% 49%;
+    --input: 0 0% 14%;
+    --ring: 43 74% 49%;
+    --success: 152 40% 28%;
+    --success-foreground: 152 60% 75%;
+    --warning: 43 74% 49%;
+    --info: 270 40% 45%;
+    --chart-1: 43 74% 49%;
+    --chart-2: 0 100% 35%;
+    --chart-3: 270 40% 40%;
+    --chart-4: 43 50% 65%;
+    --chart-5: 0 0% 50%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 43 80% 82%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 270 50% 18%;
+    --sidebar-accent-foreground: 43 100% 87%;
+    --sidebar-border: 43 40% 30%;
+    --sidebar-ring: 43 74% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border) / 0.4) transparent;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-image: var(--gradient-background);
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'SourceHanSerifCN', 'SimSun', 'STSong', serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Core visual signature: gold-outlined container + inner gold highlight */
+  .gothic-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: var(--shadow-card);
+    transition: border-color 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  }
+  .gothic-card:hover {
+    border-color: hsl(var(--border) / 0.7);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Gold fading divider (a horizontal echo of a cathedral arch) */
+  .gothic-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.6), transparent);
+  }
+
+  /* Gold text gradient, used only for the topmost-level headings */
+  .text-gold-gradient {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

@@ -1,0 +1,161 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Traditional Chinese Aesthetic · Song-dynasty Oriental Elegance — xuan paper texture, blue-green landscape, cinnabar colophon
+   All colors MUST be HSL. */
+
+@font-face {
+  font-family: 'Source Han Serif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Han Serif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.25rem;
+    --background: 42 44% 96%;
+    --foreground: 20 8% 17%;
+    --card: 43 46% 92%;
+    --card-foreground: 20 8% 17%;
+    --popover: 42 50% 97%;
+    --popover-foreground: 20 8% 17%;
+    --primary: 198 42% 30%;
+    --primary-foreground: 42 44% 96%;
+    --secondary: 40 34% 87%;
+    --secondary-foreground: 198 42% 25%;
+    --muted: 40 30% 89%;
+    --muted-foreground: 28 24% 34%;
+    --accent: 120 18% 84%;
+    --accent-foreground: 118 26% 22%;
+    --destructive: 6 64% 47%;
+    --destructive-foreground: 42 44% 96%;
+    --border: 30 26% 66%;
+    --input: 30 26% 66%;
+    --ring: 198 42% 30%;
+    --cinnabar: 6 64% 47%;
+    --cinnabar-foreground: 42 44% 96%;
+    --chart-1: 198 42% 30%;
+    --chart-2: 118 22% 40%;
+    --chart-3: 6 64% 47%;
+    --chart-4: 29 38% 44%;
+    --chart-5: 43 52% 58%;
+    --sidebar-background: 43 46% 92%;
+    --sidebar-foreground: 20 8% 17%;
+    --sidebar-primary: 198 42% 30%;
+    --sidebar-primary-foreground: 42 44% 96%;
+    --sidebar-accent: 40 30% 89%;
+    --sidebar-accent-foreground: 198 42% 25%;
+    --sidebar-border: 30 26% 66%;
+    --sidebar-ring: 198 42% 30%;
+  }
+
+  .dark {
+    --background: 30 10% 12%;
+    --foreground: 42 30% 88%;
+    --card: 28 10% 16%;
+    --card-foreground: 42 30% 88%;
+    --popover: 28 10% 16%;
+    --popover-foreground: 42 30% 88%;
+    --primary: 195 34% 52%;
+    --primary-foreground: 30 12% 10%;
+    --secondary: 28 10% 22%;
+    --secondary-foreground: 42 30% 88%;
+    --muted: 28 8% 22%;
+    --muted-foreground: 38 18% 66%;
+    --accent: 118 16% 30%;
+    --accent-foreground: 42 30% 90%;
+    --destructive: 6 58% 46%;
+    --destructive-foreground: 42 30% 92%;
+    --border: 30 12% 30%;
+    --input: 30 12% 30%;
+    --ring: 195 34% 52%;
+    --cinnabar: 6 60% 55%;
+    --cinnabar-foreground: 30 12% 10%;
+    --chart-1: 195 34% 52%;
+    --chart-2: 118 24% 48%;
+    --chart-3: 6 60% 55%;
+    --chart-4: 29 40% 54%;
+    --chart-5: 43 46% 60%;
+    --sidebar-background: 28 10% 16%;
+    --sidebar-foreground: 42 30% 88%;
+    --sidebar-primary: 195 34% 52%;
+    --sidebar-primary-foreground: 30 12% 10%;
+    --sidebar-accent: 28 8% 22%;
+    --sidebar-accent-foreground: 42 30% 88%;
+    --sidebar-border: 30 12% 30%;
+    --sidebar-ring: 195 34% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Han Serif', 'Songti SC', 'STSong', serif;
+    background-image:
+      radial-gradient(hsl(var(--foreground) / 0.035) 1px, transparent 1px),
+      radial-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 22px 22px, 22px 22px;
+    background-position: 0 0, 11px 11px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Aged xuan-paper surface texture */
+  .paper-surface {
+    background-color: hsl(var(--card));
+    background-image:
+      linear-gradient(hsl(var(--foreground) / 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.02) 1px, transparent 1px);
+    background-size: 26px 26px, 26px 26px;
+  }
+
+  /* Cinnabar seal stamp */
+  .seal-stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--cinnabar-foreground));
+    background-color: hsl(var(--cinnabar));
+    border: 2px solid hsl(var(--cinnabar) / 0.5);
+    box-shadow: inset 0 0 0 2px hsl(var(--cinnabar));
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+  }
+
+  /* Colophon-style thin divider */
+  .ink-divider {
+    height: 1px;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--border)),
+      hsl(var(--border)),
+      transparent
+    );
+  }
+}
+
+@layer utilities {
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+}

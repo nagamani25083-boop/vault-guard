@@ -1,0 +1,213 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --radius: 1.25rem;
+    --background: 222 24% 90%;
+    --foreground: 224 22% 26%;
+    --card: 222 24% 91%;
+    --card-foreground: 224 22% 26%;
+    --popover: 222 24% 93%;
+    --popover-foreground: 224 22% 26%;
+    --primary: 255 56% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 20% 84%;
+    --secondary-foreground: 224 22% 30%;
+    --muted: 222 18% 85%;
+    --muted-foreground: 224 12% 38%;
+    --accent: 332 66% 51%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 6 72% 49.5%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 16% 82%;
+    --input: 222 16% 82%;
+    --ring: 255 56% 62%;
+    --success: 152 45% 46%;
+    --warning: 38 82% 56%;
+    --info: 210 68% 58%;
+    --chart-1: 255 56% 62%;
+    --chart-2: 332 66% 62%;
+    --chart-3: 210 66% 60%;
+    --chart-4: 40 78% 60%;
+    --chart-5: 160 46% 50%;
+    --sidebar-background: 222 24% 90%;
+    --sidebar-foreground: 224 18% 32%;
+    --sidebar-primary: 255 56% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 22% 86%;
+    --sidebar-accent-foreground: 255 56% 55%;
+    --sidebar-border: 222 16% 82%;
+    --sidebar-ring: 255 56% 62%;
+    --neu-base: 222 24% 90%;
+    --shadow-neu-flat: 7px 7px 15px rgba(163, 177, 198, 0.55), -7px -7px 15px rgba(255, 255, 255, 0.85);
+    --shadow-neu-pressed: inset 5px 5px 10px rgba(163, 177, 198, 0.55), inset -5px -5px 10px rgba(255, 255, 255, 0.9);
+    --shadow-neu-sm: 4px 4px 9px rgba(163, 177, 198, 0.45), -4px -4px 9px rgba(255, 255, 255, 0.8);
+    --shadow-card: 7px 7px 15px rgba(163, 177, 198, 0.55), -7px -7px 15px rgba(255, 255, 255, 0.85);
+    --shadow-hover: 10px 10px 20px rgba(163, 177, 198, 0.6), -10px -10px 20px rgba(255, 255, 255, 0.9);
+    --gradient-primary: linear-gradient(135deg, hsl(255 60% 66%), hsl(315 58% 64%));
+    --gradient-card: linear-gradient(145deg, hsl(222 26% 92%), hsl(222 22% 88%));
+    --gradient-background: linear-gradient(160deg, hsl(222 26% 92%), hsl(222 22% 88%));
+  }
+
+  .dark {
+    --background: 225 16% 16%;
+    --foreground: 220 15% 82%;
+    --card: 225 16% 17%;
+    --card-foreground: 220 15% 82%;
+    --popover: 225 16% 18%;
+    --popover-foreground: 220 15% 82%;
+    --primary: 255 56% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 12% 24%;
+    --secondary-foreground: 220 15% 82%;
+    --muted: 225 12% 22%;
+    --muted-foreground: 220 10% 63%;
+    --accent: 332 60% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 6 62% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 225 10% 26%;
+    --input: 225 10% 26%;
+    --ring: 255 56% 66%;
+    --success: 152 42% 48%;
+    --warning: 38 74% 56%;
+    --info: 210 62% 60%;
+    --chart-1: 255 56% 66%;
+    --chart-2: 332 60% 64%;
+    --chart-3: 210 62% 62%;
+    --chart-4: 40 72% 62%;
+    --chart-5: 160 44% 54%;
+    --sidebar-background: 225 16% 15%;
+    --sidebar-foreground: 220 12% 72%;
+    --sidebar-primary: 255 56% 66%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 12% 22%;
+    --sidebar-accent-foreground: 255 60% 74%;
+    --sidebar-border: 225 10% 26%;
+    --sidebar-ring: 255 56% 66%;
+    --neu-base: 225 16% 16%;
+    --shadow-neu-flat: 7px 7px 15px rgba(0, 0, 0, 0.45), -7px -7px 15px rgba(255, 255, 255, 0.04);
+    --shadow-neu-pressed: inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset -5px -5px 10px rgba(255, 255, 255, 0.04);
+    --shadow-neu-sm: 4px 4px 9px rgba(0, 0, 0, 0.4), -4px -4px 9px rgba(255, 255, 255, 0.03);
+    --shadow-card: 7px 7px 15px rgba(0, 0, 0, 0.45), -7px -7px 15px rgba(255, 255, 255, 0.04);
+    --shadow-hover: 10px 10px 20px rgba(0, 0, 0, 0.5), -10px -10px 20px rgba(255, 255, 255, 0.05);
+    --gradient-primary: linear-gradient(135deg, hsl(255 56% 60%), hsl(315 52% 58%));
+    --gradient-card: linear-gradient(145deg, hsl(225 16% 19%), hsl(225 16% 15%));
+    --gradient-background: linear-gradient(160deg, hsl(225 16% 18%), hsl(225 16% 14%));
+  }
+}
+
+@font-face {
+  font-family: 'Glow Sans SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Glow Sans SC', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  .neu-flat {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-flat);
+    border-radius: var(--radius);
+  }
+  .neu-pressed {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-pressed);
+    border-radius: var(--radius);
+  }
+  .neu-card {
+    @apply rounded-3xl p-5 transition-all duration-300;
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-flat);
+  }
+  .neu-card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1;
+  }
+  .neu-card-hover:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .neu-sm {
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+    border-radius: 1rem;
+  }
+  .neu-icon-btn {
+    @apply flex items-center justify-center rounded-full text-foreground transition-all duration-300 hover:text-primary active:scale-95;
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+  }
+  .neu-icon-btn:active {
+    box-shadow: var(--shadow-neu-pressed);
+  }
+  .neu-inset {
+    box-shadow: var(--shadow-neu-pressed);
+  }
+  .neu-pill {
+    @apply rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300;
+    background: hsl(var(--neu-base));
+    box-shadow: var(--shadow-neu-sm);
+  }
+  .neu-pill-active {
+    @apply text-primary;
+    box-shadow: var(--shadow-neu-pressed);
+  }
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+@keyframes danmaku-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100vw - 100%));
+  }
+}
+.animate-danmaku {
+  animation: danmaku-scroll linear forwards;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

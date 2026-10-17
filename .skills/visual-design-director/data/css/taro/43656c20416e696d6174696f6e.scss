@@ -1,0 +1,169 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Cel Animation Style · Thick black outlines + flat solid color blocks + hard shadows
+   Material logic: warm white base + deep ink outlines, red / blue / green / yellow serve as action and status colors;
+   fully right-angled, flat fills, no blurred offset shadows, like hand-painted animation layered coloring;
+   interactions run on a 75-150ms stop-motion rhythm with squash-and-stretch feedback rather than smooth transitions.
+   On the mini-program end, fonts must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ family: 'YouSheBiaoTiHei', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf")' })
+   Taro.loadFontFace({ family: 'AlibabaPuHuiTi', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf")' }) */
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: warm white paper + deep ink outline color */
+    --background: 48 33% 97%;
+    --foreground: 240 28% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+    /* Animation red: primary action color, pushed down until it passes contrast for white text */
+    --primary: 355 78% 52%;
+    --primary-foreground: 0 0% 100%;
+    /* Animation blue: secondary blocks, paired with deep ink text */
+    --secondary: 203 69% 59%;
+    --secondary-foreground: 240 28% 14%;
+    --muted: 48 20% 91%;
+    --muted-foreground: 240 12% 36%;
+    /* Animation yellow: accent color, always paired with deep ink text */
+    --accent: 48 89% 50%;
+    --accent-foreground: 240 28% 14%;
+    /* Animation green: status color, a bright block like blue and yellow, paired with deep ink text */
+    --success: 145 63% 49%;
+    --success-foreground: 240 28% 14%;
+    --destructive: 355 78% 52%;
+    --destructive-foreground: 0 0% 100%;
+    /* Outline is structure itself: border shares the same value as the ink, forming the cel-shaded outline */
+    --border: 240 28% 14%;
+    --input: 240 28% 14%;
+    --ring: 355 78% 52%;
+    --radius: 0rem;
+    --chart-1: 355 78% 52%;
+    --chart-2: 203 69% 59%;
+    --chart-3: 145 63% 49%;
+    --chart-4: 48 89% 50%;
+    --chart-5: 240 28% 14%;
+    --sidebar-background: 240 28% 14%;
+    --sidebar-foreground: 48 33% 96%;
+    --sidebar-primary: 355 78% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 89% 50%;
+    --sidebar-accent-foreground: 240 28% 14%;
+    --sidebar-border: 48 33% 96%;
+    --sidebar-ring: 48 89% 50%;
+  }
+
+  /* Dark: surface flips to a deep ink-blue night scene, the four flat colors keep the same hues with only lightness adjusted */
+  .dark {
+    --background: 240 30% 9%;
+    --foreground: 48 33% 96%;
+    --card: 240 26% 13%;
+    --card-foreground: 48 33% 96%;
+    --popover: 240 26% 13%;
+    --popover-foreground: 48 33% 96%;
+    --primary: 355 78% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 203 69% 59%;
+    --secondary-foreground: 240 30% 9%;
+    --muted: 240 20% 18%;
+    --muted-foreground: 240 10% 72%;
+    --accent: 48 89% 52%;
+    --accent-foreground: 240 30% 9%;
+    --success: 145 63% 49%;
+    --success-foreground: 240 30% 9%;
+    --destructive: 355 78% 52%;
+    --destructive-foreground: 0 0% 100%;
+    /* The outline inverts to a warm white line on the dark base, keeping a crisp outline */
+    --border: 48 33% 96%;
+    --input: 48 33% 96%;
+    --ring: 48 89% 52%;
+    --chart-5: 240 28% 26%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: 3px ink outline + non-blurred hard offset shadow, blocks look cut out like animation cels */
+  .cel-outline {
+    border: 3px solid hsl(var(--border));
+    border-radius: 0;
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+  .cel-shadow-sm {
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+  .cel-shadow-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+  /* Colored hard shadow: casts a second flat layer using the primary / accent color */
+  .cel-shadow-primary {
+    box-shadow: 4px 4px 0 0 hsl(var(--primary));
+  }
+  .cel-shadow-accent {
+    box-shadow: 4px 4px 0 0 hsl(var(--accent));
+  }
+  /* Flat solid color: explicitly removes gradients and blurred shadows, preserving the layered-coloring feel */
+  .cel-flat {
+    background-image: none;
+    filter: none;
+    border-radius: 0;
+  }
+  /* Squash feedback: shifts on press, drops the shadow, and applies squash & stretch */
+  .cel-press {
+    transition: transform 100ms steps(2, end), box-shadow 100ms steps(2, end);
+  }
+  .cel-press:active {
+    transform: translate(2px, 2px) scaleX(1.06) scaleY(0.94);
+    box-shadow: 0 0 0 0 hsl(var(--border));
+  }
+  /* Title font: YouSheBiaoTiHei, compact and eye-catching */
+  .font-display {
+    font-family: 'YouSheBiaoTiHei', 'PingFang SC', sans-serif;
+    letter-spacing: 0.03em;
+  }
+  /* Stop-motion entrance: staged movement, non-smooth easing */
+  .cel-cut-in {
+    animation: cel-cut-in 150ms steps(3, end) both;
+  }
+  /* Looping bob: cartoon-prop feel for status icons */
+  .cel-bob {
+    animation: cel-bob 640ms steps(4, end) infinite;
+  }
+}
+
+@keyframes cel-cut-in {
+  from { opacity: 0; transform: translateY(10rpx) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cel-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6rpx); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cel-cut-in,
+  .cel-bob {
+    animation: none;
+  }
+}

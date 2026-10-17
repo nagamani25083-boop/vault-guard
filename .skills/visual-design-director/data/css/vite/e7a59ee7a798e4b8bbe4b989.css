@@ -1,0 +1,162 @@
+/* stylelint-disable */
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;700&family=Zhi+Mang+Xing&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mysticism · Kraft Paper · Ink
+   All colors MUST be HSL. */
+
+@font-face {
+  font-family: 'JiangChengJianRenHei';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/JiangChengJianRenHei.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.125rem;
+
+    /* Dark mystical environment */
+    --background: 34 20% 7%;
+    --foreground: 40 38% 82%;
+    --card: 34 18% 11%;
+    --card-foreground: 40 38% 82%;
+    --popover: 34 20% 9%;
+    --popover-foreground: 40 38% 82%;
+    --primary: 44 64% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 34 15% 16%;
+    --secondary-foreground: 40 34% 80%;
+    --muted: 34 14% 15%;
+    --muted-foreground: 40 20% 60%;
+    --accent: 0 66% 32%;
+    --accent-foreground: 44 55% 90%;
+    --destructive: 0 68% 42%;
+    --destructive-foreground: 40 40% 92%;
+    --border: 42 26% 24%;
+    --input: 42 26% 24%;
+    --ring: 44 64% 52%;
+
+    /* Kraft paper / ink dedicated tokens */
+    --paper: 38 46% 74%;
+    --paper-shade: 33 42% 62%;
+    --paper-edge: 28 40% 42%;
+    --ink: 26 58% 15%;
+    --ink-riddle: 30 34% 11%;
+    --gold: 44 64% 52%;
+    --seal: 0 68% 34%;
+
+    --chart-1: 44 64% 52%;
+    --chart-2: 0 66% 40%;
+    --chart-3: 168 45% 28%;
+    --chart-4: 40 46% 60%;
+    --chart-5: 30 34% 30%;
+    --sidebar-background: 34 18% 9%;
+    --sidebar-foreground: 40 34% 78%;
+    --sidebar-primary: 44 64% 52%;
+    --sidebar-primary-foreground: 40 55% 8%;
+    --sidebar-accent: 34 15% 16%;
+    --sidebar-accent-foreground: 40 34% 80%;
+    --sidebar-border: 42 26% 24%;
+    --sidebar-ring: 44 64% 52%;
+  }
+
+  .dark {
+    --background: 34 20% 7%;
+    --foreground: 40 38% 82%;
+    --card: 34 18% 11%;
+    --card-foreground: 40 38% 82%;
+    --popover: 34 20% 9%;
+    --popover-foreground: 40 38% 82%;
+    --primary: 44 64% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 34 15% 16%;
+    --secondary-foreground: 40 34% 80%;
+    --muted: 34 14% 15%;
+    --muted-foreground: 40 20% 60%;
+    --accent: 0 66% 32%;
+    --accent-foreground: 44 55% 90%;
+    --destructive: 0 68% 42%;
+    --destructive-foreground: 40 40% 92%;
+    --border: 42 26% 24%;
+    --input: 42 26% 24%;
+    --ring: 44 64% 52%;
+    --paper: 38 46% 74%;
+    --paper-shade: 33 42% 62%;
+    --paper-edge: 28 40% 42%;
+    --ink: 26 58% 15%;
+    --ink-riddle: 30 34% 11%;
+    --gold: 44 64% 52%;
+    --seal: 0 68% 34%;
+    --chart-1: 44 64% 52%;
+    --chart-2: 0 66% 40%;
+    --chart-3: 168 45% 28%;
+    --chart-4: 40 46% 60%;
+    --chart-5: 30 34% 30%;
+    --sidebar-background: 34 18% 9%;
+    --sidebar-foreground: 40 34% 78%;
+    --sidebar-primary: 44 64% 52%;
+    --sidebar-primary-foreground: 40 55% 8%;
+    --sidebar-accent: 34 15% 16%;
+    --sidebar-accent-foreground: 40 34% 80%;
+    --sidebar-border: 42 26% 24%;
+    --sidebar-ring: 44 64% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Serif SC', ui-serif, Georgia, serif;
+    /* Dark environment: a sanctuary-like vignette with a faint glow at center and darkness at the edges */
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, hsl(38 30% 16% / 0.55) 0%, transparent 55%),
+      radial-gradient(90% 80% at 50% 120%, hsl(0 40% 10% / 0.5) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Kraft paper surface: warm base + fibrous grain noise + fold light/shadow */
+  .paper-surface {
+    background-color: hsl(var(--paper));
+    background-image:
+      radial-gradient(60% 50% at 30% 20%, hsl(38 50% 80% / 0.5) 0%, transparent 60%),
+      radial-gradient(70% 60% at 80% 90%, hsl(28 40% 52% / 0.35) 0%, transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+    background-blend-mode: multiply, multiply, soft-light;
+  }
+
+  /* Scorched/weathered dark edge of the paper */
+  .paper-edge {
+    box-shadow:
+      inset 0 0 3rem hsl(var(--paper-edge) / 0.45),
+      inset 0 0 0.5rem hsl(28 35% 30% / 0.4);
+  }
+
+  /* Written ink */
+  .ink-text {
+    color: hsl(var(--ink));
+    text-shadow: 0 0 1px hsl(var(--ink) / 0.35);
+  }
+
+  /* Response ink (deeper, with a faint glow bleed-through) */
+  .ink-riddle {
+    color: hsl(var(--ink-riddle));
+    text-shadow: 0 0 2px hsl(30 40% 20% / 0.4);
+  }
+
+  .gold-text {
+    color: hsl(var(--gold));
+  }
+}

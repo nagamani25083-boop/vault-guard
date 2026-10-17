@@ -1,0 +1,214 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Neon Tech — deep purple-blue base + highly saturated neon accents (purple / teal / magenta / amber).
+   Glass texture is simulated purely with semi-transparent backgrounds + inner/outer shadows + thin borders — no blur filters, since mini-program devices don't support them.
+   Large corner radii, colored glow shadows, gradient text; interactions use a consistent 300ms smooth transition.
+   On mini-program, load 'AlibabaPuHuiTi' in app.tsx via Taro.loadFontFace. */
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Deep purple-blue base, pure white / gray bases and black text are disallowed */
+    --background: 244 47% 20%;
+    --foreground: 0 0% 100%;
+    --card: 245 40% 26%;
+    --card-foreground: 0 0% 100%;
+    --popover: 245 42% 22%;
+    --popover-foreground: 0 0% 100%;
+    /* Primary: neon purple */
+    --primary: 258 90% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 245 35% 32%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 245 30% 34%;
+    --muted-foreground: 250 20% 78%;
+    /* Accent: neon teal, paired with deep purple-blue text */
+    --accent: 187 92% 43%;
+    --accent-foreground: 244 47% 14%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 250 40% 45%;
+    --input: 250 40% 45%;
+    --ring: 258 90% 66%;
+    --radius: 1rem;
+    /* Gradients and colored glows */
+    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(292 84% 62%), hsl(330 81% 62%));
+    --gradient-accent: linear-gradient(135deg, hsl(187 92% 48%), hsl(258 90% 66%));
+    --gradient-surface: linear-gradient(150deg, hsl(250 42% 30% / 0.55), hsl(248 46% 16% / 0.4));
+    --shadow-glow: 0 12px 40px -8px hsl(258 90% 66% / 0.5);
+    --shadow-glow-strong: 0 16px 46px -10px hsl(292 84% 62% / 0.6);
+    --chart-1: 258 90% 66%;
+    --chart-2: 187 92% 50%;
+    --chart-3: 330 81% 62%;
+    --chart-4: 38 92% 58%;
+    --chart-5: 280 72% 68%;
+    --sidebar-background: 246 46% 14%;
+    --sidebar-foreground: 240 20% 92%;
+    --sidebar-primary: 258 90% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 245 36% 24%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 250 30% 30%;
+    --sidebar-ring: 258 90% 66%;
+  }
+
+  /* The theme is dark by default; .dark keeps identical values as a compatibility layer */
+  .dark {
+    --background: 244 47% 20%;
+    --foreground: 0 0% 100%;
+    --card: 245 40% 26%;
+    --card-foreground: 0 0% 100%;
+    --popover: 245 42% 22%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 258 90% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 245 35% 32%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 245 30% 34%;
+    --muted-foreground: 250 20% 78%;
+    --accent: 187 92% 43%;
+    --accent-foreground: 244 47% 14%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 250 40% 45%;
+    --input: 250 40% 45%;
+    --ring: 258 90% 66%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+  /* Core visual signature: glass card face — semi-transparent background + thin white border + inner highlight + outer colored glow, no blur filter needed */
+  .glass-card {
+    border-radius: 24rpx;
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsl(0 0% 100% / 0.18);
+    background-color: hsl(250 42% 30% / 0.55);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.14), var(--shadow-glow);
+  }
+  .glass-panel {
+    border-radius: 16rpx;
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsl(0 0% 100% / 0.12);
+    background-color: hsl(250 42% 30% / 0.4);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.1);
+  }
+  /* Gradient surface and gradient text */
+  .gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  /* Neon heading: mini-program doesn't support background-clip:text, so use a solid color + two-layer glow instead */
+  .neon-title {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 8px hsl(var(--primary) / 0.65), 0 0 24px hsl(var(--accent) / 0.35);
+  }
+  /* Colored glow shadow */
+  .neon-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .neon-glow-strong {
+    box-shadow: var(--shadow-glow-strong);
+  }
+  /* Neon outline: a thin bright border tracing a cutting-edge tech silhouette */
+  .neon-ring {
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsl(258 90% 66% / 0.55);
+    box-shadow: 0 0 0 1px hsl(187 92% 50% / 0.25), var(--shadow-glow);
+  }
+  /* Glow-spot decoration: a radial gradient simulating a diffuse light orb, replacing blur filters */
+  .glow-orb {
+    border-radius: 999rpx;
+    background-image: radial-gradient(circle, hsl(258 90% 66% / 0.55), transparent 68%);
+    pointer-events: none;
+  }
+  .glow-orb-accent {
+    border-radius: 999rpx;
+    background-image: radial-gradient(circle, hsl(330 81% 62% / 0.45), transparent 68%);
+    pointer-events: none;
+  }
+  /* Touch scale feedback + enhanced glow, smooth 300ms */
+  .press-scale {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+  .press-scale:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-glow-strong);
+  }
+
+  /* Decorative glow spots drift slowly */
+  @keyframes neon-float {
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-24px) translateX(12px);
+    }
+  }
+  .animate-float {
+    animation: neon-float 7s ease-in-out infinite;
+  }
+  /* Fade-in + glow expansion */
+  @keyframes neon-emerge {
+    0% {
+      opacity: 0;
+      transform: scale(0.96);
+      box-shadow: 0 0 0 hsl(258 90% 66% / 0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: var(--shadow-glow);
+    }
+  }
+  .animate-emerge {
+    animation: neon-emerge 300ms ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-emerge {
+      animation: none;
+    }
+    .press-scale {
+      transition: none;
+    }
+  }
+}

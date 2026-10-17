@@ -1,0 +1,214 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Engineering Blueprint · Visible Grid / Dimension Annotations / CAD Blocks
+   Light blue drafting paper as the base, engineering deep blue as lines and primary color (only small color blocks, mostly generous whitespace),
+   safety orange for CTAs, warning yellow for secondary alerts. All elements strictly align to the grid, borders visible.
+   Mini-program fonts must be loaded in app.tsx via Taro.loadFontFace: Source Han Mono SC
+   ============================================================ */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.woff2') format('woff2');
+}
+
+@layer base {
+  :root {
+    /* Drafting-paper white base + deep blue ink lines + safety orange CTA */
+    --background: 210 40% 98%;
+    --foreground: 216 60% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 216 60% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 60% 12%;
+    --primary: 216 85% 34%; /* Engineering deep blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 216 72% 52%;
+    --secondary: 214 42% 93%;
+    --secondary-foreground: 216 70% 22%;
+    --muted: 214 30% 94%;
+    --muted-foreground: 216 20% 44%;
+    --accent: 14 98% 43%; /* Safety orange: lightness tuned so white text reaches AA 4.7:1 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 74% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 45 100% 51%; /* Warning yellow: paired only with deep-blue text, never white text */
+    --border: 216 32% 84%;
+    --input: 216 32% 84%;
+    --ring: 216 85% 34%;
+    --grid-line: 224 100% 58%; /* Grid cyan-blue, layered via opacity */
+    --radius: 0.125rem;
+    --chart-1: 216 85% 40%;
+    --chart-2: 205 90% 46%;
+    --chart-3: 14 98% 46%;
+    --chart-4: 45 95% 45%;
+    --chart-5: 216 24% 40%;
+    --gradient-primary: linear-gradient(135deg, hsl(216 85% 30%), hsl(216 72% 46%));
+    --gradient-subtle: linear-gradient(180deg, hsl(214 42% 96%), hsl(210 40% 99%));
+    --gradient-cta: linear-gradient(135deg, hsl(14 98% 43%), hsl(24 96% 42%));
+    --shadow-blueprint: 0 0 0 1px hsl(216 85% 34% / 0.18);
+    --sidebar-background: 214 44% 96%;
+    --sidebar-foreground: 216 50% 20%;
+    --sidebar-primary: 216 85% 34%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 38% 91%;
+    --sidebar-accent-foreground: 216 60% 16%;
+    --sidebar-border: 216 32% 82%;
+    --sidebar-ring: 216 85% 34%;
+  }
+
+  /* Dark mode: blueprint cyanotype — the surface shifts to a deep navy rather than a neutral blue-gray,
+     lines switch to pale cyan-white, primary and CTA colors brighten while white text still meets AA */
+  .dark {
+    --background: 211 62% 8%;
+    --foreground: 205 32% 93%;
+    --card: 212 52% 12%;
+    --card-foreground: 205 32% 93%;
+    --popover: 212 54% 11%;
+    --popover-foreground: 205 32% 93%;
+    --primary: 214 92% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 214 88% 60%;
+    --secondary: 212 44% 17%;
+    --secondary-foreground: 205 32% 93%;
+    --muted: 212 40% 16%;
+    --muted-foreground: 205 24% 68%;
+    --accent: 14 96% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 74% 44%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 45 96% 55%;
+    --border: 208 45% 30%;
+    --input: 210 42% 24%;
+    --ring: 214 88% 60%;
+    --grid-line: 205 90% 62%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Mono SC', ui-monospace, 'Courier New', monospace;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: visible 1px drafting grid, a major grid layered over a fine subdivision grid, elements align to it */
+  .bg-blueprint-grid {
+    background-image:
+      linear-gradient(hsl(var(--grid-line) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line) / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-blueprint-grid-fine {
+    background-image:
+      linear-gradient(hsl(var(--grid-line) / 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line) / 0.16) 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+
+  /* CAD block: visible border + diagonal corner marks, like a technical drawing primitive */
+  .cad-block {
+    position: relative;
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  .cad-block::before,
+  .cad-block::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: hsl(var(--primary));
+    border-style: solid;
+  }
+  .cad-block::before {
+    top: -1px;
+    left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  .cad-block::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 1px 1px 0;
+  }
+
+  /* Technical annotation text: monospace, wide letter-spacing, all caps, for FIG / SCALE style labels */
+  .tech-label {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Dimension ruler: evenly spaced short tick marks, hugging a page or module edge */
+  .dimension-ruler {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--foreground) / 0.45) 0px,
+      hsl(var(--foreground) / 0.45) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+    height: 8px;
+  }
+
+  /* Dashed connector line: links related secondary information */
+  .dashed-link {
+    border-top: 1px dashed hsl(var(--primary) / 0.55);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .bg-gradient-cta {
+    background-image: var(--gradient-cta);
+  }
+  .shadow-blueprint {
+    box-shadow: var(--shadow-blueprint);
+  }
+
+  /* No interaction easing, directly "snapping to the grid" */
+  .snap-press {
+    transition: none;
+  }
+  .snap-press:active {
+    background-color: hsl(var(--secondary));
+    border-color: hsl(var(--primary));
+  }
+
+  /* Mechanical-frequency blinking underline caret (paired with typewriter text) */
+  .caret-blink::after {
+    content: '_';
+    margin-left: 0.1em;
+    color: hsl(var(--accent));
+    animation: caret-blink 1s step-end infinite;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret-blink::after {
+    animation: none;
+    opacity: 1;
+  }
+}

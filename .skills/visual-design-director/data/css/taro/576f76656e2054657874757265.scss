@@ -1,0 +1,181 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Fabric Texture — linen, canvas, and denim-like woven textures
+   Gentle neutral warm tones, warp-and-weft texture, stitch details, and soft shadows, creating a touchable handmade warmth.
+   On the Mini Program client, load the two fonts below via Taro.loadFontFace in app.tsx. */
+
+@font-face {
+  font-family: 'MuyaoSoftbrush';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Linen base + off-white cards + deep-brown text, accented with terracotta / mustard yellow / indigo */
+    --background: 36 33% 90%;
+    --foreground: 31 34% 18%;
+    --card: 40 43% 97%;
+    --card-foreground: 31 34% 18%;
+    --popover: 40 43% 97%;
+    --popover-foreground: 31 34% 18%;
+    /* Terracotta: lightness tuned so off-white text meets AA, while keeping a warm earthy feel */
+    --primary: 20 48% 44%;
+    --primary-foreground: 40 43% 97%;
+    --secondary: 36 30% 87%;
+    --secondary-foreground: 31 34% 18%;
+    --muted: 36 30% 87%;
+    --muted-foreground: 31 14% 38%;
+    /* Mustard yellow accent, likewise darkened to carry off-white text */
+    --accent: 41 58% 34%;
+    --accent-foreground: 40 43% 97%;
+    --destructive: 6 48% 46%;
+    --destructive-foreground: 40 43% 97%;
+    /* Borders are warm-brown stitch lines */
+    --border: 33 24% 68%;
+    --input: 33 24% 68%;
+    --ring: 20 48% 50%;
+    --radius: 0.5rem;
+    /* Fabric accent colors and soft shadows */
+    --indigo-cloth: 204 30% 36%;
+    --mustard: 41 58% 34%;
+    --shadow-cloth: 0 2px 10px hsla(31, 25%, 35%, 0.12);
+    --shadow-cloth-lift: 0 8px 20px -6px hsla(31, 30%, 32%, 0.22);
+    --chart-1: 20 48% 50%;
+    --chart-2: 204 30% 40%;
+    --chart-3: 41 58% 48%;
+    --chart-4: 134 26% 40%;
+    --chart-5: 31 34% 36%;
+    --sidebar-background: 34 29% 87%;
+    --sidebar-foreground: 31 34% 20%;
+    --sidebar-primary: 20 48% 44%;
+    --sidebar-primary-foreground: 40 43% 97%;
+    --sidebar-accent: 36 30% 81%;
+    --sidebar-accent-foreground: 31 34% 18%;
+    --sidebar-border: 33 24% 64%;
+    --sidebar-ring: 20 48% 50%;
+  }
+
+  /* Dark mode: deep charcoal-brown coarse linen — surfaces invert to a warm dark brown, texture and stitching preserved, accents brightened */
+  .dark {
+    --background: 30 12% 14%;
+    --foreground: 37 28% 88%;
+    --card: 30 11% 18%;
+    --card-foreground: 37 28% 88%;
+    --popover: 30 11% 18%;
+    --popover-foreground: 37 28% 88%;
+    --primary: 20 48% 44%;
+    --primary-foreground: 40 43% 97%;
+    --secondary: 30 10% 24%;
+    --secondary-foreground: 37 28% 88%;
+    --muted: 30 10% 24%;
+    --muted-foreground: 33 20% 66%;
+    --accent: 41 58% 34%;
+    --accent-foreground: 40 43% 97%;
+    --destructive: 6 48% 46%;
+    --destructive-foreground: 40 43% 97%;
+    --border: 31 14% 34%;
+    --input: 31 14% 34%;
+    --ring: 20 52% 58%;
+    --radius: 0.5rem;
+    --indigo-cloth: 204 34% 60%;
+    --mustard: 41 58% 56%;
+    --shadow-cloth: 0 2px 10px hsla(30, 20%, 4%, 0.45);
+    --shadow-cloth-lift: 0 8px 20px -6px hsla(30, 20%, 4%, 0.6);
+    --sidebar-background: 30 11% 16%;
+    --sidebar-foreground: 37 24% 84%;
+    --sidebar-primary: 20 48% 44%;
+    --sidebar-primary-foreground: 40 43% 97%;
+    --sidebar-accent: 30 10% 24%;
+    --sidebar-accent-foreground: 37 24% 88%;
+    --sidebar-border: 31 14% 32%;
+    --sidebar-ring: 20 52% 58%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'SourceHanSerifCN', 'Songti SC', serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: linen warp-and-weft texture (fine interwoven horizontal/vertical lines simulating woven fabric threads) */
+  .weave-linen {
+    background-color: hsl(var(--background));
+    background-image:
+      repeating-linear-gradient(90deg, hsla(33, 24%, 45%, 0.06) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, hsla(33, 24%, 45%, 0.06) 0 1px, transparent 1px 3px);
+  }
+  /* Sparser texture for card surfaces, to avoid interfering with reading */
+  .weave-canvas {
+    background-color: hsl(var(--card));
+    background-image:
+      repeating-linear-gradient(90deg, hsla(33, 24%, 42%, 0.04) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(0deg, hsla(33, 24%, 42%, 0.04) 0 1px, transparent 1px 4px);
+  }
+  /* Denim twill: densely woven 45-degree diagonal lines */
+  .weave-denim {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsla(204, 30%, 36%, 0.10) 0 1px,
+      transparent 1px 4px
+    );
+  }
+  /* Dashed stitch-line border */
+  .stitch-edge {
+    border: 1.5px dashed hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  /* Fabric-label double stitching: solid outer border + dashed inner stitch line */
+  .stitch-label {
+    position: relative;
+    border: 1px solid hsl(var(--border));
+    border-radius: 8px;
+  }
+  .stitch-label::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 3px;
+    bottom: 3px;
+    border: 1px dashed hsl(var(--border) / 0.5);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  /* Soft fabric shadow */
+  .shadow-cloth { box-shadow: var(--shadow-cloth); }
+  /* Lifts on touch, sinks slightly on press, simulating fabric under pressure */
+  .cloth-press {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .cloth-press:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-cloth);
+  }
+  .fade-soft {
+    animation: fade-soft 240ms ease-out both;
+  }
+}
+
+@keyframes fade-soft {
+  from { opacity: 0; transform: translateY(-6rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-soft {
+    animation: none;
+  }
+}

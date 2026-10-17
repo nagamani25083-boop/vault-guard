@@ -1,0 +1,184 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Dark — restrained typography on a dark base
+   Base #0B0F19 / card #0F172A / primary text #E5E7EB / secondary text #9CA3AF / 1px border #1F2937
+   Near-zero shadows, no decorative strokes; hierarchy comes purely from font size, weight, and spacing */
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('https://resource-static.bj.bcebos.com/fonts/Montserrat-VariableFont_wght.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Deep navy-black base / near-white primary text */
+    --background: 222 40% 7%;
+    --foreground: 220 14% 90%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 220 14% 90%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 14% 90%;
+
+    /* Signal color: a cyan-blue that stays legible without glaring in a dark environment */
+    --primary: 199 89% 36.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 220 14% 90%;
+
+    --muted: 217 33% 15%;
+    --muted-foreground: 218 11% 65%;
+
+    --accent: 199 60% 22%;
+    --accent-foreground: 199 89% 82%;
+
+    --destructive: 0 63% 52%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* 1px low-contrast border, taking over the separation role that shadows would otherwise play */
+    --border: 215 28% 17%;
+    --input: 215 28% 20%;
+    --ring: 199 89% 60%;
+
+    --chart-1: 199 89% 60%;
+    --chart-2: 218 11% 65%;
+    --chart-3: 160 50% 52%;
+    --chart-4: 262 60% 68%;
+    --chart-5: 30 70% 60%;
+
+    --sidebar-background: 222 45% 6%;
+    --sidebar-foreground: 220 14% 90%;
+    --sidebar-primary: 199 89% 60%;
+    --sidebar-primary-foreground: 222 47% 9%;
+    --sidebar-accent: 217 33% 14%;
+    --sidebar-accent-foreground: 220 14% 90%;
+    --sidebar-border: 215 28% 15%;
+    --sidebar-ring: 199 89% 60%;
+  }
+
+  /* The theme is dark by default; .dark keeps identical values as a compatibility layer */
+  .dark {
+    --radius: 0.5rem;
+    --background: 222 40% 7%;
+    --foreground: 220 14% 90%;
+    --card: 222 47% 11%;
+    --card-foreground: 220 14% 90%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 14% 90%;
+    --primary: 199 89% 36.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 220 14% 90%;
+    --muted: 217 33% 15%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 199 60% 22%;
+    --accent-foreground: 199 89% 82%;
+    --destructive: 0 63% 52%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 28% 17%;
+    --input: 215 28% 20%;
+    --ring: 199 89% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: shadow-free panels separated only by a 1px low-contrast border */
+  .calm-panel {
+    @apply bg-card border border-border;
+    box-shadow: none;
+  }
+
+  /* Hairline divider, used as a breathing-space boundary between modules */
+  .calm-divider {
+    height: 1px;
+    background: hsl(var(--border));
+  }
+
+  /* Current-state indicator: a short vertical bar in the signal color, replacing large color blocks */
+  .calm-indicator {
+    border-left: 2px solid hsl(var(--primary));
+    padding-left: 0.75rem;
+  }
+
+  /* De-emphasized primary button: relies on emphasized text and a signal-color stroke, not a solid large color block */
+  .calm-action {
+    @apply border border-input bg-transparent text-foreground;
+    transition: color 160ms ease-out, border-color 160ms ease-out;
+  }
+  .calm-action:hover {
+    color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+  }
+
+  /* Line chart stroke: uniform line width, no fill */
+  .calm-line-chart path,
+  .calm-line-chart line,
+  .calm-line-chart polyline {
+    fill: none;
+    stroke: hsl(var(--primary));
+    stroke-width: 1.5;
+  }
+
+  /* Entrance: a subtle fade and shift along the grid direction, ease-out, no bounce */
+  .calm-enter {
+    animation: calm-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes calm-enter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Content loading: pure fade-in */
+  .calm-fade {
+    animation: calm-fade 320ms ease-out both;
+  }
+
+  @keyframes calm-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calm-enter,
+    .calm-fade { animation: none; }
+    .calm-action { transition: none; }
+  }
+}

@@ -1,0 +1,214 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Literary Chinese Style — cinnabar red × apricot-cream paper base × ink-wash cyan
+   Aged texture, low-saturation retro atmosphere, serif letterforms and hairline dividers.
+   Fonts: @font-face only takes effect on H5; for the Mini Program target,
+   load the same-named font via Taro.loadFontFace in app.tsx before use.
+   ============================================================ */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanSerifCN-Bold.ttf') format('truetype');
+}
+
+@layer base {
+  :root {
+    /* Apricot-cream paper base / deep-ink body text */
+    --background: 40 43% 91%;
+    --foreground: 218 15% 32%;
+    --card: 42 45% 95%;
+    --card-foreground: 218 15% 32%;
+    --popover: 42 45% 96%;
+    --popover-foreground: 218 15% 32%;
+    /* Cinnabar red: titles, seals, key actions */
+    --primary: 4 67% 39%;
+    --primary-foreground: 42 50% 96%;
+    --primary-glow: 4 55% 55%;
+    /* Light pine-green secondary surface */
+    --secondary: 96 26% 78%;
+    --secondary-foreground: 4 67% 30%;
+    --muted: 40 30% 86%;
+    --muted-foreground: 218 12% 39%;
+    /* Reed-leaf cyan accent */
+    --accent: 92 32% 66%;
+    --accent-foreground: 100 32% 14%;
+    /* Deeper ink tone, used for headings */
+    --ink: 218 20% 24%;
+    /* Water-ripple light cyan */
+    --water: 190 30% 74%;
+    /* Gilding: used only for hairlines and border trim */
+    --gold: 38 62% 36%;
+    --destructive: 4 67% 42%;
+    --destructive-foreground: 42 50% 96%;
+    /* Very thin border, 1px or lighter */
+    --border: 40 22% 78%;
+    --input: 40 22% 78%;
+    --ring: 4 67% 39%;
+    --radius: 0.5rem;
+    --chart-1: 4 67% 45%;
+    --chart-2: 190 34% 42%;
+    --chart-3: 92 32% 50%;
+    --chart-4: 38 58% 46%;
+    --chart-5: 218 20% 40%;
+    --gradient-primary: linear-gradient(135deg, hsl(4 67% 39%), hsl(20 66% 50%));
+    --gradient-subtle: linear-gradient(180deg, hsl(42 45% 95%), hsl(40 38% 88%));
+    --shadow-scroll: 0 8px 24px -12px hsl(218 25% 24% / 0.28);
+    --shadow-seal: 0 2px 8px -2px hsl(4 67% 39% / 0.35);
+    /* Sidebar follows the paper base and cinnabar primary color */
+    --sidebar-background: 40 45% 93%;
+    --sidebar-foreground: 218 18% 28%;
+    --sidebar-primary: 4 67% 39%;
+    --sidebar-primary-foreground: 42 50% 96%;
+    --sidebar-accent: 40 30% 87%;
+    --sidebar-accent-foreground: 218 18% 28%;
+    --sidebar-border: 40 22% 78%;
+    --sidebar-ring: 4 67% 39%;
+  }
+
+  /* Dark mode keeps the warm paper hues, flipped into aged ink-brown rather than neutral gray-blue */
+  .dark {
+    --background: 30 14% 10%;
+    --foreground: 40 28% 90%;
+    --card: 28 12% 14%;
+    --card-foreground: 40 28% 90%;
+    --popover: 28 12% 15%;
+    --popover-foreground: 40 28% 90%;
+    --primary: 4 62% 46%;
+    --primary-foreground: 42 50% 96%;
+    --primary-glow: 4 55% 60%;
+    --secondary: 30 12% 20%;
+    --secondary-foreground: 40 28% 90%;
+    --muted: 28 12% 17%;
+    --muted-foreground: 38 14% 66%;
+    --accent: 92 26% 32%;
+    --accent-foreground: 40 28% 94%;
+    --ink: 40 28% 90%;
+    --water: 190 22% 30%;
+    --gold: 40 62% 58%;
+    --destructive: 4 62% 44%;
+    --destructive-foreground: 42 50% 96%;
+    --border: 30 10% 26%;
+    --input: 30 10% 26%;
+    --ring: 4 62% 52%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'SourceHanSerifCN', 'Songti SC', 'STSong', 'SimSun', serif;
+    line-height: 1.7;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: aged paper texture — double layer of extremely fine noise simulating a rubbing-print surface */
+  .paper-texture {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(hsl(218 20% 24% / 0.05) 1px, transparent 1px),
+      radial-gradient(hsl(38 40% 40% / 0.04) 1px, transparent 1px);
+    background-size: 14px 14px, 22px 22px;
+    background-position: 0 0, 7px 11px;
+  }
+  /* Cinnabar title: solid cinnabar + very faint halo, simulating ink bleeding into paper */
+  .ink-title {
+    color: hsl(var(--primary));
+    text-shadow: 0 1px 2px hsl(4 60% 30% / 0.18);
+  }
+  /* Cinnabar gradient block: used for chapter headers, banners, and other solid backgrounds */
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  /* Seal stamp: solid cinnabar fill + thin outline */
+  .seal-mark {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-seal), inset 0 0 0 1px hsl(var(--primary-foreground) / 0.35);
+  }
+  /* Gilded hairline: very light divider, replacing heavy separators */
+  .hairline-gold {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.55), transparent);
+  }
+  /* Scroll surface: paper gradient + soft cast shadow, simulating an unrolled scroll */
+  .scroll-surface {
+    background-image: var(--gradient-subtle);
+    box-shadow: var(--shadow-scroll);
+    border: 1px solid hsl(var(--border));
+  }
+  /* Vertical writing, a tribute to traditional script */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+  .text-ink {
+    color: hsl(var(--ink));
+  }
+  .bg-water {
+    background-color: hsl(var(--water));
+  }
+  /* Ink-wash diffusion entrance */
+  .animate-ink-in {
+    animation: ink-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Scroll-unrolling entrance */
+  .animate-unroll {
+    animation: unroll 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Slow floating, creating a sense of distant depth */
+  .animate-float-slow {
+    animation: float-slow 3.6s ease-in-out infinite;
+  }
+}
+
+@keyframes ink-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes unroll {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ink-in,
+  .animate-unroll,
+  .animate-float-slow {
+    animation: none;
+  }
+}

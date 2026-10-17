@@ -1,0 +1,245 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Pixel Art — retro 8-bit arcade aesthetic
+   Classic pixel palette (red/green/blue/yellow), pixel black borders, zero border radius, hard-edge offset shadows */
+
+@font-face {
+  font-family: 'ChillBitmap';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ChillBitmap_16px.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* No border radius allowed */
+    --radius: 0px;
+
+    /* Light: classic arcade white base */
+    --background: 0 0% 96%;
+    --foreground: 233 26% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 233 26% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 233 26% 14%;
+
+    --primary: 342 100% 45.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 100% 44.5%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 208 27% 88%;
+    --muted-foreground: 233 26% 30%;
+
+    --accent: 133 100% 26.5%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 342 100% 45.5%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border is pixel black — the structural line of this style */
+    --border: 233 26% 14%;
+    --input: 233 26% 14%;
+    --ring: 342 100% 50%;
+
+    --warning: 54 100% 58%;
+    --warning-foreground: 233 26% 14%;
+    --success: 133 100% 45%;
+    --success-foreground: 233 26% 14%;
+    --info: 210 100% 58%;
+    --info-foreground: 0 0% 100%;
+
+    /* 8-bit palette */
+    --pixel-yellow: 54 100% 58%;
+    --pixel-blue: 210 100% 58%;
+    --pixel-green: 133 100% 45%;
+    --pixel-red: 342 100% 50%;
+    --pixel-orange: 38 100% 50%;
+    --pixel-dark: 233 26% 14%;
+
+    --chart-1: 342 100% 50%;
+    --chart-2: 133 100% 45%;
+    --chart-3: 210 100% 58%;
+    --chart-4: 54 100% 45%;
+    --chart-5: 38 100% 50%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 233 26% 14%;
+    --sidebar-primary: 342 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 208 27% 88%;
+    --sidebar-accent-foreground: 233 26% 14%;
+    --sidebar-border: 233 26% 14%;
+    --sidebar-ring: 342 100% 50%;
+  }
+
+  /* Dark: pixel black base + neon accents, surface colors fully inverted */
+  .dark {
+    --radius: 0px;
+    --background: 233 26% 10%;
+    --foreground: 0 0% 96%;
+    --card: 233 26% 14%;
+    --card-foreground: 0 0% 96%;
+    --popover: 233 26% 14%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 342 100% 45.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 100% 44.5%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 233 26% 20%;
+    --muted-foreground: 208 27% 78%;
+    --accent: 133 100% 26.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 342 100% 45.5%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 96%;
+    --input: 233 26% 20%;
+    --ring: 342 100% 50%;
+    --warning: 54 100% 58%;
+    --warning-foreground: 233 26% 10%;
+    --success: 133 100% 45%;
+    --success-foreground: 233 26% 10%;
+    --info: 210 100% 58%;
+    --info-foreground: 0 0% 100%;
+    --pixel-yellow: 54 100% 58%;
+    --pixel-blue: 210 100% 58%;
+    --pixel-green: 133 100% 45%;
+    --pixel-red: 342 100% 50%;
+    --pixel-orange: 38 100% 50%;
+    --pixel-dark: 233 26% 10%;
+    --chart-1: 342 100% 50%;
+    --chart-2: 133 100% 45%;
+    --chart-3: 210 100% 58%;
+    --chart-4: 54 100% 58%;
+    --chart-5: 38 100% 50%;
+    --sidebar-background: 233 26% 12%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 342 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 233 26% 20%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 0 0% 96%;
+    --sidebar-ring: 342 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-radius: 0 !important;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'ChillBitmap', 'AlibabaPuHuiTi', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  /* Pixelated image rendering */
+  img, canvas {
+    image-rendering: pixelated;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-track { background: hsl(var(--muted)); }
+  *::-webkit-scrollbar-thumb { background: hsl(var(--border)); border: 0; }
+}
+
+@layer components {
+  /* Core visual signature: pixel hard-edge shadow (no blur, no offset softening) */
+  .pixel-shadow {
+    box-shadow: 4px 4px 0 hsl(var(--pixel-dark));
+  }
+  .pixel-shadow-sm {
+    box-shadow: 2px 2px 0 hsl(var(--pixel-dark));
+  }
+  .pixel-shadow-lg {
+    box-shadow: 6px 6px 0 hsl(var(--pixel-dark));
+  }
+  .dark .pixel-shadow { box-shadow: 4px 4px 0 hsl(var(--foreground)); }
+  .dark .pixel-shadow-sm { box-shadow: 2px 2px 0 hsl(var(--foreground)); }
+  .dark .pixel-shadow-lg { box-shadow: 6px 6px 0 hsl(var(--foreground)); }
+
+  /* Press feedback: instant hard cut, no easing */
+  .pixel-press {
+    transition: none;
+  }
+  .pixel-press:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 hsl(var(--pixel-dark));
+  }
+  .dark .pixel-press:active {
+    box-shadow: 2px 2px 0 hsl(var(--foreground));
+  }
+
+  /* CRT scanline texture */
+  .pixel-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--pixel-dark) / 0.03) 2px,
+      hsl(var(--pixel-dark) / 0.03) 4px
+    );
+  }
+  .dark .pixel-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(0 0% 96% / 0.03) 2px,
+      hsl(0 0% 96% / 0.03) 4px
+    );
+  }
+
+  /* Pixel grid background */
+  .pixel-grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--pixel-dark) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--pixel-dark) / 0.06) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .dark .pixel-grid-bg {
+    background-image:
+      linear-gradient(hsl(0 0% 96% / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 96% / 0.06) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Thick pixel border */
+  .pixel-border {
+    border: 3px solid hsl(var(--pixel-dark));
+  }
+  .dark .pixel-border { border-color: hsl(var(--foreground)); }
+  .pixel-border-2 {
+    border: 2px solid hsl(var(--pixel-dark));
+  }
+  .dark .pixel-border-2 { border-color: hsl(var(--foreground)); }
+
+  /* Pixel text outline */
+  .pixel-text-outline {
+    text-shadow:
+      1px 1px 0 hsl(var(--pixel-dark)),
+      -1px -1px 0 hsl(var(--pixel-dark)),
+      1px -1px 0 hsl(var(--pixel-dark)),
+      -1px 1px 0 hsl(var(--pixel-dark));
+  }
+}

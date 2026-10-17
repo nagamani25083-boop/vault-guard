@@ -1,0 +1,188 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Natural — warm off-white base / leaf-green primary / moss-green accent
+   Organic irregular corners, soft borders, generous whitespace and breathable layout */
+
+@font-face {
+  font-family: 'GildaDisplay';
+  src: url('https://resource-static.bj.bcebos.com/fonts/GildaDisplay-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Linen off-white base / deep brown text */
+    --background: 38 36% 96%;
+    --foreground: 9 28% 19%;
+
+    --card: 38 36% 96%;
+    --card-foreground: 9 28% 19%;
+    --popover: 38 36% 96%;
+    --popover-foreground: 9 28% 19%;
+
+    /* Leaf-green primary */
+    --primary: 123 46% 34%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 125 39% 94%;
+    --secondary-foreground: 124 55% 24%;
+
+    --muted: 34 35% 91%;
+    --muted-foreground: 15 25% 34%;
+
+    --accent: 122 38% 84%;
+    --accent-foreground: 124 55% 24%;
+
+    --destructive: 0 66% 47%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 34 27% 83%;
+    --input: 34 27% 83%;
+    --ring: 123 46% 34%;
+
+    --chart-1: 122 39% 49%;
+    --chart-2: 123 43% 39%;
+    --chart-3: 123 46% 34%;
+    --chart-4: 124 55% 24%;
+    --chart-5: 126 51% 18%;
+
+    --sidebar-background: 34 35% 91%;
+    --sidebar-foreground: 9 28% 19%;
+    --sidebar-primary: 123 46% 34%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 122 38% 84%;
+    --sidebar-accent-foreground: 124 55% 24%;
+    --sidebar-border: 34 27% 83%;
+    --sidebar-ring: 123 46% 34%;
+  }
+
+  .dark {
+    --radius: 0.75rem;
+    --background: 133 20% 14%;
+    --foreground: 33 27% 92%;
+    --card: 125 13% 20%;
+    --card-foreground: 33 27% 92%;
+    --popover: 125 13% 20%;
+    --popover-foreground: 33 27% 92%;
+    --primary: 122 39% 37%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 115 10% 26%;
+    --secondary-foreground: 114 14% 86%;
+    --muted: 126 12% 16%;
+    --muted-foreground: 35 19% 81%;
+    --accent: 123 43% 36%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 52%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 115 10% 26%;
+    --input: 115 10% 26%;
+    --ring: 122 39% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    line-height: 1.75;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GildaDisplay', 'Georgia', serif;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  ::selection {
+    background: hsl(122 38% 84%);
+    color: hsl(124 55% 24%);
+  }
+}
+
+@layer components {
+  /* Core visual signature: organic irregular corners — each corner radius differs, mimicking pebble and leaf contours */
+  .nat-blob {
+    border-radius: 62% 38% 55% 45% / 45% 55% 42% 58%;
+  }
+
+  .nat-leaf {
+    border-radius: 1.75rem 0.5rem 1.75rem 0.5rem;
+  }
+
+  /* Softened-edge natural card: subtle warm shadow, no hard edges */
+  .nat-soft-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.7);
+    border-radius: 1.5rem 1rem 1.75rem 1.125rem;
+    box-shadow: 0 10px 30px -18px hsl(15 25% 34% / 0.25);
+  }
+
+  /* Diffused glow background: soft abstract color haze */
+  .nat-mist {
+    background-image:
+      radial-gradient(38% 42% at 18% 26%, hsl(122 38% 84% / 0.55) 0, transparent 100%),
+      radial-gradient(42% 38% at 82% 68%, hsl(64 60% 76% / 0.45) 0, transparent 100%);
+  }
+
+  /* Slowly drifting gradient shapes, giving the background a sense of life */
+  .nat-drift {
+    animation: nat-drift 22s ease-in-out infinite alternate;
+    filter: blur(42px);
+  }
+
+  /* Buttons lift slowly on hover */
+  .nat-lift {
+    transition: transform 420ms ease-out, box-shadow 420ms ease-out;
+  }
+  .nat-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px -20px hsl(124 55% 24% / 0.4);
+  }
+
+  /* Image slowly zooms in within its container */
+  .nat-zoom-frame {
+    overflow: hidden;
+  }
+  .nat-zoom-frame img {
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nat-zoom-frame:hover img {
+    transform: scale(1.06);
+  }
+
+  /* Entrance: fade in and float upward, unhurried */
+  .nat-reveal {
+    animation: nat-reveal 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes nat-reveal {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes nat-drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(4%, -5%, 0) scale(1.12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nat-drift, .nat-reveal { animation: none; }
+    .nat-lift, .nat-zoom-frame img { transition: none; }
+  }
+}

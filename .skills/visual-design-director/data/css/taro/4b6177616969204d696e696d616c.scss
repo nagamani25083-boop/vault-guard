@@ -1,0 +1,207 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ==========================================================
+   Cute Minimal — low-saturation pastels / large radii / airy whitespace
+   Surface: warm pinkish-white page base + pure white cards, distinguished by brightness difference rather than borders.
+   Color: soft pink is the sole primary color, light purple as accent, pale cyan and light yellow used only for charts and small highlights.
+   Material: soft diffuse shadows, pastel gradients, wide outer-ring focus halo; no neon glow or hard-edge shadows.
+   Font: heading "ResourceHanRounded", body "HarmonyOS Sans".
+   On Mini Program, the same-named font must be loaded via Taro.loadFontFace in app.tsx;
+   the @font-face below only takes effect on H5.
+   ========================================================== */
+
+@font-face {
+  font-family: 'ResourceHanRounded';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 322 100% 98.5%;
+    --foreground: 268 28% 26%;
+    --card: 0 0% 100%;
+    --card-foreground: 268 28% 26%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 268 28% 26%;
+    /* Soft pink primary: brightness dialed down so white text just clears AA 4.5:1, while keeping the pink hue from shifting to deep red */
+    --primary: 328 74% 49%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 322 90% 82%;
+    --secondary: 278 60% 94%;
+    --secondary-foreground: 265 30% 30%;
+    --muted: 320 45% 96%;
+    --muted-foreground: 280 14% 42%;
+    /* Light purple accent color */
+    --accent: 272 62% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 272 85% 86%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 315 45% 89%;
+    --input: 315 45% 89%;
+    --ring: 328 74% 49%;
+    --radius: 1rem;
+    --gradient-pastel: linear-gradient(135deg, hsl(328 85% 82%), hsl(272 78% 86%));
+    --gradient-air: linear-gradient(165deg, hsl(322 100% 97%), hsl(280 100% 96%) 50%, hsl(190 90% 95%));
+    --gradient-candy: linear-gradient(135deg, hsl(46 95% 84%), hsl(330 85% 86%));
+    --shadow-pastel: 0 6px 18px -8px hsl(320 55% 60% / 0.28);
+    --shadow-pastel-lift: 0 14px 30px -14px hsl(325 65% 58% / 0.34);
+    --chart-1: 328 80% 72%;
+    --chart-2: 272 72% 74%;
+    --chart-3: 190 78% 66%;
+    --chart-4: 46 92% 70%;
+    --chart-5: 150 52% 62%;
+    --sidebar-background: 322 70% 98%;
+    --sidebar-foreground: 268 24% 30%;
+    --sidebar-primary: 328 74% 49%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 320 55% 95%;
+    --sidebar-accent-foreground: 268 30% 30%;
+    --sidebar-border: 315 42% 91%;
+    --sidebar-ring: 328 74% 49%;
+  }
+
+  /* Dark mode carries forward this theme's pink-purple hue as "night candy", never falling back to neutral gray-blue */
+  .dark {
+    --background: 282 24% 11%;
+    --foreground: 322 24% 93%;
+    --card: 282 22% 15%;
+    --card-foreground: 322 24% 93%;
+    --popover: 282 22% 15%;
+    --popover-foreground: 322 24% 93%;
+    --primary: 328 78% 68%;
+    --primary-foreground: 328 45% 14%;
+    --primary-glow: 322 70% 40%;
+    --secondary: 282 20% 22%;
+    --secondary-foreground: 322 20% 92%;
+    --muted: 282 18% 20%;
+    --muted-foreground: 300 14% 72%;
+    --accent: 272 70% 72%;
+    --accent-foreground: 272 45% 15%;
+    --accent-glow: 272 60% 42%;
+    --destructive: 0 62% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 282 18% 26%;
+    --input: 282 18% 26%;
+    --ring: 328 78% 68%;
+    --gradient-pastel: linear-gradient(135deg, hsl(328 60% 46%), hsl(272 55% 50%));
+    --gradient-air: linear-gradient(165deg, hsl(282 26% 14%), hsl(272 24% 12%) 60%, hsl(200 22% 13%));
+    --gradient-candy: linear-gradient(135deg, hsl(46 60% 48%), hsl(330 62% 54%));
+    --shadow-pastel: 0 6px 18px -8px hsl(282 45% 4% / 0.55);
+    --shadow-pastel-lift: 0 14px 30px -14px hsl(282 45% 4% / 0.65);
+    --chart-1: 328 72% 70%;
+    --chart-2: 272 66% 74%;
+    --chart-3: 190 62% 60%;
+    --chart-4: 46 80% 66%;
+    --chart-5: 150 48% 58%;
+    --sidebar-background: 282 26% 9%;
+    --sidebar-foreground: 322 20% 90%;
+    --sidebar-primary: 328 78% 68%;
+    --sidebar-primary-foreground: 328 45% 14%;
+    --sidebar-accent: 282 20% 19%;
+    --sidebar-accent-foreground: 322 20% 92%;
+    --sidebar-border: 282 18% 24%;
+    --sidebar-ring: 328 78% 68%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'HarmonyOS Sans', system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: pastel duotone gradient, used for pill buttons and hero blocks */
+  .bg-gradient-pastel {
+    background-image: var(--gradient-pastel);
+  }
+  .bg-gradient-air {
+    background-image: var(--gradient-air);
+  }
+  .bg-gradient-candy {
+    background-image: var(--gradient-candy);
+  }
+  /* Soft diffuse shadow: only directional depth, no hard edges */
+  .shadow-pastel {
+    box-shadow: var(--shadow-pastel);
+  }
+  .shadow-pastel-lift {
+    box-shadow: var(--shadow-pastel-lift);
+  }
+  /* Pastel focus halo: wide outer ring for inputs / clickable elements */
+  .ring-candy {
+    box-shadow: 0 0 0 8px hsl(var(--primary-glow) / 0.55);
+  }
+  /* Cream outline: extremely light pink double line, replacing black bold borders */
+  .border-cream {
+    border-width: 2px;
+    border-style: solid;
+    border-color: hsl(var(--border));
+  }
+  .font-rounded-title {
+    font-family: 'ResourceHanRounded', 'HarmonyOS Sans', system-ui, sans-serif;
+  }
+}
+
+/* Motion: candy-like bounce press, gentle floating entrance, subtle wobble */
+@keyframes squish {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.94);
+  }
+  75% {
+    transform: scale(1.03);
+  }
+}
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+.animate-squish {
+  animation: squish 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.animate-float-in {
+  animation: float-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-wiggle {
+  animation: wiggle 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-squish,
+  .animate-float-in,
+  .animate-wiggle {
+    animation: none;
+  }
+}

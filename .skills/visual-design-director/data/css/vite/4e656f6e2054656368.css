@@ -1,0 +1,193 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Fonts: Alibaba PuHuiTi 3.0 ===== */
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_SemiBold.ttf') format('truetype');
+}
+
+/* Neon-Tech design system. All colors MUST be HSL. */
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    --background: 244 47% 11%;
+    --foreground: 240 25% 98%;
+
+    --card: 245 38% 16%;
+    --card-foreground: 240 25% 98%;
+
+    --popover: 245 42% 14%;
+    --popover-foreground: 240 25% 98%;
+
+    --primary: 258 90% 64%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 245 30% 24%;
+    --secondary-foreground: 240 25% 96%;
+
+    --muted: 245 28% 21%;
+    --muted-foreground: 245 18% 72%;
+
+    --accent: 189 94% 30%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 350 84% 49%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 70% 45%;
+    --warning: 38 92% 55%;
+    --info: 199 90% 55%;
+
+    --border: 250 28% 30%;
+    --input: 250 26% 28%;
+    --ring: 258 90% 66%;
+
+    --chart-1: 258 90% 66%;
+    --chart-2: 189 94% 50%;
+    --chart-3: 330 81% 62%;
+    --chart-4: 38 92% 58%;
+    --chart-5: 280 72% 68%;
+
+    --sidebar-background: 246 46% 9%;
+    --sidebar-foreground: 240 20% 90%;
+    --sidebar-primary: 258 90% 66%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 245 36% 18%;
+    --sidebar-accent-foreground: 240 25% 96%;
+    --sidebar-border: 250 26% 20%;
+    --sidebar-ring: 258 90% 66%;
+
+    --education-blue: 199 90% 55%;
+    --education-green: 152 70% 45%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(292 84% 61%), hsl(330 81% 62%));
+    --gradient-accent: linear-gradient(135deg, hsl(189 94% 48%), hsl(258 90% 66%));
+    --gradient-card: linear-gradient(150deg, hsla(250, 42%, 26%, 0.55), hsla(248, 46%, 13%, 0.35));
+    --gradient-background: radial-gradient(1200px 600px at 15% -10%, hsla(258, 80%, 40%, 0.35), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, hsla(330, 80%, 45%, 0.22), transparent 55%),
+      radial-gradient(900px 500px at 50% 110%, hsla(189, 90%, 40%, 0.18), transparent 60%);
+    --shadow-card: 0 10px 34px -12px hsla(258, 90%, 40%, 0.45);
+    --shadow-hover: 0 16px 46px -12px hsla(292, 84%, 52%, 0.55);
+  }
+
+  .dark {
+    --background: 244 47% 11%;
+    --foreground: 240 25% 98%;
+    --card: 245 38% 16%;
+    --card-foreground: 240 25% 98%;
+    --popover: 245 42% 14%;
+    --popover-foreground: 240 25% 98%;
+    --primary: 258 90% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 245 30% 24%;
+    --secondary-foreground: 240 25% 96%;
+    --muted: 245 28% 21%;
+    --muted-foreground: 245 18% 72%;
+    --accent: 189 94% 30%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 84% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 250 28% 30%;
+    --input: 250 26% 28%;
+    --ring: 258 90% 66%;
+    --sidebar-background: 246 46% 9%;
+    --sidebar-foreground: 240 20% 90%;
+    --sidebar-primary: 258 90% 66%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 245 36% 18%;
+    --sidebar-accent-foreground: 240 25% 96%;
+    --sidebar-border: 250 26% 20%;
+    --sidebar-ring: 258 90% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'AlibabaPuHuiTi', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .glass-card {
+    @apply rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl;
+    box-shadow: var(--shadow-card);
+  }
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .neon-glow {
+    box-shadow: var(--shadow-card);
+  }
+  .neon-glow-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .neon-glow-hover:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .glow-orb {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+    z-index: 0;
+  }
+  .animate-float {
+    animation: float 7s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-24px) translateX(12px); }
+  }
+}

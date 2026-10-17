@@ -1,0 +1,131 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Fonts: Source Han Serif (headings) / Alibaba PuHui Ti (body) ===== */
+@font-face {
+  font-family: 'Source Han Serif CN';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Alibaba PuHui Ti';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --background: 0 0% 100%;
+    --foreground: 240 28% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+    --primary: 240 28% 14%;
+    --primary-foreground: 40 30% 96%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 240 28% 14%;
+    --muted: 40 20% 96%;
+    --muted-foreground: 0 0% 44%;
+    --accent: 39 46% 38.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 45%;
+    --border: 40 16% 88%;
+    --input: 40 16% 88%;
+    --ring: 39 46% 52%;
+    --chart-1: 39 46% 58%;
+    --chart-2: 240 28% 30%;
+    --chart-3: 30 42% 50%;
+    --chart-4: 240 18% 55%;
+    --chart-5: 45 55% 70%;
+    --sidebar-background: 240 28% 13%;
+    --sidebar-foreground: 40 20% 88%;
+    --sidebar-primary: 39 46% 58%;
+    --sidebar-primary-foreground: 240 30% 12%;
+    --sidebar-accent: 240 22% 20%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 240 18% 24%;
+    --sidebar-ring: 39 46% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 45% 40%;
+    --warning: 35 80% 46%;
+    --info: 214 55% 48%;
+    --gradient-primary: linear-gradient(135deg, hsl(240 28% 16%), hsl(240 24% 28%));
+    --shadow-card: 0 1px 3px hsl(240 28% 14% / 0.06), 0 10px 30px -18px hsl(240 28% 14% / 0.25);
+    --shadow-hover: 0 12px 34px -14px hsl(240 28% 14% / 0.28);
+  }
+
+  .dark {
+    --background: 240 24% 10%;
+    --foreground: 40 20% 92%;
+    --card: 240 22% 13%;
+    --card-foreground: 40 20% 92%;
+    --popover: 240 22% 13%;
+    --popover-foreground: 40 20% 92%;
+    --primary: 39 46% 38.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 18% 20%;
+    --secondary-foreground: 40 20% 92%;
+    --muted: 240 16% 18%;
+    --muted-foreground: 40 10% 66%;
+    --accent: 39 46% 38.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 45%;
+    --border: 240 16% 22%;
+    --input: 240 16% 22%;
+    --ring: 39 46% 58%;
+    --chart-1: 39 46% 58%;
+    --chart-2: 40 20% 78%;
+    --chart-3: 30 42% 55%;
+    --chart-4: 240 16% 50%;
+    --chart-5: 45 55% 68%;
+    --sidebar-background: 240 26% 9%;
+    --sidebar-foreground: 40 20% 88%;
+    --sidebar-primary: 39 46% 58%;
+    --sidebar-primary-foreground: 240 30% 12%;
+    --sidebar-accent: 240 20% 16%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 240 16% 20%;
+    --sidebar-ring: 39 46% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 45% 55%;
+    --warning: 38 80% 60%;
+    --info: 214 60% 62%;
+    --gradient-primary: linear-gradient(135deg, hsl(240 24% 14%), hsl(240 20% 24%));
+    --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.3), 0 10px 30px -18px hsl(0 0% 0% / 0.5);
+    --shadow-hover: 0 12px 34px -14px hsl(0 0% 0% / 0.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Alibaba PuHui Ti', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Source Han Serif CN', Georgia, serif;
+    letter-spacing: 0.01em;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}

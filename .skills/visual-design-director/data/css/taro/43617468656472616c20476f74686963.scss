@@ -1,0 +1,182 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Gothic Style —— medieval cathedral aesthetics
+   Near-black deep purple base / gold-foil text and outlines / blood-red accent / sharp right angles, no rounded corners / pointed arch and rose window motifs
+   Font: @font-face only takes effect on H5; on mini-program clients the same-named font must be loaded via Taro.loadFontFace in app.tsx */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: near-black deep purple, simulating the dark zone between stone walls and stained glass */
+    --background: 270 30% 6%;
+    --foreground: 43 62% 86%;
+    --card: 270 28% 10%;
+    --card-foreground: 43 62% 86%;
+    --popover: 270 26% 13%;
+    --popover-foreground: 43 62% 86%;
+    /* Primary color: gold foil (dark base with deep purple text, matching an inverted-color press on a gold surface) */
+    --primary: 46 68% 47%;
+    --primary-foreground: 270 40% 8%;
+    /* Secondary: deep purple, the midtone of religious frescoes */
+    --secondary: 261 49% 21%;
+    --secondary-foreground: 43 62% 86%;
+    --muted: 270 22% 15%;
+    --muted-foreground: 43 25% 68%;
+    /* Accent: blood red, used sparingly for stigmata-like emphasis */
+    --accent: 0 100% 27%;
+    --accent-foreground: 43 62% 86%;
+    --destructive: 0 100% 27%;
+    --destructive-foreground: 43 62% 86%;
+    /* Borders are gold structural lines (darkened to simulate translucent gold foil laid over dark stone) */
+    --border: 44 52% 30%;
+    --input: 270 22% 17%;
+    --ring: 46 68% 47%;
+    --radius: 0rem;
+    --chart-1: 46 68% 47%;
+    --chart-2: 0 100% 32%;
+    --chart-3: 261 45% 40%;
+    --chart-4: 43 45% 70%;
+    --chart-5: 270 12% 45%;
+    --sidebar-background: 270 32% 5%;
+    --sidebar-foreground: 43 55% 82%;
+    --sidebar-primary: 46 68% 47%;
+    --sidebar-primary-foreground: 270 40% 8%;
+    --sidebar-accent: 261 49% 21%;
+    --sidebar-accent-foreground: 43 62% 86%;
+    --sidebar-border: 44 45% 26%;
+    --sidebar-ring: 46 68% 47%;
+    /* Materials: nave's dim haze / candlelight glow / crypt shadow */
+    --gradient-nave: linear-gradient(180deg, hsl(261 40% 12%), hsl(270 30% 5%));
+    --gradient-halo: radial-gradient(120% 90% at 50% 0%, hsl(46 68% 47% / 0.18), transparent 62%);
+    --shadow-halo: 0 0 26px -4px hsl(46 68% 47% / 0.42);
+    --shadow-crypt: 0 14px 34px -10px hsl(270 45% 2% / 0.85);
+  }
+
+  /* The theme itself is dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 270 30% 6%;
+    --foreground: 43 62% 86%;
+    --card: 270 28% 10%;
+    --card-foreground: 43 62% 86%;
+    --popover: 270 26% 13%;
+    --popover-foreground: 43 62% 86%;
+    --primary: 46 68% 47%;
+    --primary-foreground: 270 40% 8%;
+    --secondary: 261 49% 21%;
+    --secondary-foreground: 43 62% 86%;
+    --muted: 270 22% 15%;
+    --muted-foreground: 43 25% 68%;
+    --accent: 0 100% 27%;
+    --accent-foreground: 43 62% 86%;
+    --destructive: 0 100% 27%;
+    --destructive-foreground: 43 62% 86%;
+    --border: 44 52% 30%;
+    --input: 270 22% 17%;
+    --ring: 46 68% 47%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    background-image: var(--gradient-halo), var(--gradient-nave);
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+@layer utilities {
+  .bg-gradient-halo {
+    background-image: var(--gradient-halo);
+  }
+  .bg-gradient-nave {
+    background-image: var(--gradient-nave);
+  }
+  /* Core visual signature: gold-outlined container + inner gold-foil highlight, sharp right angles, illuminated-manuscript border feel */
+  .gilded-frame {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: inset 0 1px 0 hsl(46 68% 47% / 0.22), var(--shadow-crypt);
+  }
+  /* Pointed arch: clip-path cuts out a Gothic spire silhouette */
+  .arch-pointed {
+    -webkit-clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+    clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+  }
+  /* Rose window: concentric thin gold-line rosette pattern, used as a local decoration */
+  .rose-window {
+    background-image:
+      repeating-radial-gradient(circle at 50% 50%, hsl(46 68% 47% / 0.3) 0, hsl(46 68% 47% / 0.3) 1px, transparent 1px, transparent 14px),
+      radial-gradient(circle at 50% 50%, hsl(46 68% 47% / 0.16), transparent 70%);
+  }
+  /* Gold fade-out divider, echoing the arches horizontally */
+  .gold-rule {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, hsl(46 68% 47% / 0.7), transparent);
+  }
+  /* Candlelight glow: a solemn, restrained tap/focus feedback, replacing bounce effects */
+  .halo-glow {
+    box-shadow: var(--shadow-halo);
+  }
+  .text-gilded {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 12px hsl(46 68% 47% / 0.45);
+  }
+  .font-title-serif {
+    font-family: 'SourceHanSerifCN', 'Songti SC', 'STSong', serif;
+    font-weight: 700;
+  }
+  /* A slow reveal like stone carvings lit by candlelight */
+  .animate-candle-reveal {
+    animation: candle-reveal 700ms ease-in-out both;
+  }
+  /* A breathing gold glow like a candle flame */
+  .animate-taper-pulse {
+    animation: taper-pulse 4s ease-in-out infinite;
+  }
+  .press-solemn:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-halo);
+  }
+}
+
+@keyframes candle-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes taper-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 16px -6px hsl(46 68% 47% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px -4px hsl(46 68% 47% / 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-candle-reveal,
+  .animate-taper-pulse {
+    animation: none;
+  }
+}

@@ -1,0 +1,166 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Fonts: YouSheBiaoTiHei (headings) + AlibabaPuHuiTi (body) ===== */
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+
+/* ===== Cel-shaded animation style design system: high-saturation flat colors + deep ink outlines + hard shadows ===== */
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    --background: 60 33% 97%;
+    --foreground: 240 28% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+
+    --primary: 355 78% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 202 60% 92%;
+    --secondary-foreground: 240 28% 14%;
+
+    --muted: 240 12% 93%;
+    --muted-foreground: 240 12% 38%;
+
+    --accent: 48 89% 29%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 355 78% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 28% 14%;
+    --input: 240 28% 14%;
+    --ring: 355 78% 56%;
+
+    /* Cartoon four-color palette (blue / green / yellow / accent red) */
+    --sky: 202 69% 55%;
+    --sky-foreground: 0 0% 100%;
+    --leaf: 145 63% 40%;
+    --leaf-foreground: 0 0% 100%;
+    --sun: 43 96% 52%;
+    --sun-foreground: 240 28% 14%;
+    --berry: 355 78% 56%;
+    --berry-foreground: 0 0% 100%;
+
+    /* Variables kept for template compatibility */
+    --education-blue: 202 69% 55%;
+    --education-green: 145 63% 40%;
+    --success: 145 63% 40%;
+    --warning: 43 96% 52%;
+    --info: 202 69% 55%;
+    --gradient-primary: hsl(355 78% 56%);
+    --gradient-card: hsl(0 0% 100%);
+    --gradient-background: hsl(60 33% 97%);
+    --shadow-card: 4px 4px 0px hsl(240 28% 14%);
+    --shadow-hover: 6px 6px 0px hsl(240 28% 14%);
+
+    --chart-1: 355 78% 56%;
+    --chart-2: 202 69% 55%;
+    --chart-3: 145 63% 40%;
+    --chart-4: 43 96% 52%;
+    --chart-5: 271 60% 55%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 28% 14%;
+    --sidebar-primary: 355 78% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 89% 50%;
+    --sidebar-accent-foreground: 240 28% 14%;
+    --sidebar-border: 240 28% 14%;
+    --sidebar-ring: 355 78% 56%;
+  }
+
+  .dark {
+    --background: 240 28% 12%;
+    --foreground: 60 33% 97%;
+    --card: 240 26% 17%;
+    --card-foreground: 60 33% 97%;
+    --popover: 240 26% 17%;
+    --popover-foreground: 60 33% 97%;
+    --primary: 355 78% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 20% 24%;
+    --secondary-foreground: 60 33% 97%;
+    --muted: 240 18% 22%;
+    --muted-foreground: 240 10% 70%;
+    --accent: 43 96% 30%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 355 78% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 20% 90%;
+    --input: 60 20% 90%;
+    --ring: 355 78% 60%;
+    --sky: 202 69% 58%;
+    --sky-foreground: 0 0% 100%;
+    --leaf: 145 55% 45%;
+    --leaf-foreground: 0 0% 100%;
+    --sun: 43 96% 55%;
+    --sun-foreground: 240 28% 14%;
+    --berry: 355 78% 60%;
+    --berry-foreground: 0 0% 100%;
+    --shadow-card: 4px 4px 0px hsl(60 20% 90%);
+    --shadow-hover: 6px 6px 0px hsl(60 20% 90%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'YouSheBiaoTiHei', 'AlibabaPuHuiTi', system-ui, sans-serif;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+/* Cel-shading hard outline utility classes */
+@layer components {
+  .cel-border {
+    @apply border-[3px] border-foreground;
+  }
+  .cel-shadow {
+    box-shadow: 4px 4px 0px hsl(var(--foreground));
+  }
+  .cel-shadow-sm {
+    box-shadow: 2px 2px 0px hsl(var(--foreground));
+  }
+  .cel-shadow-lg {
+    box-shadow: 6px 6px 0px hsl(var(--foreground));
+  }
+  .cel-card {
+    @apply border-[3px] border-foreground rounded-none bg-card;
+    box-shadow: 4px 4px 0px hsl(var(--foreground));
+  }
+  .cel-press {
+    @apply transition-all duration-100 ease-out;
+  }
+  .cel-press:active {
+    @apply translate-x-[4px] translate-y-[4px];
+    box-shadow: 0 0 0 hsl(var(--foreground)) !important;
+  }
+}

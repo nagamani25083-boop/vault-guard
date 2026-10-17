@@ -1,0 +1,214 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Coral Beat — warm off-white base + pure white card faces + coral-orange accent: light, airy, and rhythmic.
+   Large corner radii, light shadows, thin light-gray dividers; gradients are only allowed on placeholder color blocks — the main UI stays clean.
+   On mini-program, load both fonts in app.tsx via Taro.loadFontFace. */
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/YouSheBiaoTiHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ResourceHanRoundedCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Warm off-white base + pure white card faces */
+    --background: 40 33% 96%;
+    --foreground: 240 6% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 6% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 6% 11%;
+    /* Coral orange: brightness pushed down to keep the warmth of orange while white text reaches AA */
+    --primary: 22 90% 41%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 24% 93%;
+    --secondary-foreground: 240 6% 11%;
+    --muted: 40 24% 93%;
+    --muted-foreground: 240 4% 40%;
+    /* Accent surface: pale coral background with deep orange text, for light-highlight rounded blocks */
+    --accent: 24 90% 94%;
+    --accent-foreground: 22 80% 30%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 12% 90%;
+    --input: 40 12% 90%;
+    --ring: 22 90% 41%;
+    --radius: 1rem;
+    /* The only gradient allowed: a soft light-colored placeholder block */
+    --gradient-tile: linear-gradient(135deg, hsl(28 92% 88%), hsl(14 82% 84%));
+    --gradient-surface: linear-gradient(180deg, hsl(40 40% 98%), hsl(40 28% 94%));
+    /* Light shadows, avoiding heavy drop shadows */
+    --shadow-soft: 0 1px 2px hsl(28 40% 40% / 0.06), 0 6px 20px hsl(28 40% 40% / 0.07);
+    --shadow-lift: 0 10px 30px hsl(28 45% 40% / 0.14);
+    --chart-1: 22 90% 48%;
+    --chart-2: 32 82% 56%;
+    --chart-3: 8 72% 46%;
+    --chart-4: 42 70% 52%;
+    --chart-5: 200 70% 44%;
+    --sidebar-background: 40 30% 97%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 22 90% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 20% 93%;
+    --sidebar-accent-foreground: 240 6% 15%;
+    --sidebar-border: 40 14% 89%;
+    --sidebar-ring: 22 90% 41%;
+  }
+
+  /* Dark mode: shift to a warm deep-brown night surface, keeping the same warm orange hue family instead of neutral gray-blue */
+  .dark {
+    --background: 28 14% 11%;
+    --foreground: 38 25% 94%;
+    --card: 28 13% 15%;
+    --card-foreground: 38 25% 94%;
+    --popover: 28 13% 15%;
+    --popover-foreground: 38 25% 94%;
+    --primary: 24 92% 55%;
+    --primary-foreground: 26 30% 10%;
+    --secondary: 28 10% 20%;
+    --secondary-foreground: 38 25% 94%;
+    --muted: 28 10% 20%;
+    --muted-foreground: 34 12% 68%;
+    --accent: 24 40% 22%;
+    --accent-foreground: 26 92% 72%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 28 10% 24%;
+    --input: 28 10% 24%;
+    --ring: 24 92% 55%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'ResourceHanRoundedCN', -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+  .bg-gradient-tile {
+    background-image: var(--gradient-tile);
+  }
+  /* Core visual signature: buoyant lifted card — large corner radius + soft shadow, lifts and deepens the shadow on touch */
+  .card-lift {
+    border-radius: var(--radius);
+    background-color: hsl(var(--card));
+    box-shadow: var(--shadow-soft);
+    transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 220ms ease;
+  }
+  .card-lift:active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+  /* Soft light-colored placeholder block: the only element allowed a gradient */
+  .gradient-tile {
+    background-image: var(--gradient-tile);
+  }
+  .gradient-surface {
+    background-image: var(--gradient-surface);
+  }
+  /* Title font: medium weight for card-level hierarchy without feeling heavy */
+  .font-title-heavy {
+    font-family: 'YouSheBiaoTiHei', 'ResourceHanRoundedCN', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  /* Thin light-gray divider: the sole separator between compact-layout rows */
+  .divider-hairline {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: hsl(var(--border));
+  }
+  /* Highlight rounded block: light background, no strong color blocks */
+  .pill-highlight {
+    border-radius: 999rpx;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    transition: background-color 180ms ease;
+  }
+  /* Coral-orange circular control: immediate scale feedback for the emphasized state */
+  .coral-knob {
+    border-radius: 999rpx;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transition: transform 180ms cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 180ms ease;
+  }
+  .coral-knob:active {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lift);
+  }
+  /* Thin progress track: light gray by default, switches to coral orange when active */
+  .track-thin {
+    border-radius: 999rpx;
+    background-color: hsl(var(--border));
+    transition: background-color 180ms ease;
+  }
+  .track-thin-active {
+    background-color: hsl(var(--primary));
+  }
+
+  /* Beat pulse: a gentle scale-breathing motion, conveying an ongoing rhythm */
+  @keyframes coral-beat {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.06);
+      opacity: 0.85;
+    }
+  }
+  .animate-beat {
+    animation: coral-beat 1600ms cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  }
+  /* Light, airy fade-in with an upward shift */
+  @keyframes coral-rise {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-rise {
+    animation: coral-rise 320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-beat,
+    .animate-rise {
+      animation: none;
+    }
+    .card-lift,
+    .coral-knob,
+    .pill-highlight,
+    .track-thin {
+      transition: none;
+    }
+  }
+}

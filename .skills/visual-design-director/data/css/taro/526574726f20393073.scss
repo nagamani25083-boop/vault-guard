@@ -1,0 +1,219 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Retro 90s — early-internet / Win95 system feel
+   System-gray base, pure-black text, navy-blue gradient title bar, high-saturation bright accents, 2px beveled controls, zero radius.
+   On the Mini Program client, load the two fonts below via Taro.loadFontFace in app.tsx. */
+
+@font-face {
+  font-family: 'ZCOOLKuHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ZCOOLKuHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Early-system colors: system-gray base / pure-black text / white content area */
+    --background: 0 0% 75%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    /* Navy blue: title bar and primary actions */
+    --primary: 240 100% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 75%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 82%;
+    --muted-foreground: 0 0% 25%;
+    /* Bright blue accent, lightness tuned so white text meets AA */
+    --accent: 204 86% 36%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    /* Borders are hard black lines, the structural line of this style */
+    --border: 0 0% 0%;
+    --input: 0 0% 100%;
+    --ring: 204 86% 36%;
+    --radius: 0rem;
+    /* Three-state hyperlinks: blue / purple / red, always underlined */
+    --link: 240 100% 50%;
+    --link-visited: 300 100% 25%;
+    --link-hover: 0 100% 30%;
+    /* System gray scale used for the beveled 3D effect */
+    --bevel-light: 0 0% 100%;
+    --bevel-face: 0 0% 87%;
+    --bevel-shadow: 0 0% 50%;
+    --bevel-dark: 0 0% 0%;
+    --titlebar-from: 240 100% 25%;
+    --titlebar-to: 204 86% 44%;
+    --chart-1: 240 100% 45%;
+    --chart-2: 120 100% 25%;
+    --chart-3: 48 100% 45%;
+    --chart-4: 0 100% 45%;
+    --chart-5: 300 100% 25%;
+    --sidebar-background: 0 0% 75%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 240 100% 25%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 82%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 204 86% 36%;
+  }
+
+  /* Dark mode: deep-gray chassis system panel — same neutral gray scale darkened overall, bevels and blue title bar retained */
+  .dark {
+    --background: 0 0% 20%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 25%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 25%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 240 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 33%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 33%;
+    --muted-foreground: 0 0% 82%;
+    --accent: 204 86% 36%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 25%;
+    --ring: 204 86% 55%;
+    --radius: 0rem;
+    --link: 210 100% 72%;
+    --link-visited: 300 70% 75%;
+    --link-hover: 48 100% 58%;
+    --bevel-light: 0 0% 62%;
+    --bevel-face: 0 0% 33%;
+    --bevel-shadow: 0 0% 12%;
+    --bevel-dark: 0 0% 0%;
+    --titlebar-from: 240 100% 20%;
+    --titlebar-to: 204 86% 34%;
+    --sidebar-background: 0 0% 20%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 240 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 33%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100%;
+    --sidebar-ring: 204 86% 55%;
+    --chart-1: 240 100% 52%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'SourceHanSerifCN', 'SimSun', serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: 2px beveled outset (default control state) */
+  .bevel-out {
+    border-radius: 0;
+    box-shadow:
+      inset 2px 2px 0 0 hsl(var(--bevel-light)),
+      inset -2px -2px 0 0 hsl(var(--bevel-dark)),
+      inset 3px 3px 0 0 hsl(var(--bevel-face)),
+      inset -3px -3px 0 0 hsl(var(--bevel-shadow));
+  }
+  /* 2px beveled inset (input area / display area / pressed state) */
+  .bevel-in {
+    border-radius: 0;
+    box-shadow:
+      inset 2px 2px 0 0 hsl(var(--bevel-dark)),
+      inset -2px -2px 0 0 hsl(var(--bevel-light)),
+      inset 3px 3px 0 0 hsl(var(--bevel-shadow)),
+      inset -3px -3px 0 0 hsl(var(--bevel-face));
+  }
+  /* On tap, instantly invert the bevel with a slight shift, no easing */
+  .bevel-press {
+    transition: none;
+  }
+  .bevel-press:active {
+    transform: translate(1px, 1px);
+    box-shadow:
+      inset 2px 2px 0 0 hsl(var(--bevel-dark)),
+      inset -2px -2px 0 0 hsl(var(--bevel-light)),
+      inset 3px 3px 0 0 hsl(var(--bevel-shadow)),
+      inset -3px -3px 0 0 hsl(var(--bevel-face));
+  }
+  /* Navy blue → bright blue title bar gradient */
+  .titlebar-gradient {
+    background-image: linear-gradient(90deg, hsl(var(--titlebar-from)), hsl(var(--titlebar-to)));
+    color: hsl(0 0% 100%);
+    font-family: 'ZCOOLKuHei', sans-serif;
+  }
+  /* Gray-on-top, white-on-bottom 3D etched divider */
+  .etched-divider {
+    height: 2px;
+    border-top: 1px solid hsl(var(--bevel-shadow));
+    border-bottom: 1px solid hsl(var(--bevel-light));
+  }
+  /* Yellow-black construction warning stripes */
+  .caution-stripe {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(48 100% 55%) 0,
+      hsl(48 100% 55%) 12px,
+      hsl(0 0% 0%) 12px,
+      hsl(0 0% 0%) 24px
+    );
+  }
+  /* 45-degree tile texture: rough, anti-minimalist old-web feel */
+  .tile-texture {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 2px,
+      hsla(0, 0%, 0%, 0.04) 2px,
+      hsla(0, 0%, 0%, 0.04) 4px
+    );
+  }
+  /* Three-state hyperlinks */
+  .retro-link {
+    color: hsl(var(--link));
+    text-decoration: underline;
+  }
+  .retro-link:visited { color: hsl(var(--link-visited)); }
+  .retro-link:active { color: hsl(var(--link-hover)); }
+  /* Marquee and blinking badge: fast, digital, no natural easing */
+  .marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 12s linear infinite;
+  }
+  .retro-blink {
+    animation: retro-blink 1s steps(1, end) infinite;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes retro-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0.15; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .retro-blink {
+    animation: none;
+  }
+}

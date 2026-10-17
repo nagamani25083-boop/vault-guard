@@ -1,0 +1,132 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Forest Nature · Dai-green / frost white / cloud-stone gray / morning-fog blue — organic fluid shapes, generous breathing whitespace
+   Fonts: Mini Program clients must load OPPOSans4 via Taro.loadFontFace in app.tsx; H5 is handled by the @font-face below */
+@font-face {
+  font-family: 'OPPOSans4';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/OPPOSans4.0.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: frost-white paper base + pure white cards, text is deep Dai-green ink */
+    --background: 210 33% 97%;
+    --foreground: 155 20% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 155 20% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 155 20% 14%;
+    /* Brand Dai-green, white-text contrast 7.3:1 */
+    --primary: 151 27% 29%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 151 22% 46%;
+    --secondary: 151 22% 91%;
+    --secondary-foreground: 151 27% 24%;
+    --muted: 205 16% 91%;
+    --muted-foreground: 155 12% 36%;
+    /* Morning-fog blue: lightness compressed to meet white-text contrast standards (4.7:1) while keeping the misty feel */
+    --accent: 201 34% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 6 62% 46%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 200 14% 85%;
+    --input: 200 14% 85%;
+    --ring: 151 27% 29%;
+    --radius: 1.25rem;
+    --gradient-primary: linear-gradient(135deg, hsl(151 27% 29%), hsl(151 22% 46%));
+    --gradient-accent: linear-gradient(135deg, hsl(201 34% 43%), hsl(151 22% 46%));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 33% 98%), hsl(151 22% 93%));
+    --shadow-soft: 0 12px 34px -14px hsl(151 27% 29% / 0.22);
+    --shadow-card: 0 6px 20px -8px hsl(155 20% 20% / 0.12);
+    --chart-1: 151 27% 40%;
+    --chart-2: 201 34% 48%;
+    --chart-3: 43 55% 52%;
+    --chart-4: 12 52% 52%;
+    --chart-5: 88 26% 44%;
+    --sidebar-background: 205 20% 96%;
+    --sidebar-foreground: 155 20% 22%;
+    --sidebar-primary: 151 27% 29%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 151 22% 91%;
+    --sidebar-accent-foreground: 151 27% 24%;
+    --sidebar-border: 200 14% 88%;
+    --sidebar-ring: 151 27% 29%;
+  }
+
+  /* Dark mode follows the woodland hue: deep moss-green base + frost-white text, greens brightened, not falling back to neutral gray-blue */
+  .dark {
+    --background: 155 22% 8%;
+    --foreground: 150 16% 92%;
+    --card: 155 18% 12%;
+    --card-foreground: 150 16% 92%;
+    --popover: 155 18% 12%;
+    --popover-foreground: 150 16% 92%;
+    --primary: 151 34% 52%;
+    --primary-foreground: 155 40% 8%;
+    --primary-glow: 151 30% 64%;
+    --secondary: 155 14% 18%;
+    --secondary-foreground: 150 14% 90%;
+    --muted: 155 12% 16%;
+    --muted-foreground: 150 10% 70%;
+    --accent: 201 40% 58%;
+    --accent-foreground: 200 45% 10%;
+    --destructive: 6 60% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 155 12% 24%;
+    --input: 155 12% 24%;
+    --ring: 151 34% 58%;
+    --gradient-primary: linear-gradient(135deg, hsl(151 34% 44%), hsl(151 30% 58%));
+    --gradient-accent: linear-gradient(135deg, hsl(201 36% 46%), hsl(151 30% 52%));
+    --gradient-subtle: linear-gradient(180deg, hsl(155 18% 12%), hsl(155 22% 9%));
+    --shadow-soft: 0 12px 34px -14px hsl(155 50% 3% / 0.65);
+    --shadow-card: 0 6px 20px -8px hsl(155 50% 3% / 0.55);
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'OPPOSans4', -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: fluid irregular rounded corners, using asymmetric radii to soften rectangular boundaries */
+  .rounded-organic { border-radius: 42% 58% 58% 42% / 48% 44% 56% 52%; }
+  .rounded-leaf { border-radius: 1.75rem 0.5rem 1.75rem 0.5rem; }
+  .rounded-pebble { border-radius: 2.5rem 2rem 2.75rem 1.75rem; }
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-accent { background-image: var(--gradient-accent); }
+  .bg-gradient-subtle { background-image: var(--gradient-subtle); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  /* Background drifting soft glow blob: semi-transparent radial gradient, replacing blur to create an ambient layer */
+  .blob-drift {
+    background-image: radial-gradient(circle at 50% 50%, hsl(var(--primary-glow) / 0.28) 0%, hsl(var(--primary-glow) / 0) 70%);
+    border-radius: 9999px;
+  }
+  /* Slow lift on touch */
+  .press-lift { transition: transform 0.35s ease-out, box-shadow 0.35s ease-out; }
+  .press-lift:active {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+@keyframes fade-rise { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes drift { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(14px, -18px) scale(1.06); } }
+@keyframes breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.9; } }
+
+.animate-fade-rise { animation: fade-rise 0.7s ease-out both; }
+.animate-drift { animation: drift 18s ease-in-out infinite; }
+.animate-breathe { animation: breathe 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-rise,
+  .animate-drift,
+  .animate-breathe { animation: none; }
+}

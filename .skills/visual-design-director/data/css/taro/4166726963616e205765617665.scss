@@ -1,0 +1,203 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ==========================================================
+   African Textile — Kente weave + Adire tie-dye / warm earth tones / rugged woven texture
+   Surface: deep-wood page base carrying the hero visuals, deep-sand-brown cards carrying content, bold outlines cut hierarchy.
+   Color: terracotta orange as primary, sandy gold as accent, forest green as secondary, cream sand as foreground text,
+   consistently avoiding pure white, pastels and neon.
+   Material: hard-edge offset shadows, geometric stripes, woven grid, tie-dye noise; no rounded glass or blur.
+   Font: heading "Source Han Serif" with wide letter-spacing and bold weight, body "HarmonyOS Sans".
+   On Mini Program, the same-named font must be loaded via Taro.loadFontFace in app.tsx;
+   the @font-face below only takes effect on H5.
+   ========================================================== */
+
+@font-face {
+  font-family: 'SourceHanSerifTitle';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Page background: deep wood color, this theme is itself dark-toned */
+    --background: 20 38% 10%;
+    --foreground: 36 60% 90%;
+    /* Card: deep sand brown */
+    --card: 22 28% 18%;
+    --card-foreground: 36 50% 88%;
+    --popover: 22 28% 18%;
+    --popover-foreground: 36 50% 88%;
+    /* Primary color: terracotta orange, brightness dialed down so the cream-sand foreground hits AA */
+    --primary: 16 76% 41%;
+    --primary-foreground: 36 60% 94%;
+    /* Secondary: forest green */
+    --secondary: 138 34% 22%;
+    --secondary-foreground: 36 55% 88%;
+    --muted: 22 22% 22%;
+    --muted-foreground: 36 25% 66%;
+    /* Accent: sandy gold, paired with deep-wood text */
+    --accent: 42 80% 52%;
+    --accent-foreground: 20 50% 15%;
+    --destructive: 0 65% 44%;
+    --destructive-foreground: 36 60% 94%;
+    --border: 28 35% 30%;
+    --input: 22 28% 24%;
+    --ring: 42 80% 52%;
+    --radius: 0.5rem;
+    --shadow-hard: 3px 3px 0px 0px hsl(42 80% 52%);
+    --shadow-hard-sm: 2px 2px 0px 0px hsl(42 80% 52%);
+    --shadow-hard-lg: 5px 5px 0px 0px hsl(42 80% 52% / 0.7);
+    --chart-1: 16 76% 48%;
+    --chart-2: 42 80% 56%;
+    --chart-3: 138 34% 34%;
+    --chart-4: 30 42% 62%;
+    --chart-5: 8 46% 38%;
+    --sidebar-background: 20 40% 8%;
+    --sidebar-foreground: 36 55% 88%;
+    --sidebar-primary: 16 76% 41%;
+    --sidebar-primary-foreground: 36 60% 94%;
+    --sidebar-accent: 22 26% 16%;
+    --sidebar-accent-foreground: 36 50% 88%;
+    --sidebar-border: 28 35% 26%;
+    --sidebar-ring: 42 80% 52%;
+  }
+
+  /* This theme is inherently dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 20 38% 10%;
+    --foreground: 36 60% 90%;
+    --card: 22 28% 18%;
+    --card-foreground: 36 50% 88%;
+    --popover: 22 28% 18%;
+    --popover-foreground: 36 50% 88%;
+    --primary: 16 76% 41%;
+    --primary-foreground: 36 60% 94%;
+    --secondary: 138 34% 22%;
+    --secondary-foreground: 36 55% 88%;
+    --muted: 22 22% 22%;
+    --muted-foreground: 36 25% 66%;
+    --accent: 42 80% 52%;
+    --accent-foreground: 20 50% 15%;
+    --destructive: 0 65% 44%;
+    --destructive-foreground: 36 60% 94%;
+    --border: 28 35% 30%;
+    --input: 22 28% 24%;
+    --ring: 42 80% 52%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'HarmonyOS Sans', system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: Kente stripe band, orange / gold / green cycling in equal widths, anchoring division and rhythm */
+  .kente-stripe {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0px,
+      hsl(var(--primary)) 6px,
+      hsl(var(--accent)) 6px,
+      hsl(var(--accent)) 12px,
+      hsl(var(--secondary)) 12px,
+      hsl(var(--secondary)) 18px,
+      hsl(var(--accent)) 18px,
+      hsl(var(--accent)) 24px
+    );
+    height: 6px;
+  }
+  /* Hard-edge offset shadow: simulates the thickness of stitched fabric, three tiers for rest / hover / emphasis */
+  .shadow-hard-sm {
+    box-shadow: var(--shadow-hard-sm);
+  }
+  .shadow-hard {
+    box-shadow: var(--shadow-hard);
+  }
+  .shadow-hard-lg {
+    box-shadow: var(--shadow-hard-lg);
+  }
+  /* Adire tie-dye noise: coarse fabric grain */
+  .bg-fabric {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='hsl(43 83%25 65%25 / 0.06)'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='hsl(43 83%25 65%25 / 0.05)'/%3E%3C/svg%3E");
+  }
+  /* Woven grid: fine lines in both directions, simulating hand-woven texture */
+  .bg-woven {
+    background-image: repeating-linear-gradient(
+        0deg,
+        hsl(var(--border) / 0.45) 0px,
+        hsl(var(--border) / 0.45) 1px,
+        transparent 1px,
+        transparent 8px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        hsl(var(--border) / 0.45) 0px,
+        hsl(var(--border) / 0.45) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+  }
+  /* Bold outline: heavy, definite fabric edge */
+  .border-fabric {
+    border-width: 2px;
+    border-style: solid;
+    border-color: hsl(var(--border));
+  }
+  /* Wide-letter-spacing heading: horizontal rhythm reminiscent of Kente stripes */
+  .font-serif-title {
+    font-family: 'SourceHanSerifTitle', 'Songti SC', serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  /* Press: overall displacement absorbs the shadow, feedback feels crisp and weighty */
+  .press-hard:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px hsl(var(--accent));
+  }
+}
+
+/* Motion: brief fade-in + slight scale, simulating a fabric pattern unfolding */
+@keyframes weave-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes stripe-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 24px 0;
+  }
+}
+
+.animate-weave-in {
+  animation: weave-in 0.24s ease-out both;
+}
+.animate-stripe-shift {
+  animation: stripe-shift 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-weave-in,
+  .animate-stripe-shift {
+    animation: none;
+  }
+}

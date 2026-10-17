@@ -1,0 +1,186 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Duotone — international orange × deep teal, near-black cyan-teal base.
+   Hard clash of two colors: orange is used only for headings / borders / high-intensity emphasis; teal handles surfaces and mapping — never blend them into a gradient.
+   Monospace typography throughout, hard-edged containers + bold borders, zero corner radius.
+   On mini-program, load 'Source Han Mono SC' in app.tsx via Taro.loadFontFace. */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Digital void: near-black deep cyan-teal base */
+    --background: 180 100% 8%;
+    --foreground: 180 25% 92%;
+    --card: 180 55% 13%;
+    --card-foreground: 180 25% 92%;
+    --popover: 180 60% 11%;
+    --popover-foreground: 180 25% 92%;
+    /* Primary: international orange, brightness pushed down so white text reaches AA — do not switch to black text */
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 40% 16%;
+    --secondary-foreground: 180 25% 92%;
+    --muted: 180 35% 15%;
+    --muted-foreground: 180 18% 64%;
+    /* Accent: deep teal, carries deep cyan-teal text */
+    --accent: 181 100% 41%;
+    --accent-foreground: 180 100% 8%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 40% 20%;
+    --input: 180 40% 20%;
+    --ring: 16 100% 50%;
+    --radius: 0rem;
+    /* Hard offset shadow: a solid orange block, no blur, matching the hard-edge language */
+    --shadow-hard: 4px 4px 0 hsl(16 100% 42.5%);
+    --shadow-hard-accent: 4px 4px 0 hsl(181 100% 41%);
+    --chart-1: 16 100% 50%;
+    --chart-2: 181 100% 41%;
+    --chart-3: 40 82% 55%;
+    --chart-4: 200 70% 50%;
+    --chart-5: 340 68% 55%;
+    --sidebar-background: 180 100% 10%;
+    --sidebar-foreground: 180 25% 90%;
+    --sidebar-primary: 16 100% 42.5%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 180 40% 16%;
+    --sidebar-accent-foreground: 180 25% 92%;
+    --sidebar-border: 180 40% 20%;
+    --sidebar-ring: 16 100% 50%;
+  }
+
+  /* The theme is dark by default; .dark keeps identical values as a compatibility layer */
+  .dark {
+    --background: 180 100% 8%;
+    --foreground: 180 25% 92%;
+    --card: 180 55% 13%;
+    --card-foreground: 180 25% 92%;
+    --popover: 180 60% 11%;
+    --popover-foreground: 180 25% 92%;
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 40% 16%;
+    --secondary-foreground: 180 25% 92%;
+    --muted: 180 35% 15%;
+    --muted-foreground: 180 18% 64%;
+    --accent: 181 100% 41%;
+    --accent-foreground: 180 100% 8%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 40% 20%;
+    --input: 180 40% 20%;
+    --ring: 16 100% 50%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Mono SC', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: hard-edge container — bold outline + solid orange offset, zero corner radius, zero blur */
+  .hard-edge {
+    border-width: 2px;
+    border-style: solid;
+    border-color: hsl(var(--foreground));
+    border-radius: 0;
+    box-shadow: var(--shadow-hard);
+  }
+  .hard-edge-accent {
+    border-width: 2px;
+    border-style: solid;
+    border-color: hsl(var(--accent));
+    border-radius: 0;
+    box-shadow: var(--shadow-hard-accent);
+  }
+  /* Duotone image mapping: default orange-teal duotone, switches back to the original image on interaction (add the -active class or :active) */
+  .duotone-img {
+    filter: grayscale(1) contrast(1.15) sepia(1) hue-rotate(150deg) saturate(3.5);
+    transition: filter 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .duotone-img-active,
+  .duotone-img:active {
+    filter: none;
+  }
+  /* Giant monospace typography: negative letter-spacing, tightened line-height — can break grid alignment for overlap */
+  .mono-display {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+  /* Metadata scale row: small monospace text + wide letter-spacing, for ISO / aperture-style parameter labels */
+  .meta-scale {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    font-size: 20rpx;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  /* Fine grid texture: restrained enough not to compete with the image subject */
+  .grid-texture {
+    background-image:
+      linear-gradient(hsl(180 40% 20% / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(180 40% 20% / 0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  /* Small-area neon accents, one per duotone color */
+  .text-glow-primary {
+    text-shadow: 0 0 18px hsl(16 100% 50% / 0.55);
+  }
+  .text-glow-accent {
+    text-shadow: 0 0 18px hsl(181 100% 41% / 0.55);
+  }
+
+  /* Segmented reveal: content emerges section by section while scrolling, slow and smooth, avoiding sharp instant transitions */
+  @keyframes duotone-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-reveal {
+    animation: duotone-reveal 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  /* Breathing pulse for touch cursor / emphasis blocks */
+  @keyframes duotone-pulse {
+    0%,
+    100% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(1.12);
+    }
+  }
+  .animate-pulse-slow {
+    animation: duotone-pulse 2400ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-reveal,
+    .animate-pulse-slow {
+      animation: none;
+    }
+    .duotone-img {
+      transition: none;
+    }
+  }
+}

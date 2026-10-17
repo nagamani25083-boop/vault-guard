@@ -1,0 +1,179 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Wabi-Sabi Green — deep bamboo green × warm paper white × muted gold accents
+   Oriental minimalism: generous whitespace, low-saturation natural materials, restrained gold details.
+   Fonts: @font-face only takes effect on H5; for the Mini Program target,
+   load the same-named font via Taro.loadFontFace in app.tsx before use.
+   ============================================================ */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-SemiBold.woff2') format('woff2');
+}
+
+@layer base {
+  :root {
+    /* Warm paper white base / charcoal gray body text */
+    --background: 60 20% 97%;
+    --foreground: 0 0% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
+    /* Deep bamboo green: navigation, primary buttons, pricing, key actions */
+    --primary: 96 57% 20%;
+    --primary-foreground: 60 24% 98%;
+    --primary-glow: 96 38% 32%;
+    /* Moss-green light surface: secondary blocks */
+    --secondary: 82 20% 92%;
+    --secondary-foreground: 96 57% 20%;
+    --muted: 50 14% 93%;
+    --muted-foreground: 60 6% 40%;
+    /* Muted gold: used only as sparing accent (tags, thin lines, emphasis) */
+    --accent: 44 54% 54%;
+    --accent-foreground: 0 0% 17%;
+    --destructive: 8 58% 46%;
+    --destructive-foreground: 60 24% 98%;
+    /* Semi-transparent bamboo-green/charcoal outline; cards have no heavy shadow by default */
+    --border: 82 12% 85%;
+    --input: 82 12% 85%;
+    --ring: 96 57% 20%;
+    --radius: 0.75rem;
+    /* Charts: natural gradation of bamboo green — muted gold — earth tones */
+    --chart-1: 96 57% 20%;
+    --chart-2: 44 54% 54%;
+    --chart-3: 96 26% 44%;
+    --chart-4: 30 34% 52%;
+    --chart-5: 82 16% 68%;
+    /* Calm deep bamboo-green passage */
+    --sidebar-background: 99 42% 12%;
+    --sidebar-foreground: 60 22% 92%;
+    --sidebar-primary: 44 54% 56%;
+    --sidebar-primary-foreground: 99 45% 12%;
+    --sidebar-accent: 96 28% 20%;
+    --sidebar-accent-foreground: 60 24% 94%;
+    --sidebar-border: 96 24% 22%;
+    --sidebar-ring: 44 54% 56%;
+  }
+
+  /* Dark mode keeps the bamboo-green/warm-yellow hues, flipped into deep bamboo shadow rather than neutral gray-blue */
+  .dark {
+    --background: 96 12% 9%;
+    --foreground: 60 18% 92%;
+    --card: 96 12% 12%;
+    --card-foreground: 60 18% 92%;
+    --popover: 96 12% 13%;
+    --popover-foreground: 60 18% 92%;
+    --primary: 96 45% 32%;
+    --primary-foreground: 60 24% 97%;
+    --primary-glow: 96 34% 46%;
+    --secondary: 96 12% 18%;
+    --secondary-foreground: 60 16% 90%;
+    --muted: 96 10% 16%;
+    --muted-foreground: 60 8% 66%;
+    --accent: 44 52% 58%;
+    --accent-foreground: 96 30% 10%;
+    --destructive: 8 52% 44%;
+    --destructive-foreground: 60 24% 97%;
+    --border: 96 12% 22%;
+    --input: 96 12% 24%;
+    --ring: 96 40% 52%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'SourceHanSerifCN', 'Songti SC', 'STSong', serif;
+    line-height: 1.75;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: warm paper grain — extremely fine grain simulating handmade paper, without relying on blur */
+  .paper-grain {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(hsl(96 24% 30% / 0.05) 1px, transparent 1px),
+      radial-gradient(hsl(44 40% 40% / 0.04) 1px, transparent 1px);
+    background-size: 16px 16px, 26px 26px;
+    background-position: 0 0, 8px 13px;
+  }
+  /* Muted-gold hairline: the only decorative bright accent in the whole system */
+  .hairline-gold {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.7), transparent);
+  }
+  /* Bamboo-node divider: evenly spaced solid segments + whitespace */
+  .bamboo-divider {
+    height: 2px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.4) 0 14px,
+      transparent 14px 22px
+    );
+  }
+  /* Quiet card surface: flat, semi-transparent bamboo-green outline, very light shadow */
+  .card-quiet {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--primary) / 0.14);
+    box-shadow: 0 2px 16px -10px hsl(96 40% 15% / 0.16);
+  }
+  /* Muted-gold tag background: lightweight information marker */
+  .tag-gold {
+    background-color: hsl(var(--accent) / 0.18);
+    border: 1px solid hsl(var(--accent) / 0.45);
+    color: hsl(38 60% 26%);
+  }
+  .font-brand {
+    font-family: 'SourceHanSerifCN', 'Songti SC', 'STSong', serif;
+    font-weight: 600;
+  }
+  /* Entrance: fade in + move up, a quiet sense of ceremony */
+  .fade-in-up {
+    animation: fade-in-up 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Press feedback: 160ms slight inward contraction */
+  .press-scale {
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+  .press-scale:active {
+    transform: scale(0.97);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    animation: none;
+  }
+  .press-scale {
+    transition: none;
+  }
+  .press-scale:active {
+    transform: none;
+  }
+}

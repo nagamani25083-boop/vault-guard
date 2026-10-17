@@ -1,0 +1,204 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Watercolor Style — warm-white paper × tranquil blue × low-saturation wash accent colors
+   Soft gradients, layered semi-transparent overlays, large radii, light shadows; translucency is
+   simulated with translucent base colors + thin outlines + soft shadows, no blur filters used.
+   Fonts: @font-face only takes effect on H5; for the Mini Program target,
+   load the same-named font via Taro.loadFontFace in app.tsx before use.
+   ============================================================ */
+
+@font-face {
+  font-family: 'MuyaoSoftbrush';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'ResourceHanRounded';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ResourceHanRoundedCN-Regular.ttf') format('truetype');
+}
+
+@layer base {
+  :root {
+    /* Warm-white paper base / blue-ink body text */
+    --background: 36 33% 97%;
+    --foreground: 216 28% 26%;
+    --card: 36 40% 99%;
+    --card-foreground: 216 28% 26%;
+    --popover: 36 40% 99%;
+    --popover-foreground: 216 28% 26%;
+    /* Tranquil blue primary color */
+    --primary: 216 38% 47%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 216 46% 66%;
+    /* Lake-cyan secondary color */
+    --secondary: 177 42% 66%;
+    --secondary-foreground: 216 30% 22%;
+    --muted: 36 22% 92%;
+    --muted-foreground: 216 12% 42%;
+    /* Terracotta orange accent */
+    --accent: 25 70% 70%;
+    --accent-foreground: 216 30% 20%;
+    /* Watercolor palette: rose gray / warm brown, for multi-color washes */
+    --rose-wash: 352 34% 68%;
+    --clay-wash: 30 52% 66%;
+    --destructive: 352 48% 46%;
+    --destructive-foreground: 0 0% 100%;
+    /* Very faint blue-gray outline, hard black borders are forbidden */
+    --border: 216 30% 86%;
+    --input: 216 30% 86%;
+    --ring: 216 38% 47%;
+    --radius: 1rem;
+    --chart-1: 216 38% 47%;
+    --chart-2: 177 42% 52%;
+    --chart-3: 25 62% 58%;
+    --chart-4: 352 34% 62%;
+    --chart-5: 30 46% 58%;
+    --sidebar-background: 36 36% 98%;
+    --sidebar-foreground: 216 24% 30%;
+    --sidebar-primary: 216 38% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 216 34% 92%;
+    --sidebar-accent-foreground: 216 38% 32%;
+    --sidebar-border: 216 28% 88%;
+    --sidebar-ring: 216 38% 47%;
+    /* Watercolor gradients and soft shadows */
+    --gradient-primary: linear-gradient(135deg, hsl(216 38% 47%), hsl(216 46% 66%));
+    --gradient-subtle: linear-gradient(180deg, hsl(36 40% 99%), hsl(216 38% 47% / 0.06));
+    --gradient-watercolor: linear-gradient(
+      135deg,
+      hsl(216 38% 47% / 0.14),
+      hsl(177 42% 66% / 0.14) 45%,
+      hsl(25 70% 70% / 0.14)
+    );
+    --gradient-bloom: radial-gradient(60% 50% at 12% 8%, hsl(177 45% 62% / 0.18), transparent 70%),
+      radial-gradient(55% 45% at 92% 6%, hsl(25 70% 72% / 0.18), transparent 70%),
+      radial-gradient(60% 55% at 86% 96%, hsl(352 40% 68% / 0.14), transparent 72%);
+    --shadow-elegant: 0 14px 40px -16px hsl(216 38% 40% / 0.28);
+    --shadow-soft: 0 8px 24px -14px hsl(216 30% 40% / 0.2);
+  }
+
+  /* Dark mode keeps the blue-ink and warm-paper hues, flipped into a night-blue paper surface rather than neutral gray-blue */
+  .dark {
+    --background: 216 24% 12%;
+    --foreground: 36 26% 92%;
+    --card: 216 22% 16%;
+    --card-foreground: 36 26% 92%;
+    --popover: 216 22% 17%;
+    --popover-foreground: 36 26% 92%;
+    --primary: 216 48% 58%;
+    --primary-foreground: 216 34% 10%;
+    --primary-glow: 216 52% 70%;
+    --secondary: 177 32% 28%;
+    --secondary-foreground: 36 26% 94%;
+    --muted: 216 18% 20%;
+    --muted-foreground: 216 14% 68%;
+    --accent: 25 60% 58%;
+    --accent-foreground: 216 34% 12%;
+    --rose-wash: 352 30% 52%;
+    --clay-wash: 30 42% 50%;
+    --destructive: 352 48% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 216 16% 28%;
+    --input: 216 16% 28%;
+    --ring: 216 48% 62%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'ResourceHanRounded', -apple-system, 'PingFang SC', sans-serif;
+    line-height: 1.7;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: watercolor wash base — multiple soft radial color patches, simulating pigment spreading on paper */
+  .wash-bloom {
+    background-color: hsl(var(--background));
+    background-image: var(--gradient-bloom);
+  }
+  /* Semi-transparent layered card face: soft edges + light shadow, without relying on blur filters */
+  .wash-card {
+    background-image: var(--gradient-subtle);
+    border: 1px solid hsl(var(--primary) / 0.16);
+    box-shadow: var(--shadow-soft), inset 0 1px 0 hsl(0 0% 100% / 0.6);
+  }
+  /* Three-color watercolor overlay */
+  .bg-gradient-watercolor {
+    background-image: var(--gradient-watercolor);
+  }
+  .bg-gradient-bloom {
+    background-image: var(--gradient-bloom);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  /* Paper grain: extremely fine, quiet and restrained particles */
+  .paper-grain {
+    background-image:
+      radial-gradient(hsl(216 20% 40% / 0.045) 1px, transparent 1px),
+      radial-gradient(hsl(25 40% 50% / 0.035) 1px, transparent 1px);
+    background-size: 15px 15px, 23px 23px;
+    background-position: 0 0, 7px 11px;
+  }
+  /* Water-stain edge: an uneven soft outline, like dried pigment deposits */
+  .wash-edge {
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: inset 0 0 12px hsl(var(--primary) / 0.08), 0 2px 10px -6px hsl(var(--primary) / 0.3);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .font-brush {
+    font-family: 'MuyaoSoftbrush', 'ResourceHanRounded', sans-serif;
+  }
+  /* Seeping-in entrance: fade in + slight scale up, slow and natural */
+  .animate-seep-in {
+    animation: seep-in 400ms ease-out both;
+  }
+  /* Touch to enlarge / shrink on press, avoiding hard displacement */
+  .press-soft {
+    transition: transform 400ms ease-out, box-shadow 400ms ease-out;
+  }
+  .press-soft:active {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes seep-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-seep-in {
+    animation: none;
+  }
+  .press-soft {
+    transition: none;
+  }
+  .press-soft:active {
+    transform: none;
+  }
+}

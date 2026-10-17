@@ -1,0 +1,176 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============ Minimal Business Style Design System ============
+   Classical serif headings + cool gray paper-like background + restrained blue accents
+   All colors use HSL
+*/
+
+@font-face {
+  font-family: 'Source Han Serif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alibaba PuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 212 92% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 0 0% 12%;
+    --muted: 210 16% 95%;
+    --muted-foreground: 215 12% 42%;
+    --accent: 210 20% 93%;
+    --accent-foreground: 0 0% 12%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 18% 89%;
+    --input: 214 18% 89%;
+    --ring: 212 92% 54%;
+    --chart-1: 212 92% 54%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 221 60% 38%;
+    --chart-4: 190 70% 42%;
+    --chart-5: 234 45% 55%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 26%;
+    --sidebar-primary: 212 92% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 95%;
+    --sidebar-accent-foreground: 0 0% 12%;
+    --sidebar-border: 214 18% 89%;
+    --sidebar-ring: 212 92% 54%;
+    --success: 152 55% 42%;
+    --warning: 38 92% 50%;
+    --info: 212 92% 54%;
+    --badge-rail-police: 220 65% 48%;
+    --badge-station-staff: 199 72% 40%;
+    --badge-station-master: 38 78% 44%;
+    --badge-excellent-admin: 152 52% 36%;
+    --badge-air-traffic: 265 45% 55%;
+    --badge-kind-citizen: 12 68% 52%;
+    --font-serif: 'Source Han Serif', 'Songti SC', 'SimSun', serif;
+    --font-sans: 'Alibaba PuHuiTi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --shadow-card: 0 1px 2px hsl(215 25% 15% / 0.04), 0 4px 12px hsl(215 25% 15% / 0.05);
+    --shadow-hover: 0 4px 8px hsl(215 25% 15% / 0.06), 0 12px 28px hsl(215 25% 15% / 0.10);
+    --gradient-primary: linear-gradient(135deg, hsl(212 92% 54%), hsl(221 60% 38%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 98%));
+    --gradient-background: linear-gradient(180deg, hsl(0 0% 98%), hsl(210 16% 95%));
+  }
+
+  .dark {
+    --background: 220 16% 11%;
+    --foreground: 210 20% 92%;
+    --card: 220 15% 15%;
+    --card-foreground: 210 20% 92%;
+    --popover: 220 15% 15%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 212 88% 47.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 12% 20%;
+    --secondary-foreground: 210 20% 92%;
+    --muted: 220 12% 20%;
+    --muted-foreground: 215 12% 62%;
+    --accent: 220 12% 24%;
+    --accent-foreground: 210 20% 92%;
+    --destructive: 0 62% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 12% 24%;
+    --input: 220 12% 24%;
+    --ring: 212 88% 60%;
+    --chart-1: 212 88% 60%;
+    --chart-2: 199 85% 55%;
+    --chart-3: 221 60% 62%;
+    --chart-4: 190 70% 55%;
+    --chart-5: 234 55% 68%;
+    --sidebar-background: 220 15% 14%;
+    --sidebar-foreground: 210 18% 85%;
+    --sidebar-primary: 212 88% 60%;
+    --sidebar-primary-foreground: 220 20% 10%;
+    --sidebar-accent: 220 12% 22%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 220 12% 24%;
+    --sidebar-ring: 212 88% 60%;
+    --success: 152 45% 50%;
+    --warning: 38 85% 58%;
+    --info: 212 88% 60%;
+    --badge-rail-police: 220 60% 64%;
+    --badge-station-staff: 199 62% 58%;
+    --badge-station-master: 38 72% 60%;
+    --badge-excellent-admin: 152 46% 56%;
+    --badge-air-traffic: 265 48% 70%;
+    --badge-kind-citizen: 12 62% 65%;
+    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.3);
+    --shadow-hover: 0 8px 24px hsl(0 0% 0% / 0.4);
+    --gradient-primary: linear-gradient(135deg, hsl(212 88% 60%), hsl(221 60% 40%));
+    --gradient-card: linear-gradient(180deg, hsl(220 15% 16%), hsl(220 15% 13%));
+    --gradient-background: linear-gradient(180deg, hsl(220 16% 12%), hsl(220 16% 10%));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Editorial section label: small-caps monospace, wide letter-spacing, flanked by thin lines */
+  .section-label {
+    @apply flex items-center gap-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground;
+  }
+  .section-label::before,
+  .section-label::after {
+    content: "";
+    @apply h-px flex-1 bg-border;
+  }
+  .section-label--start::before {
+    display: none;
+  }
+
+  /* 2px blue accent line at the top of the card */
+  .accent-top {
+    @apply relative overflow-hidden;
+  }
+  .accent-top::before {
+    content: "";
+    @apply absolute inset-x-0 top-0 h-0.5 bg-primary;
+  }
+
+  /* Extremely subtle paper grain noise background */
+  .paper-texture {
+    background-image: radial-gradient(hsl(215 20% 60% / 0.05) 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+}

@@ -1,0 +1,207 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Editorial — magazine-style typography, high black-and-white contrast + a single accent color
+   Near-white paper base / ink-black text / deep red accent, thin dividers, subtle shadows, restrained transitions */
+
+@font-face {
+  font-family: 'PlayfairDisplay';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/Playfair_Display.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Paper-white base / ink-black text */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    /* Primary color is ink black, restrained and achromatic */
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 93%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 33%;
+
+    /* The single accent color: deep red */
+    --accent: 354 64% 33%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 354 70% 38%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Extra-thin dividers */
+    --border: 0 0% 90%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 7%;
+
+    --chart-1: 0 0% 7%;
+    --chart-2: 354 64% 33%;
+    --chart-3: 0 0% 40%;
+    --chart-4: 0 0% 68%;
+    --chart-5: 43 59% 44%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 0 0% 7%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 95%;
+    --sidebar-accent-foreground: 354 64% 33%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 7%;
+
+    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.06);
+    --shadow-md: 0 10px 30px hsl(0 0% 0% / 0.10);
+    --tracking-tight: -0.02em;
+    --leading-body: 1.8;
+  }
+
+  .dark {
+    --radius: 0.75rem;
+    --background: 0 0% 6%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 6%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 72%;
+    /* In dark mode the accent shifts to matte gold, ensuring readability against the dark background */
+    --accent: 43 59% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 53%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 96%;
+
+    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.5);
+    --shadow-md: 0 10px 30px hsl(0 0% 0% / 0.6);
+    --chart-1: 0 0% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    line-height: var(--leading-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'PlayfairDisplay', Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: masthead rule — a thick-over-thin double rule separating the header from the body copy */
+  .sig-masthead-rule {
+    border-top: 2px solid hsl(var(--foreground));
+    border-bottom: 1px solid hsl(var(--border));
+    height: 5px;
+  }
+
+  /* Drop cap: a serif capital letter dropping the opening paragraph of the article */
+  .ed-dropcap::first-letter {
+    font-family: 'PlayfairDisplay', Georgia, serif;
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.82;
+    padding-right: 0.08em;
+    font-weight: 700;
+    color: hsl(var(--accent));
+  }
+
+  /* Pull quote: an accent-colored vertical rule + large italic serif type, allowed to break out of the column grid */
+  .ed-pullquote {
+    border-left: 3px solid hsl(var(--accent));
+    padding-left: 1.25rem;
+    font-family: 'PlayfairDisplay', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.35;
+  }
+
+  /* Meta line: small caps with generous letter-spacing, for author/date/read time */
+  .ed-meta {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Soft-shadow card: an almost borderless sense of elevation */
+  .ed-card {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 400ms ease-out, transform 400ms ease-out;
+  }
+  .ed-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  /* Slow image zoom-in: the container clips while the image scales up gradually */
+  .ed-zoom-frame {
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+  .ed-zoom-frame > img {
+    display: block;
+    width: 100%;
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ed-zoom-frame:hover > img {
+    transform: scale(1.06);
+  }
+
+  /* Unhurried entrance: fade in + rise up, matching a leisurely scroll pace */
+  .ed-reveal {
+    animation: ed-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes ed-reveal {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ed-reveal { animation: none; }
+    .ed-card,
+    .ed-zoom-frame > img { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+}

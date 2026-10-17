@@ -1,0 +1,300 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Retro 90s — early internet and Win95 spirit
+   System gray base / pure black text / navy blue title bar / high-saturation bright accents / 3D beveled controls / zero border radius */
+
+@font-face {
+  font-family: 'ZCOOLKuHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ZCOOLKuHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0px;
+
+    /* Win95 gray base / pure black text */
+    --background: 0 0% 75%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Navy blue: title bar and primary actions */
+    --primary: 217 100% 25%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 75%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 88%;
+    --muted-foreground: 0 0% 30%;
+
+    /* Bright yellow accent */
+    --accent: 48 100% 27.5%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border is a solid black hard line — the structural line of this style */
+    --border: 0 0% 0%;
+    --input: 0 0% 100%;
+    --ring: 217 100% 25%;
+
+    --success: 120 100% 25%;
+    --warning: 48 100% 50%;
+    --info: 217 100% 50%;
+
+    --chart-1: 0 100% 45%;
+    --chart-2: 120 100% 30%;
+    --chart-3: 48 100% 45%;
+    --chart-4: 217 100% 45%;
+    --chart-5: 280 100% 40%;
+
+    --sidebar-background: 0 0% 75%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 217 100% 25%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 217 100% 25%;
+
+    /* Early web hyperlink three-state */
+    --link: 240 100% 50%;
+    --link-visited: 283 100% 25%;
+    --link-hover: 0 100% 45%;
+
+    /* Title bar gradient (navy blue → bright blue) */
+    --titlebar-from: 217 100% 25%;
+    --titlebar-to: 202 100% 44%;
+  }
+
+  .dark {
+    --radius: 0px;
+    --background: 0 0% 20%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 25%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 25%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 202 100% 37.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 33%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 33%;
+    --muted-foreground: 0 0% 82%;
+    --accent: 48 100% 27.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 55%;
+    --input: 0 0% 33%;
+    --ring: 202 100% 44%;
+    --success: 120 60% 45%;
+    --warning: 48 100% 50%;
+    --info: 202 100% 55%;
+    --chart-1: 0 100% 55%;
+    --chart-2: 120 70% 45%;
+    --chart-3: 48 100% 55%;
+    --chart-4: 202 100% 55%;
+    --chart-5: 280 80% 60%;
+    --sidebar-background: 0 0% 20%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 202 100% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 48 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 55%;
+    --sidebar-ring: 202 100% 44%;
+    --link: 210 100% 70%;
+    --link-visited: 283 70% 70%;
+    --link-hover: 0 100% 65%;
+    --titlebar-from: 217 100% 20%;
+    --titlebar-to: 202 100% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'SourceHanSerifCN', 'SimSun', '宋体', serif;
+    /* Fine gray diagonal striping: rough, anti-minimalist early-web texture */
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0, transparent 2px,
+        hsl(0 0% 0% / 0.03) 2px, hsl(0 0% 0% / 0.03) 4px);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'ZCOOLKuHei', 'Microsoft YaHei', '微软雅黑', sans-serif;
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  /* Core visual signature: 3D beveled raised / sunken edges (Win95 control's sense of depth) */
+  .win95-outset {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(255 255 255) rgb(0 0 0) rgb(0 0 0) rgb(255 255 255);
+    box-shadow: inset 1px 1px 0 rgb(223 223 223), inset -1px -1px 0 rgb(128 128 128);
+  }
+
+  .win95-inset {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0 0 0) rgb(255 255 255) rgb(255 255 255) rgb(0 0 0);
+    box-shadow: inset 1px 1px 0 rgb(128 128 128), inset -1px -1px 0 rgb(223 223 223);
+  }
+
+  /* System button: bevel reverses + shifts on press */
+  .win95-button {
+    @apply win95-outset px-3 py-1 text-sm font-bold select-none cursor-pointer transition-none;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'ZCOOLKuHei', sans-serif;
+  }
+  .win95-button:active {
+    @apply win95-inset;
+    transform: translate(1px, 1px);
+  }
+  .win95-button:disabled {
+    color: rgb(128 128 128);
+    text-shadow: 1px 1px 0 rgb(255 255 255);
+    cursor: not-allowed;
+  }
+
+  /* Blue gradient title bar */
+  .win95-titlebar {
+    background: linear-gradient(90deg, hsl(var(--titlebar-from)), hsl(var(--titlebar-to)));
+    @apply text-white font-bold px-2 py-1 flex items-center justify-between;
+    font-family: 'ZCOOLKuHei', sans-serif;
+  }
+
+  /* Window container: outset bevel + hard offset shadow */
+  .win95-window {
+    @apply win95-outset;
+    background-color: hsl(var(--background));
+    box-shadow: 2px 2px 0 rgb(128 128 128), 1px 1px 0 rgb(0 0 0);
+  }
+
+  /* Inset input area */
+  .win95-field {
+    @apply win95-inset px-2 py-1;
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+  }
+
+  /* Sunken divider */
+  .win95-divider {
+    border-top: 1px solid rgb(128 128 128);
+    border-bottom: 1px solid rgb(255 255 255);
+    height: 2px;
+    margin: 4px 0;
+  }
+
+  /* "Under construction" warning diagonal stripes */
+  .construction-stripe {
+    background: repeating-linear-gradient(
+      45deg,
+      hsl(48 100% 50%) 0, hsl(48 100% 50%) 10px,
+      hsl(0 0% 0%) 10px, hsl(0 0% 0%) 20px
+    );
+  }
+
+  /* Marquee */
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    @apply py-1;
+    background: hsl(0 0% 0%);
+    color: hsl(120 100% 50%);
+    font-family: 'Courier New', monospace;
+  }
+  .marquee-content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* Rainbow cycling text */
+  .rainbow-text {
+    background: linear-gradient(90deg,
+      hsl(0 100% 50%), hsl(30 100% 50%), hsl(60 100% 50%), hsl(120 100% 50%),
+      hsl(240 100% 50%), hsl(275 100% 25%), hsl(282 100% 41%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: rainbow-cycle 3s linear infinite;
+  }
+  @keyframes rainbow-cycle {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  /* Blinking badge */
+  .blink-badge {
+    animation: blink-anim 1s steps(2) infinite;
+  }
+  @keyframes blink-anim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Pixel corner cut */
+  .pixel-corner {
+    clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
+  }
+
+  /* Green-on-black counter digit */
+  .counter-digit {
+    display: inline-block;
+    background: hsl(0 0% 0%);
+    color: hsl(120 100% 50%);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    padding: 1px 4px;
+    border: 1px solid hsl(120 100% 50%);
+    min-width: 1ch;
+    text-align: center;
+  }
+}
+
+@layer utilities {
+  /* Early web hyperlink three-state */
+  .text-link {
+    color: hsl(var(--link));
+    text-decoration: underline;
+  }
+  .text-link:visited { color: hsl(var(--link-visited)); }
+  .text-link:hover { color: hsl(var(--link-hover)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content,
+  .rainbow-text,
+  .blink-badge {
+    animation: none !important;
+  }
+}

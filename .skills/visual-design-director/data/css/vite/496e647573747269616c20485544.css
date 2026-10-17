@@ -1,0 +1,213 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: HUD Industrial -- industrial-grade rendering console
+   Obsidian black base / deep charcoal panels / light gray text / neon orange as the sole accent, sharp corners with zero radius, no shadows */
+
+@font-face {
+  font-family: 'ZCOOLKuHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ZCOOLKuHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Sharp-cornered console, no rounding allowed */
+    --radius: 0px;
+
+    /* Obsidian black base / light gray text */
+    --background: 0 0% 1%;
+    --foreground: 0 0% 88%;
+
+    /* Deep charcoal panels */
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 88%;
+
+    /* Neon orange: the only vital sign in a dark instrument, used solely for key values/progress/laser lines */
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 88%;
+
+    /* Neutral gray for secondary information */
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 62%;
+
+    --accent: 16 100% 42.5%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 49%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Uniform dark gray borders that directly partition information zones */
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 100% 50%;
+
+    --success: 0 0% 70%;
+    --warning: 16 100% 50%;
+    --info: 0 0% 62%;
+
+    /* Chart colors restrained to grayscale + orange, avoiding other high-saturation hues */
+    --chart-1: 16 100% 50%;
+    --chart-2: 0 0% 62%;
+    --chart-3: 0 0% 42%;
+    --chart-4: 16 80% 38%;
+    --chart-5: 0 0% 88%;
+
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 88%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 16 100% 50%;
+  }
+
+  /* The theme itself is a dark console; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 1%;
+    --foreground: 0 0% 88%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 16 100% 42.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 100% 50%;
+    --success: 0 0% 70%;
+    --warning: 16 100% 50%;
+    --info: 0 0% 62%;
+    --chart-1: 16 100% 50%;
+    --chart-2: 0 0% 62%;
+    --chart-3: 0 0% 42%;
+    --chart-4: 16 80% 38%;
+    --chart-5: 0 0% 88%;
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 88%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 16 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'AlibabaPuHuiTi', ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Subtle grain noise simulating an industrial screen texture */
+    background-image:
+      repeating-linear-gradient(0deg, hsl(0 0% 100% / 0.012) 0 1px, transparent 1px 3px);
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'ZCOOLKuHei', 'Microsoft YaHei', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 0; }
+}
+
+@layer components {
+  /* Core visual signature: neon orange laser line (single-pixel glowing horizontal line) */
+  .hud-laser {
+    height: 1px;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 6px hsl(var(--primary) / 0.9), 0 0 18px hsl(var(--primary) / 0.45);
+  }
+
+  /* Console panel: sharp hard edges, no shadow */
+  .hud-panel {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0;
+  }
+
+  /* Dashboard tick ruler (top/side scale markers) */
+  .hud-ticks {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--border)) 0 1px,
+      transparent 1px 8px
+    );
+  }
+
+  /* Mechanical response: border turns orange + a brief upward shift, compresses on press */
+  .hud-press {
+    transition: border-color 90ms linear, transform 90ms linear;
+  }
+  .hud-press:hover {
+    border-color: hsl(var(--primary));
+    transform: translateY(-1px);
+  }
+  .hud-press:active {
+    transform: translateY(0) scaleY(0.97);
+  }
+
+  /* Key values: monospaced + orange glow */
+  .hud-metric {
+    font-variant-numeric: tabular-nums;
+    color: hsl(var(--primary));
+    text-shadow: 0 0 12px hsl(var(--primary) / 0.5);
+    letter-spacing: 0.02em;
+  }
+
+  /* Laser breathing (active status indicator) */
+  .hud-breathe {
+    animation: hud-breathe 2.4s ease-in-out infinite;
+  }
+  @keyframes hud-breathe {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+
+  /* Progress bar fill */
+  .hud-progress-fill {
+    background: hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+    transition: width 300ms linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hud-breathe { animation: none; }
+  }
+}

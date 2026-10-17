@@ -1,0 +1,209 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fabric-texture design system — linen, canvas, warm-brown stitching, all colors use HSL */
+
+@font-face {
+  font-family: 'Muyao Softbrush';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/MuyaoSoftbrush_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Han Serif CN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    --background: 37 33% 94%;
+    --foreground: 31 34% 18%;
+    --card: 38 44% 96%;
+    --card-foreground: 31 34% 18%;
+    --popover: 38 44% 96%;
+    --popover-foreground: 31 34% 18%;
+
+    --primary: 20 47% 45.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 37 27% 89%;
+    --secondary-foreground: 31 34% 20%;
+    --muted: 37 25% 90%;
+    --muted-foreground: 30 13% 40%;
+    --accent: 41 58% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 8 60% 47%;
+    --destructive-foreground: 38 44% 97%;
+    --success: 132 28% 38%;
+    --warning: 38 62% 50%;
+    --info: 204 27% 39%;
+    --education-blue: 204 27% 39%;
+    --education-green: 132 28% 38%;
+
+    --border: 31 22% 70%;
+    --input: 31 22% 70%;
+    --ring: 20 47% 50%;
+
+    --chart-1: 20 47% 54%;
+    --chart-2: 204 27% 44%;
+    --chart-3: 41 58% 54%;
+    --chart-4: 132 26% 42%;
+    --chart-5: 31 34% 38%;
+
+    --sidebar-background: 34 29% 87%;
+    --sidebar-foreground: 31 34% 22%;
+    --sidebar-primary: 20 47% 50%;
+    --sidebar-primary-foreground: 38 44% 97%;
+    --sidebar-accent: 37 33% 81%;
+    --sidebar-accent-foreground: 31 34% 18%;
+    --sidebar-border: 31 22% 66%;
+    --sidebar-ring: 20 47% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(20 47% 52%), hsl(41 58% 55%));
+    --gradient-card: linear-gradient(160deg, hsl(38 44% 97%), hsl(37 30% 92%));
+    --gradient-background: linear-gradient(180deg, hsl(37 33% 95%), hsl(37 30% 92%));
+    --shadow-card: 0 2px 8px -2px hsl(31 30% 40% / 0.14);
+    --shadow-hover: 0 8px 20px -6px hsl(31 30% 35% / 0.22);
+  }
+
+  .dark {
+    --background: 30 12% 12%;
+    --foreground: 37 28% 88%;
+    --card: 30 11% 16%;
+    --card-foreground: 37 28% 88%;
+    --popover: 30 11% 16%;
+    --popover-foreground: 37 28% 88%;
+
+    --primary: 20 52% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 9% 22%;
+    --secondary-foreground: 37 28% 88%;
+    --muted: 30 9% 22%;
+    --muted-foreground: 33 14% 63%;
+    --accent: 41 52% 37%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 8 55% 45%;
+    --destructive-foreground: 37 28% 92%;
+    --success: 132 30% 52%;
+    --warning: 38 58% 58%;
+    --info: 204 34% 60%;
+    --education-blue: 204 34% 60%;
+    --education-green: 132 30% 52%;
+
+    --border: 30 8% 28%;
+    --input: 30 8% 28%;
+    --ring: 20 52% 58%;
+
+    --chart-1: 20 52% 60%;
+    --chart-2: 204 34% 60%;
+    --chart-3: 41 55% 60%;
+    --chart-4: 132 30% 52%;
+    --chart-5: 33 24% 62%;
+
+    --sidebar-background: 30 11% 15%;
+    --sidebar-foreground: 37 24% 82%;
+    --sidebar-primary: 20 52% 58%;
+    --sidebar-primary-foreground: 30 15% 12%;
+    --sidebar-accent: 30 9% 22%;
+    --sidebar-accent-foreground: 37 24% 88%;
+    --sidebar-border: 30 8% 26%;
+    --sidebar-ring: 20 52% 58%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(20 52% 50%), hsl(41 52% 52%));
+    --gradient-card: linear-gradient(160deg, hsl(30 11% 18%), hsl(30 10% 14%));
+    --gradient-background: linear-gradient(180deg, hsl(30 12% 13%), hsl(30 11% 10%));
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.4);
+    --shadow-hover: 0 8px 20px -6px hsl(0 0% 0% / 0.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: var(--root-font-size, 16px);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Han Serif CN', 'Songti SC', serif;
+    background-image:
+      repeating-linear-gradient(90deg, hsl(31 22% 60% / 0.05) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(0deg, hsl(31 22% 60% / 0.05) 0 1px, transparent 1px 4px);
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Muyao Softbrush', 'Source Han Serif CN', serif;
+    letter-spacing: 0.02em;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Fabric-textured surface */
+  .fabric-surface {
+    background-color: hsl(var(--card));
+    background-image:
+      repeating-linear-gradient(90deg, hsl(31 22% 55% / 0.04) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, hsl(31 22% 55% / 0.04) 0 1px, transparent 1px 3px);
+  }
+
+  /* Stitched-border card: solid warm-brown outer frame + inner dashed stitching (visual signature) */
+  .stitch-card {
+    @apply fabric-surface rounded-lg border border-border;
+    box-shadow: var(--shadow-card);
+  }
+  .stitch-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px dashed hsl(var(--border) / 0.45);
+    border-radius: calc(var(--radius) - 2px);
+    pointer-events: none;
+  }
+  .stitch-card {
+    position: relative;
+  }
+
+  /* Table container: avoids inner stitching interfering with the table header */
+  .stitch-card.table-stitch::after {
+    display: none;
+  }
+
+  .stitch-border {
+    border: 1px dashed hsl(var(--border));
+  }
+
+  .gradient-text {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Cloth-label style CTA highlight transition */
+  .cloth-hover {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .cloth-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  .cloth-hover:active {
+    transform: translateY(1px);
+  }
+}

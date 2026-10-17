@@ -1,0 +1,187 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Classical Chinese Charm · Song Dynasty Oriental Aesthetic
+   Xuan-paper beige base / aged-paper cards / ink black body text / stone-cyan primary / stone-green secondary / antique brown-ochre thin lines / cinnabar red accent.
+   Radius 0-4px, restrained shadows, no glassmorphism or glossy gradients.
+   Fonts: on mini-program the font must be loaded via Taro.loadFontFace in app.tsx (H5 uses the @font-face below). */
+
+@font-face {
+  font-family: 'Source Han Serif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Han Serif';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Xuan-paper base color / ink black body text */
+    --background: 44 33% 96%;
+    --foreground: 0 0% 17%;
+    /* Aged-paper cards */
+    --card: 44 46% 92%;
+    --card-foreground: 0 0% 17%;
+    --popover: 44 46% 94%;
+    --popover-foreground: 0 0% 17%;
+    /* Stone-cyan primary */
+    --primary: 198 43% 30%;
+    --primary-foreground: 44 46% 96%;
+    /* Stone-green secondary (darkened to meet AA against off-white text) */
+    --secondary: 117 20% 38%;
+    --secondary-foreground: 44 46% 96%;
+    --muted: 40 26% 88%;
+    --muted-foreground: 30 14% 36%;
+    /* Cinnabar red accent */
+    --accent: 6 64% 45%;
+    --accent-foreground: 44 46% 96%;
+    --destructive: 6 64% 45%;
+    --destructive-foreground: 44 46% 96%;
+    /* Antique brown-ochre borders */
+    --border: 33 26% 70%;
+    --input: 33 26% 70%;
+    --ring: 198 43% 30%;
+    --radius: 0.25rem;
+    /* Decoration: cinnabar seal, paper-grain gradient, scroll's faint shadow */
+    --seal: 6 64% 45%;
+    --gradient-paper: linear-gradient(180deg, hsl(44 40% 97%), hsl(42 34% 93%));
+    --gradient-primary: linear-gradient(135deg, hsl(198 43% 30%), hsl(198 34% 46%));
+    --shadow-scroll: 0 6px 18px -10px hsl(30 30% 30% / 0.35);
+    --chart-1: 198 43% 30%;
+    --chart-2: 117 20% 38%;
+    --chart-3: 6 64% 45%;
+    --chart-4: 29 38% 44%;
+    --chart-5: 43 52% 58%;
+    --sidebar-background: 44 46% 92%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 198 43% 30%;
+    --sidebar-primary-foreground: 44 46% 96%;
+    --sidebar-accent: 40 26% 88%;
+    --sidebar-accent-foreground: 198 43% 25%;
+    --sidebar-border: 33 26% 70%;
+    --sidebar-ring: 198 43% 30%;
+  }
+
+  /* Dark mode is "reading ancient texts by night": warm deep-brown paper backdrop, keeping the stone-cyan/stone-green/cinnabar hues, no neutral gray-blue */
+  .dark {
+    --background: 30 10% 11%;
+    --foreground: 42 30% 90%;
+    --card: 30 10% 15%;
+    --card-foreground: 42 30% 90%;
+    --popover: 30 10% 15%;
+    --popover-foreground: 42 30% 90%;
+    --primary: 195 42% 56%;
+    --primary-foreground: 30 14% 9%;
+    --secondary: 117 18% 26%;
+    --secondary-foreground: 42 30% 92%;
+    --muted: 28 8% 20%;
+    --muted-foreground: 38 20% 66%;
+    --accent: 6 64% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 6 64% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 14% 28%;
+    --input: 30 14% 28%;
+    --ring: 195 42% 56%;
+    --seal: 6 64% 56%;
+    --gradient-paper: linear-gradient(180deg, hsl(30 10% 15%), hsl(30 12% 10%));
+    --gradient-primary: linear-gradient(135deg, hsl(195 42% 56%), hsl(198 30% 40%));
+    --shadow-scroll: 0 6px 18px -10px hsl(0 0% 0% / 0.6);
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Serif', 'Songti SC', 'STSong', serif;
+    line-height: 1.8;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-paper {
+    background-image: var(--gradient-paper);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  /* Core visual signature: Xuan-paper texture -- beige paper base overlaid with a low-opacity cyan-green landscape watermark */
+  .paper-texture {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(circle at 18% 22%, hsl(198 30% 55% / 0.05) 0, transparent 42%),
+      radial-gradient(circle at 82% 78%, hsl(117 24% 45% / 0.05) 0, transparent 45%),
+      var(--gradient-paper);
+  }
+  /* Aged-paper card: thin brown line + an extremely faint grid texture */
+  .paper-surface {
+    background-color: hsl(var(--card));
+    background-image:
+      linear-gradient(hsl(var(--foreground) / 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.02) 1px, transparent 1px);
+    background-size: 26px 26px, 26px 26px;
+    border: 1px solid hsl(var(--border));
+  }
+  /* Cinnabar seal: square outline with generous whitespace */
+  .seal-stamp {
+    color: hsl(var(--seal));
+    border: 2px solid hsl(var(--seal));
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+  }
+  /* Colophon-style thin line: an ink rule fading out at both ends */
+  .ink-divider {
+    height: 1px;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--border)),
+      hsl(var(--border)),
+      transparent
+    );
+  }
+  .shadow-scroll {
+    box-shadow: var(--shadow-scroll);
+  }
+  /* Vertical inscription text */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+  }
+  /* Seal-stamping animation: the ceremonial feel of cinnabar meeting paper */
+  .anim-stamp {
+    animation: stampIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes stampIn {
+    0% { transform: scale(0.95); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  /* Scroll unrolling: fade in + slight upward float */
+  .anim-scroll-in {
+    animation: scrollIn 0.5s ease-out both;
+  }
+  @keyframes scrollIn {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  /* Ink-wash breathing: a decorative loop, respects the reduced-motion preference */
+  .anim-ink-breathe {
+    animation: inkBreathe 4s ease-in-out infinite;
+  }
+  @keyframes inkBreathe {
+    0%,
+    100% { opacity: 0.5; }
+    50% { opacity: 0.85; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-ink-breathe { animation: none; }
+  }
+}

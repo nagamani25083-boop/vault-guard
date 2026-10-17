@@ -1,0 +1,174 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============ Chinese Ink Wash Design System ============ */
+
+@font-face {
+  font-family: 'AlimamaDongFangDaKai';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlimamaDongFangDaKai-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Han Serif CN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* Xuan paper white #F8F5F0 */
+    --background: 40 33% 96%;
+    /* Scorched ink */
+    --foreground: 0 0% 12%;
+
+    /* Ivory white card face, slightly brighter for layering */
+    --card: 42 46% 98%;
+    --card-foreground: 0 0% 12%;
+    --popover: 42 46% 98%;
+    --popover-foreground: 0 0% 12%;
+
+    /* Cinnabar red seal #C41E3A */
+    --primary: 350 74% 44%;
+    --primary-foreground: 40 40% 97%;
+
+    /* Light ink xuan-paper gray */
+    --secondary: 36 22% 90%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 38 24% 91%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Blue-green landscape #2E8B57 */
+    --accent: 146 45% 34%;
+    --accent-foreground: 40 40% 97%;
+
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 40 40% 97%;
+
+    --border: 35 16% 80%;
+    --input: 35 16% 80%;
+    --ring: 350 74% 44%;
+
+    /* Decoration-only */
+    --ink: 0 0% 12%;
+    --ink-soft: 0 0% 40%;
+    --gold: 46 62% 52%;
+
+    --chart-1: 350 74% 44%;
+    --chart-2: 146 45% 34%;
+    --chart-3: 0 0% 25%;
+    --chart-4: 46 62% 52%;
+    --chart-5: 24 40% 55%;
+
+    --sidebar-background: 40 33% 96%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 350 74% 44%;
+    --sidebar-primary-foreground: 40 40% 97%;
+    --sidebar-accent: 36 22% 90%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 35 16% 80%;
+    --sidebar-ring: 350 74% 44%;
+
+    --gradient-background: radial-gradient(120% 90% at 50% 0%, hsl(42 46% 98%) 0%, hsl(40 33% 96%) 45%, hsl(38 26% 93%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(42 48% 99%) 0%, hsl(40 32% 96%) 100%);
+    --shadow-card: 0 10px 30px -12px hsl(0 0% 12% / 0.14);
+    --shadow-hover: 0 16px 40px -14px hsl(0 0% 12% / 0.22);
+  }
+
+  .dark {
+    --background: 30 8% 12%;
+    --foreground: 40 30% 92%;
+    --card: 30 8% 16%;
+    --card-foreground: 40 30% 92%;
+    --popover: 30 8% 16%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 350 70% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 6% 22%;
+    --secondary-foreground: 40 30% 92%;
+    --muted: 30 6% 22%;
+    --muted-foreground: 40 12% 68%;
+    --accent: 146 40% 36.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 46%;
+    --destructive-foreground: 40 30% 96%;
+    --border: 30 6% 26%;
+    --input: 30 6% 26%;
+    --ring: 350 70% 52%;
+    --ink: 40 30% 92%;
+    --ink-soft: 40 12% 68%;
+    --gold: 46 60% 58%;
+    --chart-1: 350 70% 52%;
+    --chart-2: 146 40% 44%;
+    --chart-3: 40 20% 70%;
+    --chart-4: 46 60% 58%;
+    --chart-5: 24 36% 60%;
+    --sidebar-background: 30 8% 12%;
+    --sidebar-foreground: 40 30% 92%;
+    --sidebar-primary: 350 70% 52%;
+    --sidebar-primary-foreground: 40 30% 96%;
+    --sidebar-accent: 30 6% 22%;
+    --sidebar-accent-foreground: 40 30% 92%;
+    --sidebar-border: 30 6% 26%;
+    --sidebar-ring: 350 70% 52%;
+    --gradient-background: radial-gradient(120% 90% at 50% 0%, hsl(30 8% 16%) 0%, hsl(30 8% 12%) 60%, hsl(30 10% 9%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(30 8% 18%) 0%, hsl(30 8% 14%) 100%);
+    --shadow-card: 0 10px 30px -12px hsl(0 0% 0% / 0.5);
+    --shadow-hover: 0 16px 40px -14px hsl(0 0% 0% / 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Han Serif CN', 'Songti SC', 'SimSun', serif;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Xuan paper grain texture layer */
+  .paper-texture {
+    position: relative;
+  }
+  .paper-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+
+  /* Cinnabar seal stamp */
+  .ink-seal {
+    color: hsl(var(--primary-foreground));
+    background-color: hsl(var(--primary));
+    font-family: 'AlimamaDongFangDaKai', 'STKaiti', 'KaiTi', serif;
+    letter-spacing: 0.05em;
+    box-shadow: inset 0 0 0 2px hsl(var(--primary-foreground) / 0.35);
+  }
+
+  /* Ink-toned divider */
+  .ink-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--ink) / 0.35), transparent);
+  }
+}

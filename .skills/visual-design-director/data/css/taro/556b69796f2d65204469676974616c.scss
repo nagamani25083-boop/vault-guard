@@ -1,0 +1,181 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Ukiyo-e Digital Style — Japanese woodblock-print sensibility
+   Washi off-white base, indigo outlines, vermillion accents, gold-leaf highlights; large flat color fields, crisp edges, hard-edged embossed shadows.
+   On the Mini Program client, load the two fonts below via Taro.loadFontFace in app.tsx. */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HarmonyOSSans';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Washi off-white / indigo / vermillion / gold leaf */
+    --background: 45 50% 92%;
+    --foreground: 218 53% 22%;
+    --card: 45 55% 96%;
+    --card-foreground: 218 53% 22%;
+    --popover: 45 55% 96%;
+    --popover-foreground: 218 53% 22%;
+    /* Indigo as the primary color, also used for all outlines */
+    --primary: 218 53% 22%;
+    --primary-foreground: 45 50% 96%;
+    --secondary: 43 35% 86%;
+    --secondary-foreground: 218 53% 22%;
+    --muted: 43 35% 86%;
+    --muted-foreground: 218 25% 40%;
+    /* Vermillion: lightness tuned so off-white text meets AA, keeping a seal-like density */
+    --accent: 11 64% 44%;
+    --accent-foreground: 45 50% 96%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 45 50% 96%;
+    --border: 218 53% 22%;
+    --input: 218 53% 22%;
+    --ring: 46 68% 47%;
+    --radius: 0.25rem;
+    /* Gold leaf: only for outlines and small accent marks, text on it uses indigo */
+    --gold: 46 68% 47%;
+    --gold-foreground: 218 53% 22%;
+    --vermillion: 11 64% 44%;
+    --chart-1: 218 53% 22%;
+    --chart-2: 11 64% 44%;
+    --chart-3: 46 68% 47%;
+    --chart-4: 200 40% 42%;
+    --chart-5: 160 30% 38%;
+    --sidebar-background: 45 55% 96%;
+    --sidebar-foreground: 218 53% 22%;
+    --sidebar-primary: 218 53% 22%;
+    --sidebar-primary-foreground: 45 50% 96%;
+    --sidebar-accent: 11 64% 44%;
+    --sidebar-accent-foreground: 45 50% 96%;
+    --sidebar-border: 218 53% 22%;
+    --sidebar-ring: 46 68% 47%;
+  }
+
+  /* Dark mode: nighttime indigo paper — surfaces invert to deep indigo, text turns off-white, vermillion and gold leaf brighten to stay clearly distinct */
+  .dark {
+    --background: 218 45% 12%;
+    --foreground: 45 40% 90%;
+    --card: 218 40% 16%;
+    --card-foreground: 45 40% 90%;
+    --popover: 218 40% 16%;
+    --popover-foreground: 45 40% 90%;
+    --primary: 45 40% 90%;
+    --primary-foreground: 218 45% 14%;
+    --secondary: 218 30% 22%;
+    --secondary-foreground: 45 40% 90%;
+    --muted: 218 30% 22%;
+    --muted-foreground: 45 24% 72%;
+    --accent: 11 70% 58%;
+    --accent-foreground: 218 45% 12%;
+    --destructive: 0 68% 48%;
+    --destructive-foreground: 45 40% 96%;
+    --border: 45 30% 72%;
+    --input: 45 30% 72%;
+    --ring: 46 68% 55%;
+    --radius: 0.25rem;
+    --gold: 46 68% 55%;
+    --gold-foreground: 218 45% 12%;
+    --vermillion: 11 70% 58%;
+    --sidebar-background: 218 45% 12%;
+    --sidebar-foreground: 45 40% 90%;
+    --sidebar-primary: 45 40% 90%;
+    --sidebar-primary-foreground: 218 45% 14%;
+    --sidebar-accent: 11 70% 58%;
+    --sidebar-accent-foreground: 218 45% 12%;
+    --sidebar-border: 45 30% 72%;
+    --sidebar-ring: 46 68% 55%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'HarmonyOSSans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: woodblock-embossed hard shadow (zero blur, solid indigo offset) */
+  .woodblock-shadow {
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+  .woodblock-shadow-lg {
+    box-shadow: 8px 8px 0 0 hsl(var(--border));
+  }
+  /* Thick indigo outline, small hard-edged radius */
+  .indigo-outline {
+    border: 2px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+  /* Seigaiha (wave) pattern texture */
+  .seigaiha {
+    background-image: radial-gradient(
+      circle at 50% 100%,
+      transparent 33%,
+      hsl(var(--primary) / 0.10) 33%,
+      hsl(var(--primary) / 0.10) 41%,
+      transparent 41%
+    );
+    background-size: 40px 20px;
+  }
+  /* Washi fiber texture: extremely fine interwoven horizontal/vertical grain */
+  .washi-texture {
+    background-image:
+      repeating-linear-gradient(90deg, hsl(var(--primary) / 0.035) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(0deg, hsl(var(--primary) / 0.025) 0 1px, transparent 1px 5px);
+  }
+  /* Vermillion seal-style square mark */
+  .seal-mark {
+    color: hsl(var(--vermillion));
+    border: 2px solid hsl(var(--vermillion));
+    border-radius: 2px;
+    letter-spacing: 2px;
+    padding: 2px 6px;
+  }
+  /* Gold-leaf hairline emphasis outline */
+  .gold-edge {
+    border: 1px solid hsl(var(--gold));
+    box-shadow: inset 0 0 0 1px hsl(var(--gold) / 0.35);
+  }
+  /* Heading with wide letter-spacing serif */
+  .font-woodblock {
+    font-family: 'SourceHanSerifCN', serif;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  /* On touch, lift with a heavier embossed shadow; on press, settle back to simulate paper being pressed */
+  .press-emboss {
+    transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+  }
+  .press-emboss:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+  /* Brief fade-in with shift, restrained and composed, no bounce */
+  .fade-shift {
+    animation: fade-shift 200ms ease-out both;
+  }
+}
+
+@keyframes fade-shift {
+  from { opacity: 0; transform: translateY(8rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-shift {
+    animation: none;
+  }
+}

@@ -1,0 +1,206 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Handwritten Notes — paper-white background, graphite gray text, pure black accent
+   Strictly achromatic: pure black / dark gray / light gray / paper white; hand-drawn wobbly edges, paper grain noise, rough-pen underline */
+
+@font-face {
+  font-family: 'YangRenDongZhuShiTi-Semibold';
+  src: url('https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'YangRenDongZhuShiTi-Regular';
+  src: url('https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.125rem;
+
+    /* Paper-white base / graphite gray text */
+    --background: 30 43% 98%;
+    --foreground: 0 0% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Accent is pure black lead */
+    --primary: 0 0% 0%;
+    --primary-foreground: 30 43% 98%;
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 30 43% 98%;
+
+    /* Light gray quiet zone (light pencil shading) */
+    --muted: 30 15% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 88%;
+    --accent-foreground: 0 0% 12%;
+
+    --destructive: 0 0% 12%;
+    --destructive-foreground: 30 43% 98%;
+
+    /* Hand-drawn line color */
+    --border: 0 0% 62%;
+    --input: 0 0% 45%;
+    --ring: 0 0% 0%;
+
+    --chart-1: 0 0% 0%;
+    --chart-2: 0 0% 28%;
+    --chart-3: 0 0% 48%;
+    --chart-4: 0 0% 68%;
+    --chart-5: 0 0% 84%;
+
+    --sidebar-background: 30 25% 96%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 30 43% 98%;
+    --sidebar-accent: 30 15% 91%;
+    --sidebar-accent-foreground: 0 0% 12%;
+    --sidebar-border: 0 0% 60%;
+    --sidebar-ring: 0 0% 0%;
+  }
+
+  .dark {
+    --radius: 0.125rem;
+    /* Inverted to graphite blackboard: background darkens, strokes become white chalk */
+    --background: 0 0% 11%;
+    --foreground: 30 20% 92%;
+    --card: 0 0% 15%;
+    --card-foreground: 30 20% 92%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 30 20% 92%;
+    --primary: 30 20% 95%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 30 20% 92%;
+    --muted: 0 0% 19%;
+    --muted-foreground: 0 0% 68%;
+    --accent: 0 0% 30%;
+    --accent-foreground: 30 20% 95%;
+    --destructive: 0 0% 82%;
+    --destructive-foreground: 0 0% 8%;
+    --border: 0 0% 40%;
+    --input: 0 0% 48%;
+    --ring: 30 20% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'YangRenDongZhuShiTi-Regular', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'YangRenDongZhuShiTi-Semibold', 'PingFang SC', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  ::selection {
+    background: hsl(var(--foreground) / 0.18);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: paper grain noise background — extremely subtle grain simulating paper fiber */
+  .paper-grain {
+    position: relative;
+    background-color: hsl(var(--background));
+  }
+  .paper-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image:
+      radial-gradient(hsl(var(--foreground) / 0.10) 0.5px, transparent 0.5px),
+      radial-gradient(hsl(var(--foreground) / 0.07) 0.5px, transparent 0.5px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 2px 3px;
+  }
+
+  /* Hand-drawn wobbly border: uneven radii simulating a freehand closed line */
+  .sketch-border {
+    border: 1.5px solid hsl(var(--input));
+    border-radius: 14px 6px 12px 5px / 5px 12px 6px 14px;
+  }
+
+  /* Sticky note slight tilt (collage feel) */
+  .note-tilt { transform: rotate(-1deg); }
+  .note-tilt-alt { transform: rotate(1.2deg); }
+
+  /* Gray highlighter smear: emphasis text backing */
+  .pencil-highlight {
+    background-image: linear-gradient(
+      to top,
+      hsl(var(--foreground) / 0.16) 0,
+      hsl(var(--foreground) / 0.16) 42%,
+      transparent 42%
+    );
+  }
+
+  /* Doodle underline: wavy hand-drawn horizontal line */
+  .doodle-underline {
+    background-image: linear-gradient(to right, hsl(var(--foreground) / 0.55), hsl(var(--foreground) / 0.55));
+    background-repeat: no-repeat;
+    background-size: 100% 1.5px;
+    background-position: 0 100%;
+    padding-bottom: 2px;
+  }
+
+  /* Left binding rule */
+  .binding-rule {
+    border-left: 1.5px solid hsl(var(--destructive) / 0.35);
+    box-shadow: inset 3px 0 0 hsl(var(--border) / 0.4);
+  }
+
+  /* Paper press feedback */
+  .press-paper {
+    transition: transform 120ms ease-out, filter 120ms ease-out;
+  }
+  .press-paper:active {
+    transform: translateY(1.5px) scale(0.995);
+    filter: contrast(1.06);
+  }
+
+  /* Writing-in entrance: fade in + slight upward shift and settle */
+  .write-in {
+    animation: write-in 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes write-in {
+    from { opacity: 0; transform: translateY(10px) rotate(-1.4deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .write-in { animation: none; }
+    .press-paper { transition: none; }
+    .note-tilt, .note-tilt-alt { transform: none; }
+  }
+}

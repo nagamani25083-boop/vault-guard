@@ -1,0 +1,190 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Op Art —— optical illusion aesthetics
+   Pure black-and-white as the absolute primary colors / no grayscale gradation / sharp hard right angles / 4px hard-edged offset shadow / vibrating accent colors (vermilion · bright blue · bright yellow · olive green)
+   Font: @font-face only takes effect on H5; on mini-program clients the same-named font must be loaded via Taro.loadFontFace in app.tsx */
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Pure-white paper surface / pure-black ink block, high contrast with no midtones */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    /* Primary color is pure black; buttons default to a black background with white text, inverted on active state */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    /* Secondary is a near-black block, used for inverted-color sections */
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 25%;
+    /* Accent: vermilion, lightness compressed to meet the white-text contrast threshold while retaining its vibrancy */
+    --accent: 12 100% 44%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 12 100% 44%;
+    --destructive-foreground: 0 0% 100%;
+    /* Borders are opaque pure-black geometric structural lines */
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0rem;
+    /* Vibrating color pairs: used only for outlines, corner tags, and small accent blocks */
+    --vibrant-vermilion: 12 100% 44%;
+    --vibrant-blue: 216 100% 42%;
+    --vibrant-yellow: 48 100% 50%;
+    --vibrant-olive: 68 100% 21%;
+    --chart-1: 0 0% 0%;
+    --chart-2: 12 100% 44%;
+    --chart-3: 216 100% 42%;
+    --chart-4: 48 100% 50%;
+    --chart-5: 68 100% 21%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 12 100% 44%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100%;
+    --sidebar-ring: 0 0% 100%;
+    /* Material: hard-edged offset shadow, never blurred */
+    --shadow-hard: 4px 4px 0 0 hsl(0 0% 0%);
+    --shadow-hard-sm: 2px 2px 0 0 hsl(0 0% 0%);
+  }
+
+  /* Overall black/white inversion: a pure-black layout + white structural lines; hue remains only black/white plus vibrating accents */
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 12 100% 44%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 12 100% 44%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
+    --shadow-hard: 4px 4px 0 0 hsl(0 0% 100%);
+    --shadow-hard-sm: 2px 2px 0 0 hsl(0 0% 100%);
+    --chart-1: 0 0% 18%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+@layer utilities {
+  /* Core visual signature: even-width black-and-white diagonal stripes, the fundamental vibrating unit of Op Art */
+  .op-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--foreground)) 0,
+      hsl(var(--foreground)) 8px,
+      hsl(var(--background)) 8px,
+      hsl(var(--background)) 16px
+    );
+  }
+  /* Checkerboard: an orthogonal black-and-white grid */
+  .op-checker {
+    background-color: hsl(var(--background));
+    background-image:
+      linear-gradient(45deg, hsl(var(--foreground)) 25%, transparent 25%, transparent 75%, hsl(var(--foreground)) 75%),
+      linear-gradient(45deg, hsl(var(--foreground)) 25%, transparent 25%, transparent 75%, hsl(var(--foreground)) 75%);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+  }
+  /* Concentric circles: a target-like radial rhythm */
+  .op-concentric {
+    background-image: repeating-radial-gradient(
+      circle at 50% 50%,
+      hsl(var(--foreground)) 0,
+      hsl(var(--foreground)) 6px,
+      hsl(var(--background)) 6px,
+      hsl(var(--background)) 12px
+    );
+  }
+  /* Moiré pattern: two sets of dense fine stripes overlapped at an offset angle, producing interference */
+  .op-moire {
+    background-image:
+      repeating-linear-gradient(0deg, hsl(var(--foreground) / 0.9) 0, hsl(var(--foreground) / 0.9) 2px, transparent 2px, transparent 5px),
+      repeating-linear-gradient(6deg, hsl(var(--foreground) / 0.6) 0, hsl(var(--foreground) / 0.6) 2px, transparent 2px, transparent 5px);
+  }
+  /* Halftone dots: a regular circular dot array */
+  .op-dots {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(var(--foreground) / 0.9) 1.5px, transparent 1.6px);
+    background-size: 14px 14px;
+  }
+  /* Hard-edged offset shadow */
+  .shadow-hard {
+    box-shadow: var(--shadow-hard);
+  }
+  .shadow-hard-sm {
+    box-shadow: var(--shadow-hard-sm);
+  }
+  .shadow-hard-vermilion {
+    box-shadow: 4px 4px 0 0 hsl(var(--vibrant-vermilion));
+  }
+  .shadow-hard-blue {
+    box-shadow: 4px 4px 0 0 hsl(var(--vibrant-blue));
+  }
+  /* Hard press feedback: displacement swallows the shadow, no elasticity */
+  .press-hard:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+  /* Black/white inverted color block */
+  .op-invert {
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  /* A flat sense of motion produced by translating the stripes */
+  .animate-op-drift {
+    animation: op-drift 3s linear infinite;
+  }
+}
+
+@keyframes op-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-op-drift {
+    animation: none;
+  }
+}

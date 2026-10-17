@@ -1,0 +1,178 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Comic Book Style · Thick black outlines + high-saturation CMYK print colors
+   Material logic: white paper base + pure black outlines and text, comic red / hero blue / warning yellow create punch;
+   surfaces are built with 2-4px solid outlines and non-blurred hard offset shadows, overlaid with halftone dot patterns and radial speed lines simulating retro print.
+   On the mini-program end, fonts must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ family: 'PangMenTitle', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/PangMenTitle_Regular.ttf")' })
+   Taro.loadFontFace({ family: 'AlibabaPuHuiTi', global: true, source: 'url("https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf")' }) */
+
+@font-face {
+  font-family: 'PangMenTitle';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/PangMenTitle_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Surface: faint yellow paper white + pure black ink */
+    --background: 55 100% 97%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    /* Comic red: primary color, pushed down until it passes contrast for white text */
+    --primary: 0 74% 53%;
+    --primary-foreground: 0 0% 100%;
+    /* Warning yellow: secondary color, always paired with black text */
+    --secondary: 51 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 48 30% 90%;
+    --muted-foreground: 0 0% 28%;
+    /* Hero blue: accent color, pushed down until it passes contrast for white text */
+    --accent: 210 92% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 74% 42%;
+    --destructive-foreground: 0 0% 100%;
+    /* Outline is form itself: border shares the same pure black as the ink */
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0.25rem;
+    --chart-1: 0 74% 53%;
+    --chart-2: 210 92% 46%;
+    --chart-3: 51 100% 50%;
+    --chart-4: 0 0% 0%;
+    --chart-5: 0 0% 45%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 55 100% 97%;
+    --sidebar-primary: 0 74% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 51 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 55 100% 97%;
+    --sidebar-ring: 51 100% 50%;
+  }
+
+  /* Dark: switches to deep gray print stock, ink inverts to paper white, the three print colors keep the same hues without clashing */
+  .dark {
+    --background: 0 0% 17%;
+    --foreground: 48 60% 96%;
+    --card: 0 0% 21%;
+    --card-foreground: 48 60% 96%;
+    --popover: 0 0% 21%;
+    --popover-foreground: 48 60% 96%;
+    --primary: 0 74% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 51 100% 52%;
+    --secondary-foreground: 0 0% 8%;
+    --muted: 0 0% 26%;
+    --muted-foreground: 48 12% 76%;
+    --accent: 210 92% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 74% 50%;
+    --destructive-foreground: 0 0% 100%;
+    /* On the dark gray print stock, the outline inverts to paper white, still the main visual form */
+    --border: 55 40% 92%;
+    --input: 55 40% 92%;
+    --ring: 51 100% 52%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: thick black outline + non-blurred hard offset shadow, panels lift off the page */
+  .ink-panel {
+    border: 3px solid hsl(var(--border));
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+  .ink-panel-sm {
+    border: 2px solid hsl(var(--border));
+    box-shadow: 3px 3px 0 0 hsl(var(--border));
+  }
+  /* Halftone dot pattern: retro print dots for shadow and transition areas */
+  .bg-halftone {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.14) 1.5px, transparent 1.6px);
+    background-size: 9px 9px;
+  }
+  /* Radial speed lines: reinforce a sense of motion around focal content */
+  .bg-speed-lines {
+    background-image: repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      hsl(var(--foreground) / 0.1) 0deg 2deg,
+      transparent 2deg 9deg
+    );
+  }
+  /* Outlined text: headlines look like print letters carved out by a black line */
+  .text-outline {
+    -webkit-text-stroke: 1.5px hsl(var(--foreground));
+    paint-order: stroke fill;
+  }
+  /* Speech-bubble tail: hard-edged triangular tail attached to the bottom-left of the bubble */
+  .bubble-tail {
+    position: relative;
+  }
+  .bubble-tail::after {
+    content: '';
+    position: absolute;
+    left: 28rpx;
+    bottom: -20rpx;
+    width: 0;
+    height: 0;
+    border-left: 20rpx solid hsl(var(--border));
+    border-bottom: 20rpx solid transparent;
+  }
+  /* Title font: PangMenTitle, bold and eye-catching */
+  .font-title {
+    font-family: 'PangMenTitle', 'AlibabaPuHuiTi', -apple-system, sans-serif;
+    letter-spacing: 0.02em;
+  }
+  /* Camera-push feel for panels: shrinks and drops the hard shadow on press */
+  .panel-press {
+    transition: transform 90ms ease-out, box-shadow 90ms ease-out;
+  }
+  .panel-press:active {
+    transform: translate(3px, 3px) scale(0.99);
+    box-shadow: 0 0 0 0 hsl(var(--border));
+  }
+  /* Fast entrance: action-scene burst reveal */
+  .burst-in {
+    animation: burst-in 220ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  }
+  /* Impact pulse: looping scale-up for emphasis labels */
+  .impact-pulse {
+    animation: impact-pulse 900ms ease-in-out infinite;
+  }
+}
+
+@keyframes burst-in {
+  0% { opacity: 0; transform: scale(0.7) rotate(-6deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-2deg); }
+}
+@keyframes impact-pulse {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50% { transform: scale(1.06) rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-in,
+  .impact-pulse {
+    animation: none;
+  }
+}

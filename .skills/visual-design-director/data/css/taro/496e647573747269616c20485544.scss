@@ -1,0 +1,170 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* HUD Industrial Style · industrial-grade rendering console
+   Obsidian black base / deep charcoal panels / light gray body text / neon orange as the sole accent, sharp zero-radius corners, no soft shadows.
+   Fonts: on mini-program the font must be loaded via Taro.loadFontFace in app.tsx (H5 uses the @font-face below). */
+
+@font-face {
+  font-family: 'ZCOOLKuHei';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/ZCOOLKuHei_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Sharp-cornered console, rounding disallowed */
+    --radius: 0px;
+    /* Obsidian black base / light gray body text */
+    --background: 0 0% 1%;
+    --foreground: 0 0% 88%;
+    /* Deep charcoal panels */
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 88%;
+    /* Neon orange: the only vital sign in a dark instrument, used solely for key values/progress/laser lines */
+    --primary: 16 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 88%;
+    /* Neutral gray for secondary information */
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 16 100% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 42%;
+    --destructive-foreground: 0 0% 100%;
+    /* Uniform dark gray outlines that directly partition information zones */
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 100% 50%;
+    /* Chart colors restrained to grayscale + orange, avoiding other high-saturation hues */
+    --chart-1: 16 100% 50%;
+    --chart-2: 0 0% 62%;
+    --chart-3: 0 0% 42%;
+    --chart-4: 16 80% 38%;
+    --chart-5: 0 0% 88%;
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 88%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 16 100% 50%;
+    /* Non-color role variables */
+    --shadow-laser: 0 0 6px hsl(16 100% 50% / 0.9), 0 0 18px hsl(16 100% 50% / 0.45);
+  }
+
+  /* The theme itself is a dark console; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 1%;
+    --foreground: 0 0% 88%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 88%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 16 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 16 100% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 100% 50%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: neon orange laser line (single-pixel glowing horizontal line) */
+  .hud-laser {
+    height: 2px;
+    background-color: hsl(var(--primary));
+    box-shadow: var(--shadow-laser);
+  }
+  /* Console panel: sharp hard edges, no stacked shadow layers */
+  .hud-panel {
+    background-color: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    border-radius: 0;
+  }
+  /* Dashboard tick ruler */
+  .hud-ticks {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--border)) 0 2px,
+      transparent 2px 16px
+    );
+  }
+  /* Industrial screen grain noise: fine horizontal scan lines simulating film and monitor texture */
+  .hud-grain {
+    background-image: repeating-linear-gradient(
+      0deg,
+      hsl(0 0% 100% / 0.02) 0 2px,
+      transparent 2px 6px
+    );
+  }
+  /* Key values: monospaced digits + subtle orange glow */
+  .hud-metric {
+    color: hsl(var(--primary));
+    font-family: 'AlibabaPuHuiTi', ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 12px hsl(var(--primary) / 0.5);
+  }
+  /* Heading: ZCOOL KuHei + wide letter spacing */
+  .hud-title {
+    font-family: 'ZCOOLKuHei', 'PingFang SC', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  /* Progress fill: solid orange + linear advancement, no easing decoration */
+  .hud-progress-fill {
+    background-color: hsl(var(--primary));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+    transition: width 300ms linear;
+  }
+  /* Mechanical response: border turns orange + a brief upward shift, compresses on press */
+  .hud-press {
+    transition: border-color 90ms linear, transform 90ms linear;
+  }
+  .hud-press:active {
+    border-color: hsl(var(--primary));
+    transform: translateY(1px) scaleY(0.97);
+  }
+  /* Laser breathing: used only for active status indication */
+  .hud-breathe {
+    animation: hudBreathe 2.4s ease-in-out infinite;
+  }
+  @keyframes hudBreathe {
+    0%,
+    100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hud-breathe { animation: none; }
+  }
+}

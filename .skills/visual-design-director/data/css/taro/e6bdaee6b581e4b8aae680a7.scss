@@ -1,0 +1,204 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Trendy Personality · clashing colors + bold black outlines + blur-free solid drop shadows, sticker-collage style
+   On Mini Program targets, the heading font must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ global: true, family: 'DouyinSansBold',
+     source: 'url("https://resource-static.cdn.bcebos.com/fonts/DouyinSansBold.ttf")' })
+   ============================================================ */
+
+@font-face {
+  font-family: 'DouyinSansBold';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/DouyinSansBold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 45 50% 96%; /* Warm off-white canvas base, setting off the clashing-color stickers */
+    --foreground: 0 0% 8%; /* Near-black, doubling as the outline and hard-shadow color */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+    --primary: 113 100% 72%; /* Acidic fluorescent green, paired with black text */
+    --primary-foreground: 0 0% 8%;
+    --secondary: 331 93% 42%; /* Clashing rose-pink, lightness kept low enough for white text */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 45 25% 90%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 331 93% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 44%;
+    --destructive-foreground: 0 0% 100%;
+    --highlight: 51 100% 60%; /* Fluorescent highlighter yellow, for annotations and marker-pen-style blocks */
+    --highlight-foreground: 0 0% 8%;
+    --border: 0 0% 8%; /* Outline is a black line, 2rpx~8rpx */
+    --input: 0 0% 8%;
+    --ring: 113 100% 72%;
+    --radius: 0.25rem; /* Hard-edged, almost no rounding */
+
+    --chart-1: 113 100% 55%;
+    --chart-2: 331 93% 50%;
+    --chart-3: 51 100% 55%;
+    --chart-4: 199 100% 45%;
+    --chart-5: 268 90% 55%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 113 100% 72%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 45 25% 90%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 8%;
+    --sidebar-ring: 331 93% 42%;
+  }
+
+  /* Dark inversion: the canvas becomes a painted-black wall, outlines flip to white, clashing colors stay just as loud */
+  .dark {
+    --background: 0 20% 5%;
+    --foreground: 45 50% 96%;
+    --card: 0 15% 11%;
+    --card-foreground: 45 50% 96%;
+    --popover: 0 15% 11%;
+    --popover-foreground: 45 50% 96%;
+    --primary: 113 100% 72%;
+    --primary-foreground: 0 20% 5%;
+    --secondary: 331 93% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 12% 18%;
+    --muted-foreground: 40 15% 70%;
+    --accent: 331 93% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --highlight: 51 100% 62%;
+    --highlight-foreground: 0 20% 5%;
+    --border: 45 50% 96%;
+    --input: 45 50% 96%;
+    --ring: 113 100% 72%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: solid blur-free hard shadow, offset toward the bottom-right, creating a tactile sticker depth */
+  .shadow-brutal-sm {
+    box-shadow: 4rpx 4rpx 0 0 hsl(var(--foreground));
+  }
+  .shadow-brutal {
+    box-shadow: 8rpx 8rpx 0 0 hsl(var(--foreground));
+  }
+  .shadow-brutal-lg {
+    box-shadow: 12rpx 12rpx 0 0 hsl(var(--foreground));
+  }
+  .shadow-brutal-primary {
+    box-shadow: 10rpx 10rpx 0 0 hsl(var(--primary));
+  }
+
+  /* Bold black outline: a hard-edged skeleton for dividing areas */
+  .stroke-heavy {
+    border: 6rpx solid hsl(var(--foreground));
+  }
+  .stroke-mid {
+    border: 4rpx solid hsl(var(--foreground));
+  }
+
+  /* Giant heading: state the value proposition outright, the bigger the size the better */
+  .font-display {
+    font-family: 'DouyinSansBold', -apple-system, 'PingFang SC', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Fluorescent marker-pen highlight strip */
+  .marker-highlight {
+    background-color: hsl(var(--highlight));
+    color: hsl(var(--highlight-foreground));
+  }
+
+  /* Diagonal clashing-color stripes, a sharp-lined graphic background texture */
+  .stripe-diagonal {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--foreground)) 0 8rpx,
+      transparent 8rpx 24rpx
+    );
+  }
+
+  /* Random sticker tilt, forming a playful, deliberately disordered order */
+  .tilt-left {
+    transform: rotate(-3deg);
+  }
+  .tilt-right {
+    transform: rotate(3deg);
+  }
+}
+
+/* Marquee / springy entrance / button press */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.7) rotate(-6deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.06) rotate(1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 12s linear infinite;
+  }
+  .animate-pop-in {
+    animation: pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .animate-wobble {
+    animation: wobble 2.4s ease-in-out infinite;
+  }
+  /* Noticeable press-down on tap, shadow shrinks in sync */
+  .pressable:active {
+    transform: translate(6rpx, 6rpx);
+    box-shadow: 2rpx 2rpx 0 0 hsl(var(--foreground));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-wobble,
+  .animate-pop-in {
+    animation: none;
+  }
+}

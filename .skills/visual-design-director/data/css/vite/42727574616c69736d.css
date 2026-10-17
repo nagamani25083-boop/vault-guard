@@ -1,0 +1,196 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Brutalism — high-contrast clashing colors + hard-edge solid shadows
+   Neon green primary / near-black ink / magenta accent / paper-white canvas base
+   Thick black outlines (2~4px), pure black shadows with no blur offset, right angles, sticker-style stacking */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('https://resource-static.bj.bcebos.com/fonts/Anton-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Paper-white canvas / near-black ink text */
+    --background: 48 33% 96%;
+    --foreground: 0 33% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 33% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 33% 4%;
+
+    /* Primary: neon green, paired with deep ink text for contrast */
+    --primary: 113 100% 71%;
+    --primary-foreground: 0 33% 4%;
+
+    /* Secondary: near-black solid block */
+    --secondary: 0 33% 4%;
+    --secondary-foreground: 48 33% 96%;
+
+    --muted: 48 20% 89%;
+    --muted-foreground: 0 0% 26%;
+
+    /* Accent: magenta */
+    --accent: 331 94% 31%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 38%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Thick black outline */
+    --border: 0 33% 4%;
+    --input: 0 33% 4%;
+    --ring: 331 94% 45%;
+
+    --chart-1: 113 100% 60%;
+    --chart-2: 331 94% 45%;
+    --chart-3: 0 33% 4%;
+    --chart-4: 45 100% 51%;
+    --chart-5: 205 90% 45%;
+
+    --sidebar-background: 113 100% 71%;
+    --sidebar-foreground: 0 33% 4%;
+    --sidebar-primary: 0 33% 4%;
+    --sidebar-primary-foreground: 113 100% 71%;
+    --sidebar-accent: 331 94% 31%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 33% 4%;
+    --sidebar-ring: 331 94% 45%;
+
+    /* Non-color role variable: hard-edge solid shadow */
+    --shadow-brutal: 6px 6px 0 0 hsl(0 33% 4%);
+    --shadow-brutal-sm: 4px 4px 0 0 hsl(0 33% 4%);
+  }
+
+  /* Dark inversion: walls turn deep ink, outlines turn paper-white, neon green stays primary */
+  .dark {
+    --radius: 0rem;
+    --background: 0 20% 6%;
+    --foreground: 48 33% 96%;
+    --card: 0 12% 10%;
+    --card-foreground: 48 33% 96%;
+    --popover: 0 12% 10%;
+    --popover-foreground: 48 33% 96%;
+    --primary: 113 100% 71%;
+    --primary-foreground: 0 33% 4%;
+    --secondary: 48 33% 96%;
+    --secondary-foreground: 0 33% 4%;
+    --muted: 0 8% 16%;
+    --muted-foreground: 48 15% 76%;
+    --accent: 331 94% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 80% 50.5%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 48 33% 96%;
+    --input: 48 33% 96%;
+    --ring: 113 100% 71%;
+    --shadow-brutal: 6px 6px 0 0 hsl(48 33% 96%);
+    --shadow-brutal-sm: 4px 4px 0 0 hsl(48 33% 96%);
+    --chart-3: 0 33% 23%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Anton', 'Impact', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: thick outlines + pure black blur-free hard shadow sticker blocks */
+  .brutal-block {
+    @apply border-[3px] border-border bg-card;
+    box-shadow: var(--shadow-brutal);
+  }
+
+  /* Extra-thick outline variant, used to emphasize primary blocks */
+  .brutal-block-thick {
+    @apply border-4 border-border bg-card;
+    box-shadow: var(--shadow-brutal);
+  }
+
+  /* Press feedback: sinks toward the shadow direction on click, shadow collapses */
+  .brutal-press {
+    @apply border-[3px] border-border;
+    box-shadow: var(--shadow-brutal-sm);
+    transition: transform 80ms linear, box-shadow 80ms linear;
+  }
+  .brutal-press:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-brutal);
+  }
+  .brutal-press:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 0 hsl(var(--border));
+  }
+
+  /* Sticker-style random tilt: breaks the rigid grid */
+  .brutal-tilt { transform: rotate(-2deg); }
+  .brutal-tilt-alt { transform: rotate(1.5deg); }
+
+  /* Text-outline highlight block */
+  .brutal-highlight {
+    @apply bg-primary text-primary-foreground border-[3px] border-border px-2;
+    display: inline-block;
+  }
+
+  /* Full-width marquee caption strip */
+  .brutal-marquee {
+    @apply border-y-[3px] border-border bg-accent text-accent-foreground;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .brutal-marquee > * {
+    display: inline-block;
+    padding-left: 100%;
+    animation: brutal-marquee 18s linear infinite;
+  }
+
+  @keyframes brutal-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* Entrance: slides in from off-screen with bouncy overshoot */
+  .brutal-slam {
+    animation: brutal-slam 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  @keyframes brutal-slam {
+    from { opacity: 0; transform: translateX(-40px) rotate(-3deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brutal-marquee > * { animation: none; padding-left: 0; }
+    .brutal-slam { animation: none; }
+    .brutal-press { transition: none; }
+  }
+}

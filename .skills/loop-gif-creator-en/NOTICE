@@ -1,0 +1,5 @@
+Adaptation by King, 2026. New browser runtime and wrappers are independently written.
+Reference source: https://github.com/anthropics/skills/tree/main/skills/slack-gif-creator
+Pinned source revision: 41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f
+No upstream endorsement. Upstream documents are not copied unless explicitly retained below.
+scripts/upstream/core: unchanged Anthropic slack-gif-creator code, Apache-2.0.

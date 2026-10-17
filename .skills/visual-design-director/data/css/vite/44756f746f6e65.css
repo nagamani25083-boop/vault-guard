@@ -1,0 +1,211 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system: Duotone — deep teal base x international orange, high-contrast two-tone
+   Near-black deep teal foundation / international orange primary / dark teal-green secondary, hard edges, thick strokes, no clutter texture */
+
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0rem;
+
+    /* Near-black deep teal foundation lets the orange pop */
+    --background: 180 100% 8%;
+    --foreground: 180 22% 95%;
+
+    --card: 180 82% 11%;
+    --card-foreground: 180 22% 95%;
+    --popover: 180 82% 11%;
+    --popover-foreground: 180 22% 95%;
+
+    /* International orange: headings, strokes, high-intensity emphasis */
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Dark teal-green secondary */
+    --secondary: 181 100% 26%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted zone stays within the deep teal family */
+    --muted: 180 55% 15%;
+    --muted-foreground: 180 18% 75%;
+
+    /* Amber orange accent, paired with dark-base text */
+    --accent: 26 95% 38.5%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 49%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Thick strokes take the orange */
+    --border: 16 90% 46%;
+    --input: 180 40% 24%;
+    --ring: 16 100% 50%;
+
+    --chart-1: 16 100% 50%;
+    --chart-2: 181 100% 41%;
+    --chart-3: 26 95% 61%;
+    --chart-4: 180 40% 35%;
+    --chart-5: 180 18% 78%;
+
+    --sidebar-background: 180 100% 6%;
+    --sidebar-foreground: 180 22% 95%;
+    --sidebar-primary: 16 100% 50%;
+    --sidebar-primary-foreground: 180 100% 7%;
+    --sidebar-accent: 180 55% 15%;
+    --sidebar-accent-foreground: 26 95% 61%;
+    --sidebar-border: 16 90% 40%;
+    --sidebar-ring: 16 100% 50%;
+
+    --duo-edge: 4px;
+  }
+
+  /* Theme is inherently dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --radius: 0rem;
+    --background: 180 100% 8%;
+    --foreground: 180 22% 95%;
+    --card: 180 82% 11%;
+    --card-foreground: 180 22% 95%;
+    --popover: 180 82% 11%;
+    --popover-foreground: 180 22% 95%;
+    --primary: 16 100% 42.5%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 181 100% 26%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 180 55% 15%;
+    --muted-foreground: 180 18% 75%;
+    --accent: 26 95% 38.5%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 16 90% 46%;
+    --input: 180 40% 24%;
+    --ring: 16 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Source Han Mono SC', 'PingFang SC', ui-monospace, monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Han Mono SC', ui-monospace, monospace;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: hsl(var(--primary));
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* Core visual signature: duotone image layer — two-tone mapping by default, hover restores original color */
+  .sig-duotone {
+    position: relative;
+    isolation: isolate;
+    background-color: hsl(var(--secondary));
+    overflow: hidden;
+  }
+  .sig-duotone > img,
+  .sig-duotone > video {
+    display: block;
+    width: 100%;
+    filter: grayscale(1) contrast(1.15);
+    mix-blend-mode: screen;
+    transition: filter 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                mix-blend-mode 600ms linear,
+                transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .sig-duotone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: hsl(var(--primary));
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+    transition: opacity 600ms linear;
+    pointer-events: none;
+  }
+  .sig-duotone:hover > img,
+  .sig-duotone:hover > video {
+    filter: none;
+    mix-blend-mode: normal;
+    transform: scale(1.03);
+  }
+  .sig-duotone:hover::after {
+    opacity: 0;
+  }
+
+  /* Hard-edge image container: thick orange stroke, zero radius */
+  .duo-hard-frame {
+    border: var(--duo-edge) solid hsl(var(--primary));
+    background-color: hsl(var(--card));
+  }
+
+  /* Metadata scale bar: monospaced small caps + orange leading tick line */
+  .duo-meta {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: hsl(var(--muted-foreground));
+    border-left: var(--duo-edge) solid hsl(var(--primary));
+    padding-left: 0.6rem;
+  }
+
+  /* Supertype: cross-column typesetting, can overlap color blocks */
+  .duo-supertype {
+    font-weight: 700;
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: hsl(var(--primary));
+  }
+
+  /* Grid-breaking overlap: negative margin lifts the stacking level, creating an overlapping relationship */
+  .duo-overlap {
+    position: relative;
+    z-index: 2;
+    margin-top: -3rem;
+  }
+
+  /* Staggered entrance: slow, strongly rhythmic rise */
+  .duo-reveal {
+    animation: duo-reveal 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes duo-reveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .duo-reveal { animation: none; }
+    .sig-duotone > img,
+    .sig-duotone > video { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+}

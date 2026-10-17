@@ -1,0 +1,190 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Quiet Luxury Resort · Restrained Minimalism / Generous Whitespace / Warm Gold Hairlines
+   Warm off-white and pure white as the base, deep navy as text, mid-gray as secondary text;
+   warm gold used only for ratings, badges, pressed states, and hairline accents; near-black as CTA.
+   Gradient overuse, high-saturation colors, and excessive decoration are forbidden — the interface should stay understated.
+   Mini-program fonts must be loaded in app.tsx via Taro.loadFontFace:
+     Source Han Serif CN (Song-style headings), AlibabaPuHuiTi (body text)
+   ============================================================ */
+
+@font-face {
+  font-family: 'Source Han Serif CN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Deep navy / pure white / warm off-white / warm gold / mid-gray — a restrained five-color palette */
+    --background: 40 20% 97%;
+    --foreground: 240 28% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 14%;
+    --primary: 0 0% 10%; /* Near-black CTA paired with white text at 16.8:1 */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 40 16% 93%;
+    --secondary-foreground: 240 28% 14%;
+    --muted: 40 16% 94%;
+    --muted-foreground: 240 5% 43%; /* Mid-gray secondary text, tuned against the off-white base to reach AA 4.8:1 */
+    --accent: 38 48% 37%; /* Text-bearing warm gold: lightness tuned so white text reaches AA 5.0:1 */
+    --accent-foreground: 0 0% 100%;
+    --gold: 39 46% 61%; /* Decorative warm gold: hairlines, badges, borders — never carries body text */
+    --navy: 240 28% 14%;
+    --destructive: 0 65% 44%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 14% 87%;
+    --input: 40 14% 87%;
+    --ring: 38 48% 37%;
+    --radius: 0.875rem;
+    --chart-1: 240 28% 24%;
+    --chart-2: 38 48% 45%;
+    --chart-3: 39 46% 61%;
+    --chart-4: 240 8% 62%;
+    --chart-5: 200 14% 44%;
+    --gradient-scrim: linear-gradient(180deg, hsl(240 28% 14% / 0) 0%, hsl(240 28% 14% / 0.62) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(39 52% 68%), hsl(36 40% 48%));
+    --shadow-quiet: 0 2px 10px -4px hsl(240 28% 14% / 0.12);
+    --shadow-lift: 0 12px 28px -14px hsl(240 28% 14% / 0.24);
+    --sidebar-background: 40 22% 96%;
+    --sidebar-foreground: 240 20% 24%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 40 16% 92%;
+    --sidebar-accent-foreground: 240 28% 14%;
+    --sidebar-border: 40 14% 86%;
+    --sidebar-ring: 38 48% 37%;
+  }
+
+  /* Dark mode: nightfall villa — the surface shifts to deep navy (keeping this template's navy hue rather than a neutral blue-gray),
+     the CTA inverts from near-black to a warm-white base with deep-blue text, warm gold brightens as the sole accent light in the night scene */
+  .dark {
+    --background: 240 24% 8%;
+    --foreground: 40 20% 95%;
+    --card: 240 22% 12%;
+    --card-foreground: 40 20% 95%;
+    --popover: 240 22% 12%;
+    --popover-foreground: 40 20% 95%;
+    --primary: 40 20% 95%;
+    --primary-foreground: 240 26% 12%;
+    --secondary: 240 18% 16%;
+    --secondary-foreground: 40 20% 95%;
+    --muted: 240 16% 15%;
+    --muted-foreground: 240 8% 70%;
+    --accent: 39 52% 58%; /* Night-scene warm gold paired with deep-blue text at 8.0:1 */
+    --accent-foreground: 240 30% 10%;
+    --gold: 39 52% 66%;
+    --navy: 240 24% 8%;
+    --destructive: 0 62% 46%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 12% 26%;
+    --input: 240 12% 26%;
+    --ring: 39 52% 58%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: warm gold hairline — a single ultra-thin gold line fading out at both ends, a restrained touch of luxury as a divider */
+  .gold-hairline {
+    height: 1px;
+    background-image: linear-gradient(90deg, transparent, hsl(var(--gold)) 50%, transparent);
+  }
+
+  /* Warm gold thin outline: the sole decoration for badges and rating blocks */
+  .gold-frame {
+    border: 1px solid hsl(var(--gold) / 0.7);
+    border-radius: var(--radius);
+  }
+
+  /* Private info card: translucent white + ultra-thin white border + soft drop shadow simulating transparency (no blur filter used) */
+  .quiet-glass {
+    background-color: hsl(var(--card) / 0.82);
+    border: 1px solid hsl(0 0% 100% / 0.36);
+    border-radius: var(--radius);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.4), var(--shadow-lift);
+  }
+
+  /* Photo scrim: a dark gradient at the image's lower edge, keeping overlaid text always legible */
+  .photo-scrim {
+    background-image: var(--gradient-scrim);
+  }
+
+  /* Serif display heading: large yet restrained, architectural-magazine style */
+  .font-display {
+    font-family: 'Source Han Serif CN', 'Songti SC', 'STSong', serif;
+    letter-spacing: 0.01em;
+  }
+
+  /* Pill button geometry: fully rounded, understated form */
+  .pill {
+    border-radius: 9999px;
+  }
+
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  .bg-gradient-scrim {
+    background-image: var(--gradient-scrim);
+  }
+  .shadow-quiet {
+    box-shadow: var(--shadow-quiet);
+  }
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Slight lift on touch, deeper shadow, quiet and restrained */
+  .press-quiet {
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  .press-quiet:active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Content fades in with a slight upward shift, no bounce, no rotation */
+  .fade-in-quiet {
+    animation: fade-in-quiet 0.6s ease-out both;
+  }
+}
+
+@keyframes fade-in-quiet {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-quiet {
+    animation: none;
+    opacity: 1;
+  }
+  .press-quiet {
+    transition: none;
+  }
+}

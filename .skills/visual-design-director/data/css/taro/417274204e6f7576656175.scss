@@ -1,0 +1,193 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Art Nouveau Style — organic curves, vine and floral motifs, Mucha-poster decorative feel
+   Deep green / gold / ivory / warm brown, soft and refined, large radii with fine gold-foil outlines.
+   On the Mini Program client, load the two fonts below via Taro.loadFontFace in app.tsx. */
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/SourceHanSerifCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('https://resource-static.bj.bcebos.com/fonts-skill/AlibabaPuHuiTi_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Ivory paper base + deep green text + gold accents, all layering sits on warm ivory tiers */
+    --background: 44 50% 94%;
+    --foreground: 96 48% 16%;
+    --card: 44 54% 97%;
+    --card-foreground: 96 48% 16%;
+    --popover: 44 54% 97%;
+    --popover-foreground: 96 48% 16%;
+    /* Deep green as the primary action color */
+    --primary: 96 50% 20%;
+    --primary-foreground: 44 54% 97%;
+    --secondary: 40 30% 87%;
+    --secondary-foreground: 96 48% 16%;
+    --muted: 42 30% 89%;
+    --muted-foreground: 34 24% 36%;
+    /* Gold accent: keeps the gold-foil brightness, uses deep green as its text color to meet AA */
+    --accent: 46 68% 47%;
+    --accent-foreground: 96 48% 14%;
+    --destructive: 6 58% 44%;
+    --destructive-foreground: 44 54% 97%;
+    --border: 44 34% 76%;
+    --input: 44 34% 78%;
+    --ring: 46 68% 47%;
+    --radius: 0.9rem;
+    --gold: 46 68% 47%;
+    --gradient-primary: linear-gradient(135deg, hsl(96 46% 26%), hsl(96 52% 17%));
+    --gradient-gold: linear-gradient(135deg, hsl(46 78% 58%), hsl(42 66% 42%));
+    --gradient-subtle: linear-gradient(180deg, hsl(44 54% 97%), hsl(44 44% 91%));
+    --shadow-elegant: 0 10px 30px -12px hsl(96 44% 18% / 0.22);
+    --shadow-gold: 0 8px 24px -10px hsl(46 66% 40% / 0.35);
+    --chart-1: 96 46% 26%;
+    --chart-2: 46 68% 47%;
+    --chart-3: 30 46% 42%;
+    --chart-4: 140 28% 36%;
+    --chart-5: 20 52% 48%;
+    --sidebar-background: 44 54% 97%;
+    --sidebar-foreground: 96 48% 16%;
+    --sidebar-primary: 96 50% 20%;
+    --sidebar-primary-foreground: 44 54% 97%;
+    --sidebar-accent: 46 68% 47%;
+    --sidebar-accent-foreground: 96 48% 14%;
+    --sidebar-border: 44 34% 76%;
+    --sidebar-ring: 46 68% 47%;
+  }
+
+  /* Dark mode: deep forest-green nighttime — surfaces invert to dark green, text turns ivory, gold accent stays unchanged */
+  .dark {
+    --background: 96 24% 8%;
+    --foreground: 44 42% 90%;
+    --card: 96 22% 12%;
+    --card-foreground: 44 42% 90%;
+    --popover: 96 22% 12%;
+    --popover-foreground: 44 42% 90%;
+    --primary: 96 36% 30%;
+    --primary-foreground: 44 42% 92%;
+    --secondary: 96 16% 18%;
+    --secondary-foreground: 44 42% 88%;
+    --muted: 96 16% 18%;
+    --muted-foreground: 44 24% 70%;
+    --accent: 46 68% 47%;
+    --accent-foreground: 96 24% 10%;
+    --destructive: 6 55% 47%;
+    --destructive-foreground: 44 40% 92%;
+    --border: 96 18% 24%;
+    --input: 96 18% 24%;
+    --ring: 46 68% 50%;
+    --radius: 0.9rem;
+    --gold: 46 68% 50%;
+    --gradient-primary: linear-gradient(135deg, hsl(96 36% 32%), hsl(96 40% 20%));
+    --gradient-gold: linear-gradient(135deg, hsl(46 72% 54%), hsl(42 62% 38%));
+    --gradient-subtle: linear-gradient(180deg, hsl(96 22% 13%), hsl(96 24% 9%));
+    --shadow-elegant: 0 10px 30px -12px hsl(96 40% 4% / 0.55);
+    --shadow-gold: 0 8px 24px -10px hsl(46 60% 30% / 0.45);
+    --chart-1: 96 40% 45%;
+    --chart-2: 46 68% 52%;
+    --chart-3: 30 50% 52%;
+    --chart-4: 140 30% 46%;
+    --chart-5: 20 55% 55%;
+    --sidebar-background: 96 24% 10%;
+    --sidebar-foreground: 44 42% 90%;
+    --sidebar-primary: 46 68% 50%;
+    --sidebar-primary-foreground: 96 24% 10%;
+    --sidebar-accent: 96 18% 20%;
+    --sidebar-accent-foreground: 44 42% 90%;
+    --sidebar-border: 96 18% 22%;
+    --sidebar-ring: 46 68% 50%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'AlibabaPuHuiTi', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: gold-foil double outline — thin outer gold line + light inner gold line, mimicking an embossed gold edge */
+  .gold-frame {
+    border: 2rpx solid hsl(var(--gold) / 0.6);
+    box-shadow:
+      inset 0 0 0 2rpx hsl(var(--gold) / 0.28),
+      var(--shadow-elegant);
+  }
+  /* Gold underline emphasis (headings, key text) */
+  .gold-underline {
+    background-image: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold) / 0.15));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 3rpx;
+    padding-bottom: 4rpx;
+  }
+  /* Vine-style divider: gold line at center + faded ends, paired with a dot node */
+  .vine-divider {
+    height: 2rpx;
+    background-image:
+      radial-gradient(circle at 50% 50%, hsl(var(--gold)) 0 3rpx, transparent 3rpx),
+      linear-gradient(90deg, transparent, hsl(var(--gold) / 0.55) 20%, hsl(var(--gold) / 0.55) 80%, transparent);
+    background-size: 100% 100%, 100% 2rpx;
+    background-position: center, center;
+    background-repeat: no-repeat;
+  }
+  /* Organic curved outline: asymmetric radius replacing a regular rectangle */
+  .organic-shape {
+    border-radius: 58% 42% 52% 48% / 46% 54% 46% 54%;
+  }
+  /* Mucha-poster style arched top */
+  .arch-top {
+    border-top-left-radius: 999rpx;
+    border-top-right-radius: 999rpx;
+  }
+  /* Gold-foil gradient and soft shadow */
+  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle { background-image: var(--gradient-subtle); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  /* Lifts slightly on touch with a subtle golden glow */
+  .lift-glow {
+    transition: transform 280ms ease, box-shadow 280ms ease;
+  }
+  .lift-glow:active {
+    transform: translateY(-2rpx);
+    box-shadow: var(--shadow-gold);
+  }
+  /* Decorative pattern floats slowly */
+  .float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+  .fade-rise {
+    animation: fade-rise 520ms ease-out both;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
+}
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(12rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .fade-rise {
+    animation: none;
+  }
+}

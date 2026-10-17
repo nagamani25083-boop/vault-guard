@@ -1,0 +1,162 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* ============================================================
+   Dark Minimal · dark base with generous whitespace, hierarchy carried only by size/weight/spacing
+   Shadow ≈ 0, border ≤ 1px, a single signal color used only for selected/current states
+   On Mini Program targets, the font must be loaded in app.tsx via Taro.loadFontFace:
+   Taro.loadFontFace({ global: true, family: 'Glow Sans SC',
+     source: 'url("https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.ttf")' })
+   ============================================================ */
+
+@font-face {
+  font-family: 'Glow Sans SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/GlowSansSC-Normal-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 222 39% 7%; /* Primary background */
+    --foreground: 220 14% 90%; /* Primary text */
+    --card: 222 47% 11%; /* Secondary background / card, only one shade lighter than the base */
+    --card-foreground: 220 14% 90%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 14% 90%;
+    --primary: 0 74% 50%; /* The single signal color: selected state / primary button / current status */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 220 14% 90%;
+    --muted: 215 25% 16%;
+    --muted-foreground: 218 11% 65%; /* Secondary text */
+    --accent: 0 40% 20%; /* Low-lightness backing for the signal color, used in weak-emphasis areas */
+    --accent-foreground: 0 60% 88%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 28% 20%; /* 1px boundary */
+    --input: 215 28% 20%;
+    --ring: 0 74% 50%;
+    --radius: 0.75rem;
+
+    /* Charts: uniform stroke weight, no fill, color steps differentiated only by lightness */
+    --chart-1: 0 74% 55%;
+    --chart-2: 218 11% 65%;
+    --chart-3: 220 14% 82%;
+    --chart-4: 0 40% 42%;
+    --chart-5: 215 20% 45%;
+
+    --sidebar-background: 222 44% 9%;
+    --sidebar-foreground: 220 14% 82%;
+    --sidebar-primary: 0 74% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 16%;
+    --sidebar-accent-foreground: 220 14% 90%;
+    --sidebar-border: 215 28% 20%;
+    --sidebar-ring: 0 74% 50%;
+  }
+
+  /* Theme is inherently dark; .dark mirrors the same values as a compatibility layer */
+  .dark {
+    --background: 222 39% 7%;
+    --foreground: 220 14% 90%;
+    --card: 222 47% 11%;
+    --card-foreground: 220 14% 90%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 14% 90%;
+    --primary: 0 74% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 220 14% 90%;
+    --muted: 215 25% 16%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 0 40% 20%;
+    --accent-foreground: 0 60% 88%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 215 28% 20%;
+    --input: 215 28% 20%;
+    --ring: 0 74% 50%;
+  }
+
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Glow Sans SC', -apple-system, 'PingFang SC', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: 1px hairline dividers, standing in for shadows and color blocks to establish hierarchy */
+  .hairline {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .hairline-t {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  /* An extremely faint top afterglow, the only "material" allowed, to avoid a large expanse of dead black */
+  .bg-void {
+    background: radial-gradient(120% 90% at 50% 0%, hsl(222 47% 13%) 0%, hsl(222 39% 7%) 55%, hsl(222 42% 4%) 100%);
+  }
+
+  /* Signal bar: current-state indicator, a 2px left-side vertical line in place of a filled block */
+  .signal-bar {
+    border-left: 2px solid hsl(var(--primary));
+  }
+
+  /* De-emphasized button: keeps only an outline and text color, primary button ≠ large color block */
+  .btn-quiet {
+    border: 1px solid hsl(var(--border));
+    background-color: transparent;
+    color: hsl(var(--foreground));
+  }
+  .btn-quiet-active {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  /* Line-chart stroke: uniform thickness, no fill */
+  .stroke-line {
+    border: 1px solid hsl(var(--muted-foreground) / 0.6);
+    background-color: transparent;
+  }
+}
+
+/* Motion is minimal and linear: slides and fades in along the grid, no bounce */
+@keyframes minimal-rise {
+  0% {
+    transform: translateY(12rpx);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes minimal-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: minimal-rise 0.42s ease-out both;
+  }
+  .animate-fade {
+    animation: minimal-fade 0.32s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-fade {
+    animation: none;
+  }
+}

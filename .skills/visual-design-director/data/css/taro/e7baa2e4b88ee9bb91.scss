@@ -1,0 +1,169 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+/* Red and Black · Brutalism
+   Void black base / stark white text / warning red used only for borders, dividers, emphasis, and calls to action.
+   Bold solid lines define the layout, zero radius, zero soft shadows, only hard offset shadows.
+   Fonts: on mini-program the font must be loaded via Taro.loadFontFace in app.tsx (H5 uses the @font-face below). */
+
+@font-face {
+  font-family: 'DouyinSansBold';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/DouyinSansBold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Han Mono SC';
+  src: url('https://resource-static.cdn.bcebos.com/fonts/SourceHanMonoSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Void black canvas / stark white typography */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 13%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 100%;
+    /* Warning red: darkened to just meet AA when carrying white text, without flipping white text to black */
+    --primary: 0 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 0 100% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    /* Heavy solid strokes */
+    --border: 0 0% 32%;
+    --input: 0 0% 32%;
+    --ring: 0 100% 56%;
+    /* Bold sharp corners, rounding disallowed */
+    --radius: 0px;
+    /* Fully saturated signal red: used only for lines, strokes, and glow effects, never carries text */
+    --red-signal: 0 100% 56%;
+    --gradient-primary: linear-gradient(135deg, hsl(0 100% 45%), hsl(0 100% 32%));
+    --shadow-hard: 6px 6px 0 0 hsl(0 100% 56%);
+    --shadow-hard-white: 6px 6px 0 0 hsl(0 0% 100%);
+    --chart-1: 0 100% 56%;
+    --chart-2: 0 0% 80%;
+    --chart-3: 0 0% 55%;
+    --chart-4: 0 0% 35%;
+    --chart-5: 0 72% 52%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 0 100% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 32%;
+    --sidebar-ring: 0 100% 56%;
+  }
+
+  /* The theme itself is dark; .dark keeps the same values as a compatibility layer */
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 13%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 72%;
+    --accent: 0 100% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 32%;
+    --input: 0 0% 32%;
+    --ring: 0 100% 56%;
+  }
+}
+
+@layer base {
+  page,
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Source Han Mono SC', 'Sarasa Mono SC', ui-monospace, Menlo, monospace;
+  }
+}
+
+@layer utilities {
+  /* Core visual signature: brutalist hard-edged offset shadow (a solid-color block displaced, no feathering) */
+  .brutal-shadow {
+    box-shadow: var(--shadow-hard);
+  }
+  .brutal-shadow-white {
+    box-shadow: var(--shadow-hard-white);
+  }
+  /* Heavy solid stroke: bold lines strictly delimiting the layout */
+  .brutal-border {
+    border: 4px solid hsl(var(--foreground));
+    border-radius: 0;
+  }
+  .brutal-border-red {
+    border: 4px solid hsl(var(--red-signal));
+    border-radius: 0;
+  }
+  /* Top red accent rule: a signal marker at the start of a section */
+  .red-top-rule {
+    border-top: 6px solid hsl(var(--red-signal));
+  }
+  /* Red diagonal hazard stripe band */
+  .red-hazard-stripe {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--red-signal)) 0 12px,
+      hsl(var(--background)) 12px 24px
+    );
+  }
+  /* Large compact heading: DouyinSansBold + negative letter spacing */
+  .display-title {
+    font-family: 'DouyinSansBold', 'PingFang SC', 'Heiti SC', sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+  .text-glow-red {
+    text-shadow: 0 0 10px hsl(var(--red-signal) / 0.55);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  /* Trigger feedback: a full color inversion + instant displacement, no gradual transition */
+  .press-invert:active {
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+  /* High-speed slide-in: no fade, the element rushes straight into frame */
+  .anim-slam-in {
+    animation: slamIn 0.18s linear both;
+  }
+  @keyframes slamIn {
+    0% { transform: translateX(-24px); }
+    100% { transform: translateX(0); }
+  }
+  /* Red-line sweep: a looping emphasis animation */
+  .anim-red-sweep {
+    animation: redSweep 1.2s steps(6) infinite;
+  }
+  @keyframes redSweep {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-red-sweep { animation: none; }
+  }
+}

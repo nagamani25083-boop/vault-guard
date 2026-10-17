@@ -1,0 +1,196 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= Handwritten Notebook Design System =================
+   Grayscale + warm-white paper, graphite gray text, charcoal-black accents; hand-drawn borders and paper texture.
+   All colors are HSL.
+*/
+
+@font-face {
+  font-family: "YRDHeading";
+  src: url("https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "YRDBody";
+  src: url("https://resource-static.bj.bcebos.com/fonts/YangRenDongZhuShiTi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Warm-white paper #FDFBF7 */
+    --background: 40 50% 98%;
+    --foreground: 30 12% 18%;
+
+    /* Card: a slightly brighter paper surface */
+    --card: 42 55% 99%;
+    --card-foreground: 30 12% 18%;
+    --popover: 42 55% 99%;
+    --popover-foreground: 30 12% 18%;
+
+    /* Charcoal-black ink */
+    --primary: 30 14% 12%;
+    --primary-foreground: 40 50% 98%;
+
+    /* Kraft-paper light gray */
+    --secondary: 38 24% 90%;
+    --secondary-foreground: 30 12% 18%;
+    --muted: 38 22% 92%;
+    --muted-foreground: 30 8% 41%;
+    --accent: 40 30% 87%;
+    --accent-foreground: 30 12% 18%;
+
+    /* Faded ink red (correction/deletion) */
+    --destructive: 4 52% 44%;
+    --destructive-foreground: 40 50% 98%;
+
+    /* Pencil-gray lines */
+    --border: 32 14% 78%;
+    --input: 32 16% 70%;
+    --ring: 30 14% 25%;
+
+    --chart-1: 30 14% 18%;
+    --chart-2: 30 10% 38%;
+    --chart-3: 30 8% 55%;
+    --chart-4: 38 20% 70%;
+    --chart-5: 4 52% 44%;
+
+    --sidebar-background: 40 40% 96%;
+    --sidebar-foreground: 30 12% 22%;
+    --sidebar-primary: 30 14% 12%;
+    --sidebar-primary-foreground: 40 50% 98%;
+    --sidebar-accent: 38 24% 90%;
+    --sidebar-accent-foreground: 30 12% 18%;
+    --sidebar-border: 32 14% 78%;
+    --sidebar-ring: 30 14% 25%;
+  }
+
+  .dark {
+    /* Blackboard / dark inked paper */
+    --background: 30 8% 12%;
+    --foreground: 40 30% 92%;
+    --card: 30 8% 15%;
+    --card-foreground: 40 30% 92%;
+    --popover: 30 8% 15%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 40 30% 92%;
+    --primary-foreground: 30 10% 12%;
+    --secondary: 30 6% 22%;
+    --secondary-foreground: 40 30% 92%;
+    --muted: 30 6% 22%;
+    --muted-foreground: 40 12% 66%;
+    --accent: 30 6% 26%;
+    --accent-foreground: 40 30% 92%;
+    --destructive: 4 52% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 6% 30%;
+    --input: 30 6% 30%;
+    --ring: 40 20% 70%;
+    --chart-1: 40 30% 88%;
+    --chart-2: 40 16% 68%;
+    --chart-3: 40 12% 52%;
+    --chart-4: 30 8% 40%;
+    --chart-5: 4 52% 52%;
+    --sidebar-background: 30 8% 14%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 40 30% 92%;
+    --sidebar-primary-foreground: 30 10% 12%;
+    --sidebar-accent: 30 6% 24%;
+    --sidebar-accent-foreground: 40 30% 92%;
+    --sidebar-border: 30 6% 30%;
+    --sidebar-ring: 40 20% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    /* Paper texture: an extremely faint fractal noise overlay on the warm-white base */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-hand;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Hand-drawn border: irregular rounded corners simulating a freehand-sketched box */
+  .sketch-box {
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  }
+
+  .sketch-box-alt {
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  }
+
+  /* Hand-drawn thin border (secondary container, pencil gray) */
+  .sketch-line {
+    border: 1.5px solid hsl(var(--border));
+    border-radius: 225px 15px 255px 15px / 15px 255px 15px 225px;
+  }
+
+  /* Highlighter marker emphasis (gray marker) */
+  .highlighter {
+    background-image: linear-gradient(
+      104deg,
+      transparent 0.5%,
+      hsl(var(--accent)) 2%,
+      hsl(var(--accent)) 96%,
+      transparent 99.5%
+    );
+    padding: 0 0.15em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Ruled notebook paper background */
+  .notebook-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(1.75rem - 1px),
+      hsl(var(--border) / 0.5) calc(1.75rem - 1px),
+      hsl(var(--border) / 0.5) 1.75rem
+    );
+    background-position-y: 0.5rem;
+  }
+}
+
+@layer utilities {
+  /* Ink dot: marker state */
+  .ink-dot {
+    background: radial-gradient(
+      circle at 42% 38%,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--foreground)) 62%,
+      hsl(var(--foreground) / 0.85) 100%
+    );
+    box-shadow: 0.5px 0.5px 0 hsl(var(--foreground) / 0.4);
+  }
+}
